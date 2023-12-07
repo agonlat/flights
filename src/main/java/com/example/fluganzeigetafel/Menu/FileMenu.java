@@ -44,7 +44,7 @@ public class FileMenu {
         handler.writeToCSV_File((ArrayList<Flight>) df.getFlights());
     }
 
-    public static void flightChangeAction() {
+    public static void flightChangeAction(Stage mainStage) {
         DataInterface df = DataInterface.getInstance();
 
         if (df.getFlights().isEmpty()) {
@@ -52,7 +52,7 @@ public class FileMenu {
             return;
         }
 
-        FlightChangeView flightChangeView = new FlightChangeView();
+        FlightChangeView flightChangeView = new FlightChangeView(mainStage);
     }
 
 }

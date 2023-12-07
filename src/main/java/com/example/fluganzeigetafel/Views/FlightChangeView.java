@@ -52,7 +52,7 @@ private GridPane gridPane;
         );
     }
 
-    public FlightChangeView() {
+    public FlightChangeView(Stage mainStage) {
         Stage stage = new Stage();
         checkStageClose = false;
         stage.setResizable(false);
@@ -152,10 +152,11 @@ private GridPane gridPane;
         });
 
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent windowEvent) {
                 checkStageClose = true;
+                stage.close();
             }
         });
 
@@ -191,14 +192,7 @@ private GridPane gridPane;
             updateApproveButtonState();
         });
 
-        flightNoTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue && checkStageClose == false) {  // Check flight number format when losing focus
-                if (!ValidationUtil.checkFlightNumberFormat(flightNoTextField.getText().trim())) {
-                    ErrorDialog dialog = new ErrorDialog("Check flight number format!");
-                    // Optionally, you can choose to disable the approveButton here as well.
-                }
-            }
-        });
+
 
 // Listener for newIttTextField
         newIttTextField.textProperty().addListener((observable, oldValue, newValue) ->

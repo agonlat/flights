@@ -7,6 +7,7 @@ import com.example.fluganzeigetafel.Menu.DataMenu;
 import com.example.fluganzeigetafel.Menu.FileMenu;
 import com.example.fluganzeigetafel.Menu.ViewMenu;
 import com.example.fluganzeigetafel.Utility.FilterAndSearchMethods;
+import com.example.fluganzeigetafel.Utility.UtilityMethods;
 import com.example.fluganzeigetafel.Utility.ValidationUtil;
 import com.example.fluganzeigetafel.Views.PrintView;
 import javafx.application.Application;
@@ -15,13 +16,22 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
+import javafx.scene.image.Image;
+import java.awt.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
+
 
 public class Main extends Application {
     @Override
@@ -72,101 +82,16 @@ public class Main extends Application {
 
         loadFlightsItem.setOnAction(e-> FileMenu.fileLoadAction(stage));
         exportItem.setOnAction(e->FileMenu.fileExportAction());
-        changeFlightItem.setOnAction(e->FileMenu.flightChangeAction());
+        changeFlightItem.setOnAction(e->FileMenu.flightChangeAction(stage));
         changeViewOptionsItem.setOnAction(e-> ViewMenu.changeViewOptionAction());
         FilterAndSearchMethods.filterFlights(filterTextField);
         statisticalDataItem.setOnAction(e-> DataMenu.statisticalDataAction());
         settingsItem.setOnAction(e->DataMenu.settingsActions());
 
 
-
-        searchButton.setOnAction(e-> {
-            if (DataInterface.getInstance().getFlights().isEmpty()) {
-                LoadFlightsDialog dil = new LoadFlightsDialog();
-                return;
-            }
-
-            Stage stage1 = new Stage() ;
-            stage1.setWidth(stage1.getWidth()+100);
-            stage1.setResizable(false);
-            Label label1 = new Label("Flight no or control no");
-            TextField field = new TextField();
-
-            Button submit = new Button("Search");
-            Button cancel = new Button("Cancel");
-
-            cancel.setOnAction(b->stage1.close());
-
-           VBox box = new VBox();
-           box.setPadding(new Insets(0,5,0,5));
-           HBox hbox = new HBox();
-           box.setSpacing(5);
-           hbox.setSpacing(5);
-           HBox.setHgrow(cancel, Priority.ALWAYS);
-            HBox.setHgrow(submit, Priority.ALWAYS);
-           hbox.getChildren().addAll(cancel,submit);
-           box.getChildren().addAll(label1, field, hbox);
-            hbox.setPadding(new Insets(0,0,5,0));
+        searchButton.setOnAction(e->UtilityMethods.setSearchButtonAction(searchButton));
 
 
-
-
-
-
-            submit.setOnAction(g->{
-                if (ValidationUtil.checkFlightNumberFormat(field.getText().trim())) {
-                    if (ValidationUtil.checkFlightNumberExistence(field.getText().trim()) != null) {
-                        Flight f = ValidationUtil.checkFlightNumberExistence(field.getText().trim());
-                        String pattern = "FNR: " + f.getFnr() +
-                                " KNR: " + f.getKnr() +
-                                " REG: " + f.getReg() +
-                                " TYP: " + f.getTyp() +
-                                " HA0: " + f.getHa0() +
-                                " LSK: " + f.getLsk() +
-                                " STT: " + f.getStt() +
-                                " ITT: " + f.getItt() +
-                                " POS: " + f.getPos() +
-                                " TER: " + f.getTer() +
-                                " MAD: " + f.getMad() +
-                                " SAA: " + f.getSaa();
-
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION, pattern,new ButtonType("Print", ButtonBar.ButtonData.APPLY));
-                        alert.setTitle("Information");
-
-
-                        alert.setContentText(pattern);
-                        alert.setWidth(alert.getWidth() + 500);
-                        Optional<ButtonType> opt = alert.showAndWait();
-
-                        if (opt.isPresent() && opt.get().getButtonData() == ButtonBar.ButtonData.APPLY) {
-                            PrintView controller = new PrintView();
-                            controller.createPDF(f);
-                        }
-
-                    }
-                    else {
-                        Alert alertF = new Alert(Alert.AlertType.INFORMATION);
-
-                        alertF.setTitle("Information");
-                        alertF.setContentText("Flight not found!");
-                        alertF.showAndWait();
-                    }
-
-
-
-
-                }
-               else {
-                    Alert alertF = new Alert(Alert.AlertType.INFORMATION);
-                    alertF.setTitle("Information");
-                    alertF.setContentText("Flight does not match the pattern!");
-                    alertF.showAndWait();
-                }
-
-            });
-            stage1.setScene(new Scene(box));
-            stage1.showAndWait();
-        });
 
 
 
@@ -218,7 +143,10 @@ public class Main extends Application {
 
         Scene scene = new Scene(tableLayout, width, height);
 
-        stage.setTitle("Anzeigetafel");
+
+
+
+        stage.setTitle("Display panel");
         stage.setScene(scene);
 
 

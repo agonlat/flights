@@ -5,12 +5,14 @@ import com.example.fluganzeigetafel.Data.Flight;
 import com.example.fluganzeigetafel.Data.FlightsTable;
 import com.example.fluganzeigetafel.Menu.DataMenu;
 import com.example.fluganzeigetafel.Menu.FileMenu;
+import com.example.fluganzeigetafel.Menu.PrintMenu;
 import com.example.fluganzeigetafel.Menu.ViewMenu;
 import com.example.fluganzeigetafel.Utility.FilterAndSearchMethods;
 import com.example.fluganzeigetafel.Utility.UtilityMethods;
 import com.example.fluganzeigetafel.Utility.ValidationUtil;
 import com.example.fluganzeigetafel.Views.PrintView;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -87,9 +89,8 @@ public class Main extends Application {
         FilterAndSearchMethods.filterFlights(filterTextField);
         statisticalDataItem.setOnAction(e-> DataMenu.statisticalDataAction());
         settingsItem.setOnAction(e->DataMenu.settingsActions());
-
-
         searchButton.setOnAction(e->UtilityMethods.setSearchButtonAction(searchButton));
+        print.setOnAction((ActionEvent event)-> PrintMenu.printOnAction());
 
 
 

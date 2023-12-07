@@ -102,7 +102,7 @@ public class UtilityMethods {
 
                     if (opt.isPresent() && opt.get().getButtonData() == ButtonBar.ButtonData.APPLY) {
                         PrintView controller = new PrintView();
-                        controller.createPDF(f);
+                       // controller.createPDF(f);
                     }
 
                 } else {

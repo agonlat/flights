@@ -4,7 +4,7 @@ module com.example.fluganzeigetafel {
     requires java.desktop;
     requires org.apache.pdfbox;
     requires asciitable;
-
+    requires com.google.zxing;
 
 
     opens com.example.fluganzeigetafel to javafx.fxml;

@@ -1,11 +1,12 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Data;
 
+import com.example.fluganzeigetafel.Data.Flight;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import com.example.fluganzeigetafel.DataInterface;
+import com.example.fluganzeigetafel.Data.DataInterface;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;

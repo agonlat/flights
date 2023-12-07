@@ -1,7 +1,16 @@
 package com.example.fluganzeigetafel;
+import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
+import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.Data.Flight;
+import com.example.fluganzeigetafel.Data.FlightsTable;
+import com.example.fluganzeigetafel.Menu.DataMenu;
+import com.example.fluganzeigetafel.Menu.FileMenu;
+import com.example.fluganzeigetafel.Menu.ViewMenu;
+import com.example.fluganzeigetafel.Utility.FilterAndSearchMethods;
+import com.example.fluganzeigetafel.Utility.ValidationUtil;
+import com.example.fluganzeigetafel.Views.PrintView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -61,12 +70,12 @@ public class Main extends Application {
         viewMenu.getItems().addAll(changeViewOptionsItem, settingsItem);
         dataMenu.getItems().add(statisticalDataItem);
 
-        loadFlightsItem.setOnAction(e->FileMenu.fileLoadAction(stage));
+        loadFlightsItem.setOnAction(e-> FileMenu.fileLoadAction(stage));
         exportItem.setOnAction(e->FileMenu.fileExportAction());
         changeFlightItem.setOnAction(e->FileMenu.flightChangeAction());
-        changeViewOptionsItem.setOnAction(e->ViewMenu.changeViewOptionAction());
+        changeViewOptionsItem.setOnAction(e-> ViewMenu.changeViewOptionAction());
         FilterAndSearchMethods.filterFlights(filterTextField);
-        statisticalDataItem.setOnAction(e->DataMenu.statisticalDataAction());
+        statisticalDataItem.setOnAction(e-> DataMenu.statisticalDataAction());
         settingsItem.setOnAction(e->DataMenu.settingsActions());
 
 
@@ -130,7 +139,7 @@ public class Main extends Application {
                         Optional<ButtonType> opt = alert.showAndWait();
 
                         if (opt.isPresent() && opt.get().getButtonData() == ButtonBar.ButtonData.APPLY) {
-                            PDF_controller controller = new PDF_controller();
+                            PrintView controller = new PrintView();
                             controller.createPDF(f);
                         }
 

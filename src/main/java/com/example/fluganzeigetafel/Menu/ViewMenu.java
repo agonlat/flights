@@ -1,4 +1,8 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Menu;
+
+import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
+import com.example.fluganzeigetafel.Views.Change_viewView;
 
 public class ViewMenu {
 
@@ -8,7 +12,7 @@ public class ViewMenu {
           return;
         }
 
-        ViewChange viewChange = new ViewChange();
+        Change_viewView changeViewView = new Change_viewView();
 
     }
 

@@ -1,15 +1,18 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Menu;
 
+import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
+import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.Data.Flight;
+import com.example.fluganzeigetafel.Handler.FileHandler;
+import com.example.fluganzeigetafel.Views.FlightChangeView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import com.example.fluganzeigetafel.DataInterface;
-import com.example.fluganzeigetafel.FileHandler;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class FileMenu {
-    static void fileLoadAction(Stage stage) {
+    public static void fileLoadAction(Stage stage) {
         DataInterface dataInterface = DataInterface.getInstance();
 
         FileChooser chooser = new FileChooser();
@@ -29,7 +32,7 @@ public class FileMenu {
         }
     }
 
-    static void fileExportAction() {
+    public static void fileExportAction() {
         DataInterface df = DataInterface.getInstance();
         if (df.getFlights().isEmpty()) {
             LoadFlightsDialog dialog = new LoadFlightsDialog();
@@ -41,7 +44,7 @@ public class FileMenu {
         handler.writeToCSV_File((ArrayList<Flight>) df.getFlights());
     }
 
-    static void flightChangeAction() {
+    public static void flightChangeAction() {
         DataInterface df = DataInterface.getInstance();
 
         if (df.getFlights().isEmpty()) {
@@ -49,7 +52,7 @@ public class FileMenu {
             return;
         }
 
-        FlightChange flightChange = new FlightChange();
+        FlightChangeView flightChangeView = new FlightChangeView();
     }
 
 }

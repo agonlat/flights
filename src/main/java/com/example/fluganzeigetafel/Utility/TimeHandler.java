@@ -1,4 +1,4 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Utility;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

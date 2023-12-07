@@ -1,4 +1,8 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Menu;
+
+import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
+import com.example.fluganzeigetafel.Views.StatisticsView;
 
 public class DataMenu {
 
@@ -8,7 +12,7 @@ public class DataMenu {
             return;
         }
 
-        StatisticalDataController dataController = new StatisticalDataController();
+        StatisticsView dataController = new StatisticsView();
 
 
     }

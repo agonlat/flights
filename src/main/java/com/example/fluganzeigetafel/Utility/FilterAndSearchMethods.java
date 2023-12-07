@@ -1,5 +1,7 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Utility;
 
+import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.Data.Flight;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.TextField;

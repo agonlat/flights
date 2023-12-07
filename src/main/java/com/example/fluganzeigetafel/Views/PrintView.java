@@ -1,17 +1,16 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Views;
 
+import com.example.fluganzeigetafel.Data.Flight;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 
-
-
 import java.io.File;
 import java.io.IOException;
 
-public class PDF_controller {
+public class PrintView {
     public void createPDF(Flight flight) {
         try {
             PDDocument doc = new PDDocument();
@@ -65,5 +64,4 @@ public class PDF_controller {
             throw new RuntimeException(e);
         }
     }
-
 }

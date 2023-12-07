@@ -1,14 +1,13 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Handler;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.awt.Desktop;
 
-import com.example.fluganzeigetafel.Flight;
-import com.example.fluganzeigetafel.ErrorDialog;
-
+import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
+import com.example.fluganzeigetafel.Data.Flight;
+import com.example.fluganzeigetafel.Utility.TimeHandler;
 
 
 public class FileHandler {
@@ -67,7 +66,7 @@ public class FileHandler {
     }
 
 
-    boolean writeToCSV_File(final ArrayList<Flight> flights) {
+    public boolean writeToCSV_File(final ArrayList<Flight> flights) {
         String filename = "output.csv"; // Specify the desired file name
         String path = System.getProperty("user.dir") + File.separator + filename; // Combine directory and filename
         try {

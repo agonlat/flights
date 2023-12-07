@@ -1,5 +1,7 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Data;
 
+
+import com.example.fluganzeigetafel.Utility.UtilityMethods;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ public class DataInterface {
     private List<Flight> flights;
 
     private String filePath;
+    private List<Flight> temporaryFlights;
     private int changedFlightsCounter;
     public static FlightsTable flightsTable;
 
@@ -46,6 +49,7 @@ public class DataInterface {
         flights = new ArrayList<>();
         filePath = "";
         changedFlightsCounter = 0;
+        temporaryFlights = new ArrayList<>();
 
     }
 
@@ -89,6 +93,22 @@ public class DataInterface {
 
 
         return this.flights != null;
+    }
+
+    public boolean addTemporaryFlights(List<Flight>flights) {
+
+        if (flights != null)
+            this.temporaryFlights = flights;
+
+
+        if (this.temporaryFlights != null)
+            return true;
+        return false;
+    }
+
+    public void setFlightsTable(FlightsTable table) {
+        flightsTable = table;
+
     }
 
 

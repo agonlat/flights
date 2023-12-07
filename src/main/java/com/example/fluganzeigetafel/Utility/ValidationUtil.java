@@ -1,4 +1,7 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Utility;
+
+import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.Data.Flight;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

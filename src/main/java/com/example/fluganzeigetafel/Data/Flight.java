@@ -1,4 +1,4 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Data;
 
 public class Flight {
     private String fnr;

@@ -1,4 +1,4 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.CustomDialogs;
 
 import javafx.scene.control.Alert;
 

@@ -1,5 +1,10 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Views;
 
+import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
+import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.Data.Flight;
+import com.example.fluganzeigetafel.Utility.ValidationUtil;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -8,11 +13,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FlightChange {
+public class FlightChangeView {
     private Label flightNoLabel;
     private TextField flightNoTextField;
     private TextField newIttTextField;
@@ -32,6 +38,7 @@ public class FlightChange {
 
     private Label flightInfo;
     private Flight f;
+    private boolean checkStageClose;
 
 private GridPane gridPane;
 
@@ -45,8 +52,9 @@ private GridPane gridPane;
         );
     }
 
-    public FlightChange() {
+    public FlightChangeView() {
         Stage stage = new Stage();
+        checkStageClose = false;
         stage.setResizable(false);
 
         stage.initModality(Modality.WINDOW_MODAL);
@@ -144,6 +152,12 @@ private GridPane gridPane;
         });
 
 
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                checkStageClose = true;
+            }
+        });
 
 
 
@@ -178,7 +192,7 @@ private GridPane gridPane;
         });
 
         flightNoTextField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {  // Check flight number format when losing focus
+            if (!newValue && checkStageClose == false) {  // Check flight number format when losing focus
                 if (!ValidationUtil.checkFlightNumberFormat(flightNoTextField.getText().trim())) {
                     ErrorDialog dialog = new ErrorDialog("Check flight number format!");
                     // Optionally, you can choose to disable the approveButton here as well.

@@ -1,6 +1,7 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Views;
 
 
+import com.example.fluganzeigetafel.Data.DataInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.print.*;
@@ -13,9 +14,9 @@ import javafx.stage.Stage;
 
 import java.util.Map;
 
-public class StatisticalDataController {
+public class StatisticsView {
 
-    public StatisticalDataController() {
+    public StatisticsView() {
         Stage stage = new Stage();
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);
@@ -30,7 +31,7 @@ public class StatisticalDataController {
                 FXCollections.observableArrayList();
         int i = 0;
 
-        for (Map.Entry<String,Integer> entry:DataInterface.getInstance().getAirlines().entrySet()) {
+        for (Map.Entry<String,Integer> entry: DataInterface.getInstance().getAirlines().entrySet()) {
             airlinesData.add(new PieChart.Data(entry.getKey(), entry.getValue()));
             i++;
         }

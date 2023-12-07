@@ -1,5 +1,8 @@
-package com.example.fluganzeigetafel;
+package com.example.fluganzeigetafel.Views;
 
+import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.Data.Flight;
+import com.example.fluganzeigetafel.Utility.TimeHandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -8,13 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-public class ViewChange {
+public class Change_viewView {
 
    private ToggleButton utc;
    private ToggleButton local;
@@ -22,7 +22,7 @@ public class ViewChange {
 
 
 
-    public ViewChange () {
+    public Change_viewView() {
         Stage stage = new Stage();
         stage.setWidth(150);
         stage.setResizable(false);

@@ -2,7 +2,7 @@
 
 #Steps to build this project
 
-#1. Clone this project
+##1. Clone this project
 #2. Open the project an IDE (IntelliJ recommended)
 #3. Download JavaFX jars
 #4. Add the jars to Dependency:

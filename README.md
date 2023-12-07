@@ -22,3 +22,4 @@ git checkout master
 #### - Select all JavaFX jars
 #### 6. After selecting the jars you will see all jars that are in the project
 #### 7. If the newly added JavaFX jars are not selected, select them and click on "apply"
+#### 8. Now Go to the main class and run this class. The display panel should appear

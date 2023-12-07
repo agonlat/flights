@@ -1,35 +1,63 @@
 package com.example.fluganzeigetafel;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.chart.PieChart;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DataInterface {
     private static DataInterface instance;
     private List<Flight> flights;
-    private List<Flight> temporaryFlights;
+
     private String filePath;
+    private int changedFlightsCounter;
     public static FlightsTable flightsTable;
+
+    public int getChangedFlightsCounter() {
+        return changedFlightsCounter;
+    }
+
+    public void incrementCounter() {
+        this.changedFlightsCounter++;
+    }
+
+    public HashMap<String, Integer> getAirlines() {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for (Flight f : flights) {
+            String airline = UtilityMethods.getAirlineCode(f.getFnr());
+
+            // Check if the airline is already in the map
+            if (map.containsKey(airline)) {
+                // If yes, get the current count, increment it, and put it back in the map
+                int currentCount = map.get(airline);
+                map.put(airline, currentCount + 1);
+            } else {
+                // If no, add the airline to the map with a count of 1
+                map.put(airline, 1);
+            }
+        }
+
+        return map;
+    }
+
 
     private DataInterface() {
         flights = new ArrayList<>();
-        temporaryFlights = new ArrayList<>();
         filePath = "";
+        changedFlightsCounter = 0;
 
     }
 
     public static DataInterface getInstance() {
-        if (instance == null) {
+
             synchronized (DataInterface.class) {
                 if (instance == null)  {
                     instance = new DataInterface();
                 }
 
             }
-        }
+
 
         return instance;
     }
@@ -38,9 +66,7 @@ public class DataInterface {
         return flights;
     }
 
-    public List<Flight> getTemporaryFlights() {
-        return temporaryFlights;
-    }
+
 
     public String getFilePath() {
         return filePath;
@@ -62,25 +88,11 @@ public class DataInterface {
         this.flights = flights;
 
 
-        if (this.flights != null)
-            return true;
-    return false;
+        return this.flights != null;
     }
 
-    public boolean addTemporaryFlights(List<Flight>flights) {
-
-        if (flights != null)
-            this.temporaryFlights = flights;
 
 
-        if (this.temporaryFlights != null)
-            return true;
-        return false;
-    }
 
-   public void setFlightsTable(FlightsTable table) {
-        flightsTable = table;
-
-   }
 
 }

@@ -31,6 +31,7 @@ public class FlightChange {
     private  Button approveButton;
 
     private Label flightInfo;
+    private Flight f;
 
 private GridPane gridPane;
 
@@ -120,7 +121,7 @@ private GridPane gridPane;
         flightNoTextField.textProperty().addListener((observable, newValue, oldValue)-> {
             if (!flightNoTextField.getText().trim().isEmpty() && ValidationUtil.checkFlightNumberFormat(flightNoTextField.getText().trim())
             ) {
-                Flight f = ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim());
+                 f = ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim());
 
                 if (f != null) {
 
@@ -206,6 +207,25 @@ private GridPane gridPane;
 
 
         approveButton.setOnAction(e -> {
+
+            if (ValidationUtil.checkFlightNumberFormat(flightNoTextField.getText().trim())) {
+                if (ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim()) != null) {
+                    if (newIttTextField.getText().isBlank() && newPosTextField.getText().isBlank() &&
+                    newSAACombo.getValue().toString().equals(f.getSaa()) && newTerminalCombo.getValue().toString().equals(f.getTer()) ) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setContentText("Nothing to change. Flight remains the same");
+                        alert.showAndWait();
+                        return;
+                    }
+                }
+            }
+
+
+
+
+
+
             Flight flightToUpdate;
 
             String flightNo = flightNoTextField.getText().trim();
@@ -269,8 +289,16 @@ private GridPane gridPane;
                 flightToUpdate.setSaa(newSAACombo.getValue().toString());
             }
 
-
+            flightInfo.setText("FNR: " + f.getFnr() + " " + "KNR: " + f.getKnr() + " " + "ITT: "+ f.getItt() + " " + "TER: "+ f.getTer() + " " + "POS: " + f.getPos()
+                    + " " + "SAA: " + f.getSaa());
             DataInterface.flightsTable.refresh();
+            DataInterface.getInstance().incrementCounter();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setContentText("Flight successfully changed");
+            alert.showAndWait();
+
         });
 
          gridPane = new GridPane();

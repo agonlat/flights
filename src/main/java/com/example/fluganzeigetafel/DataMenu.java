@@ -8,6 +8,7 @@ public class DataMenu {
             return;
         }
 
+        StatisticalDataController dataController = new StatisticalDataController();
 
 
     }

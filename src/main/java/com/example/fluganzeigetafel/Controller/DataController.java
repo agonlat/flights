@@ -1,10 +1,10 @@
-package com.example.fluganzeigetafel.Menu;
+package com.example.fluganzeigetafel.Controller;
 
 import com.example.fluganzeigetafel.Data.DataInterface;
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
-import com.example.fluganzeigetafel.Views.StatisticsView;
+import com.example.fluganzeigetafel.Manager.StatisticsManager;
 
-public class DataMenu {
+public class DataController {
 
     public static void statisticalDataAction() {
         if (DataInterface.getInstance().getFlights().isEmpty()) {
@@ -12,7 +12,7 @@ public class DataMenu {
             return;
         }
 
-        StatisticsView dataController = new StatisticsView();
+        StatisticsManager dataController = new StatisticsManager();
 
 
     }

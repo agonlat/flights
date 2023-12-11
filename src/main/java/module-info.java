@@ -2,17 +2,18 @@ module com.example.fluganzeigetafel {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
-    requires org.apache.pdfbox;
-    requires asciitable;
+
+
     requires com.google.zxing;
+    requires pdfbox.app;
 
 
     opens com.example.fluganzeigetafel to javafx.fxml;
     exports com.example.fluganzeigetafel;
-    exports com.example.fluganzeigetafel.Menu;
-    opens com.example.fluganzeigetafel.Menu to javafx.fxml;
-    exports com.example.fluganzeigetafel.Views;
-    opens com.example.fluganzeigetafel.Views to javafx.fxml;
+    exports com.example.fluganzeigetafel.Controller;
+    opens com.example.fluganzeigetafel.Controller to javafx.fxml;
+    exports com.example.fluganzeigetafel.Manager;
+    opens com.example.fluganzeigetafel.Manager to javafx.fxml;
     exports com.example.fluganzeigetafel.Utility;
     opens com.example.fluganzeigetafel.Utility to javafx.fxml;
     exports com.example.fluganzeigetafel.CustomDialogs;

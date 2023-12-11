@@ -1,10 +1,10 @@
-package com.example.fluganzeigetafel.Menu;
+package com.example.fluganzeigetafel.Controller;
 
 import com.example.fluganzeigetafel.Data.DataInterface;
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
-import com.example.fluganzeigetafel.Views.Change_viewView;
+import com.example.fluganzeigetafel.Manager.ViewChangeManager;
 
-public class ViewMenu {
+public class ViewController {
 
     public static void changeViewOptionAction() {
         if (DataInterface.getInstance().getFlights().isEmpty()) {
@@ -12,7 +12,7 @@ public class ViewMenu {
           return;
         }
 
-        Change_viewView changeViewView = new Change_viewView();
+        ViewChangeManager changeViewView = new ViewChangeManager();
 
     }
 

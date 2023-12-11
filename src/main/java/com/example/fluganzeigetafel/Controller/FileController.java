@@ -1,17 +1,17 @@
-package com.example.fluganzeigetafel.Menu;
+package com.example.fluganzeigetafel.Controller;
 
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.Data.DataInterface;
 import com.example.fluganzeigetafel.Data.Flight;
 import com.example.fluganzeigetafel.Handler.FileHandler;
-import com.example.fluganzeigetafel.Views.FlightChangeView;
+import com.example.fluganzeigetafel.Manager.FlightChangeManager;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class FileMenu {
+public class FileController {
     public static void fileLoadAction(Stage stage) {
         DataInterface dataInterface = DataInterface.getInstance();
 
@@ -52,7 +52,7 @@ public class FileMenu {
             return;
         }
 
-        FlightChangeView flightChangeView = new FlightChangeView(mainStage);
+        FlightChangeManager flightChangeManager = new FlightChangeManager(mainStage);
     }
 
 }

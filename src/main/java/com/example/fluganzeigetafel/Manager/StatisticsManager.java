@@ -1,4 +1,4 @@
-package com.example.fluganzeigetafel.Views;
+package com.example.fluganzeigetafel.Manager;
 
 
 import com.example.fluganzeigetafel.Data.DataInterface;
@@ -14,9 +14,9 @@ import javafx.stage.Stage;
 
 import java.util.Map;
 
-public class StatisticsView {
+public class StatisticsManager {
 
-    public StatisticsView() {
+    public StatisticsManager() {
         Stage stage = new Stage();
         GridPane pane = new GridPane();
         Scene scene = new Scene(pane);

@@ -1,4 +1,4 @@
-package com.example.fluganzeigetafel.Views;
+package com.example.fluganzeigetafel.Manager;
 
 import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.Data.DataInterface;
@@ -18,7 +18,7 @@ import javafx.stage.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FlightChangeView {
+public class FlightChangeManager {
     private Label flightNoLabel;
     private TextField flightNoTextField;
     private TextField newIttTextField;
@@ -52,7 +52,7 @@ private GridPane gridPane;
         );
     }
 
-    public FlightChangeView(Stage mainStage) {
+    public FlightChangeManager(Stage mainStage) {
         Stage stage = new Stage();
         checkStageClose = false;
         stage.setResizable(false);

@@ -1,5 +1,6 @@
 package com.example.fluganzeigetafel.Utility;
 
+import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.Data.DataInterface;
 import com.example.fluganzeigetafel.Data.Flight;
 import javafx.collections.FXCollections;
@@ -10,10 +11,21 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class FilterAndSearchMethods {
+    static int counter = 0;
     public static void filterFlights(TextField filterTextField) {
 
-        filterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
 
+
+
+
+        filterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (DataInterface.getInstance().getFlights().isEmpty() && counter == 0) {
+                LoadFlightsDialog loadFlightsDialog = new LoadFlightsDialog();
+                counter++;
+                filterTextField.clear();
+                counter = 0;
+                return;
+            }
 
         DataInterface dataInterface = DataInterface.getInstance();
         ArrayList<Flight> flights = (ArrayList<Flight>) dataInterface.getFlights();

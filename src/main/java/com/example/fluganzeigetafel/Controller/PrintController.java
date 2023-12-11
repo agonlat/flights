@@ -1,10 +1,10 @@
-package com.example.fluganzeigetafel.Menu;
+package com.example.fluganzeigetafel.Controller;
 
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.Data.DataInterface;
-import com.example.fluganzeigetafel.Views.PrintView;
+import com.example.fluganzeigetafel.Manager.PrintManager;
 
-public class PrintMenu {
+public class PrintController {
 
     public static void printOnAction() {
 
@@ -14,7 +14,7 @@ public class PrintMenu {
         }
 
 
-        PrintView printMenu = new PrintView();
+        PrintManager printMenu = new PrintManager();
         printMenu.createPDF();
 
     }

@@ -4,7 +4,7 @@ package com.example.fluganzeigetafel.Utility;
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.Data.DataInterface;
 import com.example.fluganzeigetafel.Data.Flight;
-import com.example.fluganzeigetafel.Views.PrintView;
+import com.example.fluganzeigetafel.Manager.PrintManager;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -101,7 +101,7 @@ public class UtilityMethods {
                     Optional<ButtonType> opt = alert.showAndWait();
 
                     if (opt.isPresent() && opt.get().getButtonData() == ButtonBar.ButtonData.APPLY) {
-                        PrintView controller = new PrintView();
+                        PrintManager controller = new PrintManager();
                        // controller.createPDF(f);
                     }
 
@@ -126,4 +126,29 @@ public class UtilityMethods {
         stage1.showAndWait();
 
     }
+
+    public static String leaveOneWhiteSpace(String input) {
+        StringBuilder result = new StringBuilder();
+        int spaceCount = 0;
+
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+
+            if (Character.isWhitespace(currentChar)) {
+                // If it's the first space encountered, append it
+                if (spaceCount == 0) {
+                    result.append(currentChar);
+                }
+
+                spaceCount++;
+            } else {
+                // Reset space count when a non-space character is encountered
+                spaceCount = 0;
+                result.append(currentChar);
+            }
+        }
+
+        return result.toString();
+    }
+
 }

@@ -351,7 +351,12 @@ public class PrintManager {
 
             stream.beginText();
             stream.newLineAtOffset(rectX + 20, rextY + 100);
-            int fl = DataInterface.getInstance().getFlights().size();
+            int fl = 0;
+
+            if (DataInterface.getInstance().getTemporaryFlights()!=null) {
+                fl = DataInterface.getInstance().getTemporaryFlights().size();
+            } else
+                fl = DataInterface.getInstance().getFlights().size();
             stream.showText("Flights: " + fl);
             stream.endText();
 

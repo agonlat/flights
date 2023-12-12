@@ -1,25 +1,18 @@
 package com.example.fluganzeigetafel;
-import com.example.fluganzeigetafel.Data.DataInterface;
-import com.example.fluganzeigetafel.Data.FlightsTable;
+import com.example.fluganzeigetafel.Data.*;
 import com.example.fluganzeigetafel.Controller.DataController;
 import com.example.fluganzeigetafel.Controller.FileController;
 import com.example.fluganzeigetafel.Controller.PrintController;
 import com.example.fluganzeigetafel.Controller.ViewController;
-import com.example.fluganzeigetafel.Data.MainGraphicElements;
-import com.example.fluganzeigetafel.Data.MenuBarView;
 import com.example.fluganzeigetafel.Utility.FilterAndSearchMethods;
 import com.example.fluganzeigetafel.Utility.UtilityMethods;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
@@ -43,19 +36,8 @@ public class Main extends Application {
         stage.setTitle("Display panel");
 
 
-
-
-
         DataInterface dataInterface = DataInterface.getInstance();
-
-
         FlightsTable table = new FlightsTable();
-
-
-
-
-
-
 
 
 
@@ -64,10 +46,14 @@ public class Main extends Application {
         MainGraphicElements mainGraphicElements = new MainGraphicElements(pane);
 
 
-
         VBox tableLayout = new VBox();
-        tableLayout.getChildren().addAll(new MenuBarView(stage).getMenuBar(),pane, table);
-        VBox.setVgrow(table, Priority.ALWAYS);
+        TabPaneView paneView = new TabPaneView(tableLayout);
+        tableLayout.getChildren().addAll(new MenuBarView(stage).getMenuBar(),pane,paneView.getTabPaneView());
+
+
+
+
+
 
 
 

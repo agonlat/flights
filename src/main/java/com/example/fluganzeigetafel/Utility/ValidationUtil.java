@@ -1,15 +1,55 @@
 package com.example.fluganzeigetafel.Utility;
 
+import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.Data.DataInterface;
 import com.example.fluganzeigetafel.Data.Flight;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidationUtil {
+
+    public static boolean checkTER(final String terminal) {
+        try {
+            int ter = Integer.parseInt(terminal);
+            if (ter == 1 || ter == 2)
+                return true;
+
+
+        } catch (NumberFormatException e) {
+            ErrorDialog dialog = new ErrorDialog("Only numbers between 1 and 2 are allowed!");
+        }
+
+        return false;
+    }
+    public static boolean checkSAA(final String status) {
+        ArrayList values = new ArrayList(Arrays.asList(01,03,05,15,20,22,23,25,27,30,35,38,43,46,48,51,53,56,57,60,61
+                ,63,64,65,66,67,72,80,86,88,94,96,97,98,99));
+
+
+        try {
+            int sta = Integer.parseInt(status);
+
+            if (!values.contains(sta)) {
+                return false;
+            }
+
+
+
+        } catch (NumberFormatException e) {
+            ErrorDialog dialog = new ErrorDialog("Only one of these status is allowed: 01,03,05,15,20,22,23,25,27,30,35,38,43,46,48,51,53,56,57,60,61\n" +
+                    "                ,63,64,65,66,67,72,80,86,88,94,96,97,98,99 ");
+
+        }
+
+        return true;
+    }
+
 
     public static boolean checkFlightNumberFormat(final String flightNo) {
 

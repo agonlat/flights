@@ -302,6 +302,10 @@ private GridPane gridPane;
             DataInterface.flightsTable.refresh();
             DataInterface.getInstance().incrementCounter();
 
+
+            DataInterface.getInstance().getChangedFlightsSet().add(f);
+
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setContentText("Flight successfully changed");

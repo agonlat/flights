@@ -18,7 +18,7 @@ public class PrintController {
 
 
         PrintManager printMenu = new PrintManager();
-        if (DataInterface.getInstance().getTemporaryFlights() != null)
+        if (!DataInterface.getInstance().getTemporaryFlights().isEmpty())
             printMenu.createPDF((ArrayList<Flight>) DataInterface.getInstance().getTemporaryFlights());
         else
             printMenu.createPDF((ArrayList<Flight>) DataInterface.getInstance().getFlights());

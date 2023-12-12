@@ -3,9 +3,7 @@ package com.example.fluganzeigetafel.Data;
 
 import com.example.fluganzeigetafel.Utility.UtilityMethods;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class DataInterface {
 
@@ -16,6 +14,8 @@ public class DataInterface {
     private List<Flight> temporaryFlights;
     private int changedFlightsCounter;
     public static FlightsTable flightsTable;
+    private Set<Flight> changedFlightsSet;
+
 
     public int getChangedFlightsCounter() {
         return changedFlightsCounter;
@@ -46,11 +46,16 @@ public class DataInterface {
     }
 
 
+    public Set<Flight> getChangedFlightsSet() {
+        return changedFlightsSet;
+    }
+
     private DataInterface() {
         flights = new ArrayList<>();
         filePath = "";
         changedFlightsCounter = 0;
         temporaryFlights = new ArrayList<>();
+        changedFlightsSet = new HashSet<>();
 
     }
 

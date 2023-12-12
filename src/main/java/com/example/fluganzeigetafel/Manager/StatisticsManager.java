@@ -55,7 +55,7 @@ public class StatisticsManager {
 
         StackedBarChart<String, Number> stackedBarChartChanged = new StackedBarChart<>(new CategoryAxis(), new NumberAxis());
         stackedBarChartChanged.getData().add(changedFlights);
-        stackedBarChartChanged.setTitle("Changed flights " + DataInterface.getInstance().getChangedFlightsCounter());
+        stackedBarChartChanged.setTitle("Changed flights " + DataInterface.getInstance().getChangedFlightsSet().size());
 
 
         BorderPane bdp = new BorderPane();

@@ -73,7 +73,7 @@ public class PrintManager {
             stream.newLineAtOffset(rectX + 20, rextY + 100);
             int fl = 0;
 
-            if (DataInterface.getInstance().getTemporaryFlights()!=null) {
+            if (!DataInterface.getInstance().getTemporaryFlights().isEmpty()) {
             fl = DataInterface.getInstance().getTemporaryFlights().size();
             } else
                 fl = DataInterface.getInstance().getFlights().size();
@@ -83,7 +83,7 @@ public class PrintManager {
 
             stream.beginText();
             stream.newLineAtOffset(rectX + 20, rextY + 80);
-            int c = DataInterface.getInstance().getChangedFlightsCounter();
+            int c = DataInterface.getInstance().getChangedFlightsSet().size();
             stream.showText("Changed flights: " + c);
             stream.endText();
 
@@ -353,7 +353,7 @@ public class PrintManager {
             stream.newLineAtOffset(rectX + 20, rextY + 100);
             int fl = 0;
 
-            if (DataInterface.getInstance().getTemporaryFlights()!=null) {
+            if (!DataInterface.getInstance().getTemporaryFlights().isEmpty()) {
                 fl = DataInterface.getInstance().getTemporaryFlights().size();
             } else
                 fl = DataInterface.getInstance().getFlights().size();
@@ -362,7 +362,7 @@ public class PrintManager {
 
             stream.beginText();
             stream.newLineAtOffset(rectX + 20, rextY + 80);
-            int c = DataInterface.getInstance().getChangedFlightsCounter();
+            int c = DataInterface.getInstance().getChangedFlightsSet().size();
             stream.showText("Changed flights: " + c);
             stream.endText();
 

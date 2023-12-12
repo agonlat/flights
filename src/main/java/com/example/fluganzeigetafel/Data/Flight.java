@@ -1,5 +1,7 @@
 package com.example.fluganzeigetafel.Data;
 
+import java.util.Objects;
+
 public class Flight {
     private String fnr;
     private String knr;
@@ -126,6 +128,30 @@ public class Flight {
         this.saa = saa;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return Objects.equals(fnr, flight.fnr) &&
+                Objects.equals(knr, flight.knr) &&
+                Objects.equals(reg, flight.reg) &&
+                Objects.equals(typ, flight.typ) &&
+                Objects.equals(ha0, flight.ha0) &&
+                Objects.equals(lsk, flight.lsk) &&
+                Objects.equals(stt, flight.stt) &&
+                Objects.equals(itt, flight.itt) &&
+                Objects.equals(pos, flight.pos) &&
+                Objects.equals(ter, flight.ter) &&
+                Objects.equals(mad, flight.mad) &&
+                Objects.equals(saa, flight.saa);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fnr, knr, reg, typ, ha0, lsk, stt, itt, pos, ter, mad, saa);
+    }
 
 
 }

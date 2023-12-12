@@ -2,7 +2,10 @@ package com.example.fluganzeigetafel.Controller;
 
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.Data.DataInterface;
+import com.example.fluganzeigetafel.Data.Flight;
 import com.example.fluganzeigetafel.Manager.PrintManager;
+
+import java.util.ArrayList;
 
 public class PrintController {
 
@@ -15,7 +18,11 @@ public class PrintController {
 
 
         PrintManager printMenu = new PrintManager();
-        printMenu.createPDF();
+        if (DataInterface.getInstance().getTemporaryFlights() != null)
+            printMenu.createPDF((ArrayList<Flight>) DataInterface.getInstance().getTemporaryFlights());
+        else
+            printMenu.createPDF((ArrayList<Flight>) DataInterface.getInstance().getFlights());
+
 
     }
 }

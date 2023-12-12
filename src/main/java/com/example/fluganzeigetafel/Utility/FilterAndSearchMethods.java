@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FilterAndSearchMethods {
     static int counter = 0;
@@ -33,12 +34,15 @@ public class FilterAndSearchMethods {
         // Create a filtered list
         FilteredList<Flight> filteredFlights = new FilteredList<>(FXCollections.observableArrayList(flights));
 
+
         String filter = newValue.trim();
 
         // Set the filter predicate
         filteredFlights.setPredicate(flight ->
                 flight.getFnr().startsWith(filter) || flight.getKnr().startsWith(filter));
 
+            List<Flight> arrayList = new ArrayList<>(filteredFlights);
+            DataInterface.getInstance().addTemporaryFlights(arrayList);
         // Update the TableView with the filtered list
         DataInterface.flightsTable.setItems(filteredFlights);
 
@@ -47,6 +51,7 @@ public class FilterAndSearchMethods {
 
         // If the filter is empty, show all flights
         if (newValue.isBlank()) {
+            DataInterface.getInstance().addFlights(flights);
             DataInterface.flightsTable.setItems(FXCollections.observableArrayList(flights));
             DataInterface.flightsTable.refresh();
         }
@@ -54,10 +59,6 @@ public class FilterAndSearchMethods {
 
     }
 
-    public static void searchAction() {
-        Stage stage = new Stage();
 
-
-    }
 
 }

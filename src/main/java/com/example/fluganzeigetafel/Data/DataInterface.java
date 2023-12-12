@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DataInterface {
+
     private static DataInterface instance;
     private List<Flight> flights;
 
@@ -69,7 +70,9 @@ public class DataInterface {
     public List<Flight> getFlights() {
         return flights;
     }
-
+    public List<Flight> getTemporaryFlights() {
+        return temporaryFlights;
+    }
 
 
     public String getFilePath() {

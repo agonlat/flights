@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -96,13 +97,15 @@ public class UtilityMethods {
                     alert.setTitle("Information");
 
 
+
                     alert.setContentText(pattern);
-                    alert.setWidth(alert.getWidth() + 500);
+                   alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     Optional<ButtonType> opt = alert.showAndWait();
 
                     if (opt.isPresent() && opt.get().getButtonData() == ButtonBar.ButtonData.APPLY) {
                         PrintManager controller = new PrintManager();
-                       // controller.createPDF(f);
+                        controller.createPDF(f);
+
                     }
 
                 } else {

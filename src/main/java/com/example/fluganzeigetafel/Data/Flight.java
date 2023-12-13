@@ -1,5 +1,8 @@
 package com.example.fluganzeigetafel.Data;
 
+import com.example.fluganzeigetafel.Contract.Contract;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Flight {
@@ -15,6 +18,14 @@ public class Flight {
     private String ter;
     private String mad;
     private String saa;
+
+    private ArrayList<Contract> contracts;
+
+    public ArrayList<Contract> getContracts() {
+        return contracts;
+    }
+
+
 
     public String getFnr() {
         return fnr;
@@ -126,6 +137,7 @@ public class Flight {
         this.ter = ter;
         this.mad = mad;
         this.saa = saa;
+        this.contracts = new ArrayList<>();
     }
 
 

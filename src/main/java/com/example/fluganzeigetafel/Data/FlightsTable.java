@@ -1,16 +1,21 @@
 package com.example.fluganzeigetafel.Data;
 
+import com.example.fluganzeigetafel.Contract.CSVRow;
+import com.example.fluganzeigetafel.Contract.Contract;
+import com.example.fluganzeigetafel.Contract.Data.ContractTable;
+import com.example.fluganzeigetafel.Contract.Handler.FileHandler;
 import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.Utility.ValidationUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-
+import com.sun.javafx.scene.control.behavior.TabPaneBehavior;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class FlightsTable extends TableView{
     int selectedIndex = 0;
@@ -83,7 +88,7 @@ public class FlightsTable extends TableView{
             Flight selectedFlight = (Flight) this.getSelectionModel().getSelectedItem();
             if (selectedFlight != null) {
                 DataInterface.getInstance().getFlights().remove(selectedFlight);
-                 selectedIndex=this.getSelectionModel().getSelectedIndex();
+                selectedIndex=this.getSelectionModel().getSelectedIndex();
                 delItems.push(selectedFlight);
                 this.populateTable((ArrayList<Flight>) DataInterface.getInstance().getFlights());
                 this.refresh();
@@ -111,6 +116,7 @@ public class FlightsTable extends TableView{
 
         this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.setPlaceholder(new Label(""));
+        int ind = 0;
 
         String[] cols = new String[]{"FNR", "KNR", "REG", "TYP", "HA0", "LSK", "STT", "ITT", "POS", "TER", "MAD", "SAA"};
 
@@ -118,14 +124,80 @@ public class FlightsTable extends TableView{
 
             TableColumn<Flight, String> column = new TableColumn<>(s);
 
+
             column.setCellValueFactory(new PropertyValueFactory<>(s.toLowerCase()));
-       //     column.setSortType(TableColumn.SortType.ASCENDING);
+            //     column.setSortType(TableColumn.SortType.ASCENDING);
+
+if (ind == 0) {
+
+    column.setCellFactory(col -> {
+        TableCell<Flight, String> cell = new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (!empty) {
+                    setText(item);
+
+                    // Set text color to blue for the first column
+                    setStyle("-fx-text-fill: lightblue;-fx-alignment: center");
+                } else {
+                    setText(null);
+                    setStyle("");
+                }
+            }
+        };
 
 
 
-            column.setCellFactory(TextFieldTableCell.<Flight>forTableColumn());
+        // Change cursor on mouse enter
+        cell.setOnMouseEntered(e -> cell.setCursor(Cursor.HAND));
 
+        // Handle click events
+        // Handle click events
+        cell.setOnMouseClicked(e -> {
+
+            ObservableList<Tab> allTabs =  DataInterface.getInstance().getTabPaneView().getTabs();
+            DataInterface.getInstance().getTabPaneView().getTabs().remove(1,allTabs.size() );
+
+            if (!cell.isEmpty()) {
+                // Handle click event for non-empty cells
+
+                FileHandler contractHandler = new FileHandler();
+                DataInterface.getInstance().setContracts(contractHandler.readCSV_toList("src/main/resources/au.csv"));
+                ArrayList<Contract> contr = DataInterface.getInstance().getContracts();
+
+                Flight f = (Flight) DataInterface.getInstance().getFlightsTable().getItems().get(cell.getIndex());
+
+                for (Contract cont : contr) {
+                    ContractTable contractTable = new ContractTable();
+                    Tab tab = new Tab("Contract " + cont.getAUKEY(), contractTable);
+                    ObservableList<CSVRow> list = FXCollections.observableArrayList(cont.getCSVRows());
+
+                    // Add all CSVRows for the current contract to the ContractTable
+                    contractTable.setItems(list);
+
+                    contractTable.refresh();
+
+                    System.out.println(DataInterface.getInstance().getContracts().get(0).getCSVRows().size());
+                    System.out.println(DataInterface.getInstance().getContracts().get(5).getCSVRows().size());
+
+                    // Add the ContractTable to a new tab in the TabPane
+                    DataInterface.getInstance().getTabPaneView().addTab(tab);
+                }
+            }
+        });
+
+        return cell;
+
+    });
+    ind = -1;
+
+}
             switch (s) {
+
+
+
                 case "POS":
 
                     column.setEditable(true);
@@ -165,8 +237,8 @@ public class FlightsTable extends TableView{
                             ErrorDialog dialog = new ErrorDialog("Wrong value! Check to proceed");
                             this.refresh();
                         }
-                           else
-                        f.setSaa(changed);
+                        else
+                            f.setSaa(changed);
                     });
                     break;
                 case "ITT":
@@ -178,15 +250,15 @@ public class FlightsTable extends TableView{
                         f.setItt(changed);
                         if (ValidationUtil.checkNewInternalTimeFormat(changed) && ValidationUtil.checkNewInternalTimeValue(changed, e.getOldValue()))
                             f.setItt(changed);
-                            else {
+                        else {
                             ErrorDialog dialog = new ErrorDialog("Wrong value! Check to proceed");
                             this.refresh();
                         }
 
 
-                            if (!ValidationUtil.checkNewInternalTimeValue(changed, e.getOldValue())) {
+                        if (!ValidationUtil.checkNewInternalTimeValue(changed, e.getOldValue())) {
                             ErrorDialog dialog = new ErrorDialog("New itt cannot be smaller than the old one!");
-                                this.refresh();
+                            this.refresh();
                         }
 
                     });

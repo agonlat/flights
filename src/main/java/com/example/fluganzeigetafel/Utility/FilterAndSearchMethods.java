@@ -52,7 +52,7 @@ public class FilterAndSearchMethods {
         // If the filter is empty, show all flights
         if (newValue.isBlank()) {
             DataInterface.getInstance().addFlights(flights);
-            DataInterface.flightsTable.setItems(FXCollections.observableArrayList(flights));
+            DataInterface.flightsTable.populateTable(flights);
             DataInterface.flightsTable.refresh();
         }
         });

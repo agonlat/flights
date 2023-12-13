@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.example.fluganzeigetafel.Contract.Contract;
 import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
+import com.example.fluganzeigetafel.Data.DataInterface;
 import com.example.fluganzeigetafel.Data.Flight;
 import com.example.fluganzeigetafel.Utility.TimeHandler;
 
@@ -51,7 +53,19 @@ public class FileHandler {
                     flight.setItt(TimeHandler.getActualDate() + " " + TimeHandler.getTime(flight.getItt()));
 
                 list.add(flight);
+                ArrayList<Contract> contractList = DataInterface.getInstance().getContracts();
+
+                for (Contract contract : contractList) {
+                    String aukey = contract.getAUKEY();
+                    if (aukey.equals(flight.getKnr())) {
+                        flight.getContracts().add(contract);
+                    }
+
+
             }
+
+
+        }
             return (ArrayList<Flight>) list;
         } catch (FileNotFoundException e) {
             ErrorDialog dialog = new ErrorDialog("File not found. Check file path");

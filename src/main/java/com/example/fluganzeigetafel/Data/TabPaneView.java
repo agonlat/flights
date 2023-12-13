@@ -6,23 +6,23 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class TabPaneView  {
-    private TabPane pane;
+public class TabPaneView extends TabPane {
+
     public TabPaneView(VBox vbox) {
-         pane = new TabPane();
+
         Tab flightsTab = new Tab("Flights", DataInterface.flightsTable);
         flightsTab.setClosable(false);
-        pane.getTabs().add(flightsTab);
-        VBox.setVgrow(pane, Priority.ALWAYS);
+        this.getTabs().add(flightsTab);
+        VBox.setVgrow(this, Priority.ALWAYS);
 
     }
 
     public TabPane getTabPaneView() {
-        return pane;
+        return this;
     }
 
     public Tab addTab(Tab tab) {
-        pane.getTabs().add(tab);
+        this.getTabs().add(tab);
         return tab;
     }
 }

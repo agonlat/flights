@@ -1,18 +1,25 @@
 package com.example.fluganzeigetafel.Data;
 
 
+import com.example.fluganzeigetafel.Contract.CSVRow;
+import com.example.fluganzeigetafel.Contract.Contract;
 import com.example.fluganzeigetafel.Utility.UtilityMethods;
+import javafx.scene.control.TabPane;
 
 import java.util.*;
 
 public class DataInterface {
 
+    private ArrayList<CSVRow> contractDataRow;
+    private ArrayList<Contract> contracts;
     private static DataInterface instance;
     private List<Flight> flights;
-
+    private TabPaneView pane;
     private String filePath;
     private List<Flight> temporaryFlights;
     private int changedFlightsCounter;
+
+
     public static FlightsTable flightsTable;
     private Set<Flight> changedFlightsSet;
 
@@ -24,6 +31,11 @@ public class DataInterface {
     public void incrementCounter() {
         this.changedFlightsCounter++;
     }
+
+    public static FlightsTable getFlightsTable() {
+        return flightsTable;
+    }
+
 
     public HashMap<String, Integer> getAirlines() {
         HashMap<String, Integer> map = new HashMap<>();
@@ -56,9 +68,20 @@ public class DataInterface {
         changedFlightsCounter = 0;
         temporaryFlights = new ArrayList<>();
         changedFlightsSet = new HashSet<>();
+        contractDataRow = new ArrayList<>();
+        contracts = new ArrayList<>();
 
     }
 
+    public boolean setTabPaneView(TabPaneView view) {
+        this.pane = view;
+        if (pane != null)
+            return true;
+        else return false;
+    }
+    public TabPaneView getTabPaneView() {
+       return this.pane;
+    }
     public static DataInterface getInstance() {
 
             synchronized (DataInterface.class) {
@@ -120,7 +143,11 @@ public class DataInterface {
     }
 
 
+    public ArrayList<Contract> getContracts() {
+        return this.contracts;
+    }
 
-
-
+    public void setContracts(ArrayList<Contract> contr) {
+        this.contracts = contr;
+    }
 }

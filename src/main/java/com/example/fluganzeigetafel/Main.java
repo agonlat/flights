@@ -48,6 +48,7 @@ public class Main extends Application {
 
         VBox tableLayout = new VBox();
         TabPaneView paneView = new TabPaneView(tableLayout);
+        DataInterface.getInstance().setTabPaneView(paneView);
         tableLayout.getChildren().addAll(new MenuBarView(stage).getMenuBar(),pane,paneView.getTabPaneView());
 
 

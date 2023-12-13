@@ -7,7 +7,7 @@ module com.example.fluganzeigetafel {
     requires com.google.zxing;
     requires pdfbox.app;
 
-
+    opens com.example.fluganzeigetafel.Contract to javafx.base;
     opens com.example.fluganzeigetafel to javafx.fxml;
     exports com.example.fluganzeigetafel;
     exports com.example.fluganzeigetafel.Controller;

@@ -6,20 +6,24 @@ module com.example.fluganzeigetafel {
 
     requires com.google.zxing;
     requires pdfbox.app;
+    requires org.junit.jupiter.api;
+    requires org.junit.platform.commons;
+
 
     opens com.example.fluganzeigetafel.Contract to javafx.base;
     opens com.example.fluganzeigetafel to javafx.fxml;
     exports com.example.fluganzeigetafel;
-    exports com.example.fluganzeigetafel.Controller;
-    opens com.example.fluganzeigetafel.Controller to javafx.fxml;
-    exports com.example.fluganzeigetafel.Manager;
-    opens com.example.fluganzeigetafel.Manager to javafx.fxml;
-    exports com.example.fluganzeigetafel.Utility;
-    opens com.example.fluganzeigetafel.Utility to javafx.fxml;
+
+    exports com.example.fluganzeigetafel.Flights.Controller;
+    opens com.example.fluganzeigetafel.Flights.Controller to javafx.fxml;
+    exports com.example.fluganzeigetafel.Flights.Manager;
+    opens com.example.fluganzeigetafel.Flights.Manager to javafx.fxml;
+    exports com.example.fluganzeigetafel.Flights.Utility;
+    opens com.example.fluganzeigetafel.Flights.Utility to javafx.fxml;
     exports com.example.fluganzeigetafel.CustomDialogs;
     opens com.example.fluganzeigetafel.CustomDialogs to javafx.fxml;
-    exports com.example.fluganzeigetafel.Data;
-    opens com.example.fluganzeigetafel.Data to javafx.fxml;
-    exports com.example.fluganzeigetafel.Handler;
-    opens com.example.fluganzeigetafel.Handler to javafx.fxml;
+    exports com.example.fluganzeigetafel.Flights.Data;
+    opens com.example.fluganzeigetafel.Flights.Data to javafx.fxml;
+    exports com.example.fluganzeigetafel.Flights.Handler;
+    opens com.example.fluganzeigetafel.Flights.Handler to javafx.fxml;
 }

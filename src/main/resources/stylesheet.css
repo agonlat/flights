@@ -1,0 +1,40 @@
+.button  {
+    -fx-font-family: customFont;
+    -fx-background-color: #1E1E1E;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 5;
+    -fx-background-radius: 15;
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-padding: 7 12 7 12;
+
+}
+
+.text-field {
+    -fx-background-color: #1E1E1E;
+    -fx-border-radius: 5;
+    -fx-background-radius: 15;
+    -fx-padding: 7 12 7 12;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+}
+
+.text-field:focused {
+
+}
+
+
+
+.button:hover {
+    -fx-background-color: #383838;
+    -fx-font-family: customFont;
+
+
+
+}
+
+.button:pressed{
+    -fx-background-color: #000000;
+}

@@ -2,6 +2,9 @@ package com.example.fluganzeigetafel.Contract.Handler;
 
 import com.example.fluganzeigetafel.Contract.CSVRow;
 import com.example.fluganzeigetafel.Contract.Contract;
+import com.example.fluganzeigetafel.DataInterface;
+import com.example.fluganzeigetafel.Flights.Data.Flight;
+import javafx.scene.chart.PieChart;
 
 
 import java.io.*;
@@ -11,6 +14,7 @@ import java.util.List;
 
 public class FileHandler {
     public ArrayList<Contract> readCSV_toList(String filepath) {
+        DataInterface.getInstance().setFilePath(filepath);
         boolean check = true;
 
         ArrayList<Contract> list = new ArrayList<>();
@@ -96,7 +100,8 @@ public class FileHandler {
                 );
 
                 for (int j = 0; j < values.length; j++) {
-                    CSVRow row = new CSVRow(cols[j], values[j]);
+                    CSVRow row = new CSVRow(cols[j],  values[j]);
+                    if (!row.getValue().isEmpty() && !row.getValue().contains(";"))
                     contract.getCSVRows().add(row);
                 }
 
@@ -106,17 +111,46 @@ public class FileHandler {
 
                 list.add(contract);
 
+
+
             }
 
 
 
 
 
-        return list;
+            return list;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public void addContractsToFlights(ArrayList<Contract> list) {
+        System.out.println("INB");
+        ArrayList<Contract> contracts = list;
+        System.out.println("d"+contracts.size());
+
+        for (Flight f : DataInterface.getInstance().getFlights()) {
+            for (Contract contract : contracts) {
+                if (f.getKnr().trim().equals(contract.getAUKNL()) || f.getKnr().trim().equals(contract.getAUKNS()) ){
+                    f.addContract(contract);
+                    System.err.println("FOUND" + f.getKnr());
+                    System.err.println("sd" + f.getContracts().size());
+                    ArrayList<CSVRow > cs = Contract.generateListOfCSVRows(contract);
+                    System.out.println("sdsdg" + cs.size());
+                    f.addCSV(cs);
+
+                }
+            }
+        }
+
+    }
+
+
+
+
+
+
 }

@@ -1,0 +1,148 @@
+package Tests;
+
+import com.example.fluganzeigetafel.Contract.Subcontracts.Subcontract;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class SubcontractTest {
+
+    @Test
+    public void testSubcontractGettersAndSetters() {
+        // Create a Subcontract instance
+        Subcontract subcontract = new Subcontract();
+
+        // Set values using setter methods
+        subcontract.setATTBE("ATTBE123");
+        subcontract.setATTEN("ATTEN456");
+        subcontract.setAUKEY("AUKEY789");
+        subcontract.setCBDFK("CBDFKABC");
+        subcontract.setETTBE("ETTBE123");
+        subcontract.setETTEN("ETTEN456");
+        subcontract.setINDNR("INDNR789");
+        subcontract.setLUPDN("LUPDNABC");
+        subcontract.setLUPDT("LUPDT123");
+        subcontract.setLUPDV("LUPDV456");
+        subcontract.setLZUAU("LZUAU789");
+        subcontract.setMENGE("MENGEABC");
+        subcontract.setSTTBE("STTBE123");
+        subcontract.setSTTEN("STTEN456");
+        subcontract.setUAKEY("UAKEY789");
+        subcontract.setUAPIR("UAPIRABC");
+        subcontract.setUASAA("UASAA123");
+        subcontract.setUASAU("UASAU456");
+        subcontract.setXUA("XUA789");
+        subcontract.setZINFO("ZINFOABC");
+        subcontract.setDFKEY("DFKEY123");
+        subcontract.setORTFR("ORTFR456");
+        subcontract.setORTTO("ORTTO789");
+        subcontract.setUAART("UAARTABC");
+        subcontract.setUAREE("UAREE123");
+        subcontract.setFGKEY("FGKEY456");
+        subcontract.setUAABF("UAABF789");
+        subcontract.setREKEY("REKEYABC");
+        subcontract.setSPREK("SPREK123");
+        subcontract.setATT30("ATT30123");
+        subcontract.setATT50("ATT50456");
+        subcontract.setATT55("ATT55456");
+        subcontract.setATT60("ATT60567");
+        subcontract.setATT70("ATT70890");
+        subcontract.setATT75("ATT75901");
+        subcontract.setATTER("ATTER234");
+        subcontract.setUAAGE("UAAGE567");
+        subcontract.setEINHE("EINHE678");
+        subcontract.setATT20("ATT20987");
+        subcontract.setQKB("QKB345");
+        subcontract.setSAA20("SAA20987");
+        subcontract.setSAAOF("SAAOF567");
+        subcontract.setSKA("SKA678");
+        subcontract.setSTT20("STT20987");
+        subcontract.setURK("URK567");
+        subcontract.setRELFK("RELFK678");
+        subcontract.setUAINF("UAINF345");
+        subcontract.setETT30("ETT30987");
+        subcontract.setUAKSL("UAKSL567");
+        subcontract.setSPKEY("SPKEY678");
+        subcontract.setMENG2("MENG234");
+        subcontract.setCINFO("CINFO567");
+        subcontract.setATT40("ATT40567");
+        subcontract.setSTLIK("STLIK234");
+        subcontract.setOKEYN("OKEYN567");
+        subcontract.setABI("ABI234");
+        subcontract.setEBI("EBI567");
+        subcontract.setSBI("SBI234");
+        subcontract.setTOURK("TOURK567");
+        subcontract.setEINH2("EINH2567");
+        subcontract.setEINH3("EINH3567");
+        subcontract.setEINH4("EINH4567");
+        subcontract.setMENG3("MENG3567");
+        subcontract.setMENG4("MENG4567");
+        subcontract.setXCABA("XCABA567");
+
+        // Test getter methods
+        Assertions.assertEquals("ATTBE123", subcontract.getATTBE());
+        Assertions.assertEquals("ATTEN456", subcontract.getATTEN());
+        Assertions.assertEquals("AUKEY789", subcontract.getAUKEY());
+        Assertions.assertEquals("CBDFKABC", subcontract.getCBDFK());
+        Assertions.assertEquals("ETTBE123", subcontract.getETTBE());
+        Assertions.assertEquals("ETTEN456", subcontract.getETTEN());
+        Assertions.assertEquals("INDNR789", subcontract.getINDNR());
+        Assertions.assertEquals("LUPDNABC", subcontract.getLUPDN());
+        Assertions.assertEquals("LUPDT123", subcontract.getLUPDT());
+        Assertions.assertEquals("LUPDV456", subcontract.getLUPDV());
+        Assertions.assertEquals("LZUAU789", subcontract.getLZUAU());
+        Assertions.assertEquals("MENGEABC", subcontract.getMENGE());
+        Assertions.assertEquals("STTBE123", subcontract.getSTTBE());
+        Assertions.assertEquals("STTEN456", subcontract.getSTTEN());
+        Assertions.assertEquals("UAKEY789", subcontract.getUAKEY());
+        Assertions.assertEquals("UAPIRABC", subcontract.getUAPIR());
+        Assertions.assertEquals("UASAA123", subcontract.getUASAA());
+        Assertions.assertEquals("UASAU456", subcontract.getUASAU());
+        Assertions.assertEquals("XUA789", subcontract.getXUA());
+        Assertions.assertEquals("ZINFOABC", subcontract.getZINFO());
+        Assertions.assertEquals("DFKEY123", subcontract.getDFKEY());
+        Assertions.assertEquals("ORTFR456", subcontract.getORTFR());
+        Assertions.assertEquals("ORTTO789", subcontract.getORTTO());
+        Assertions.assertEquals("UAARTABC", subcontract.getUAART());
+        Assertions.assertEquals("UAREE123", subcontract.getUAREE());
+        Assertions.assertEquals("FGKEY456", subcontract.getFGKEY());
+        Assertions.assertEquals("UAABF789", subcontract.getUAABF());
+        Assertions.assertEquals("REKEYABC", subcontract.getREKEY());
+        Assertions.assertEquals("SPREK123", subcontract.getSPREK());
+        Assertions.assertEquals("ATT30123", subcontract.getATT30());
+        Assertions.assertEquals("ATT50456", subcontract.getATT50());
+        Assertions.assertEquals("ATT55456", subcontract.getATT55());
+        Assertions.assertEquals("ATT60567", subcontract.getATT60());
+        Assertions.assertEquals("ATT70890", subcontract.getATT70());
+        Assertions.assertEquals("ATT75901", subcontract.getATT75());
+        Assertions.assertEquals("ATTER234", subcontract.getATTER());
+        Assertions.assertEquals("UAAGE567", subcontract.getUAAGE());
+        Assertions.assertEquals("EINHE678", subcontract.getEINHE());
+        Assertions.assertEquals("ATT20987", subcontract.getATT20());
+        Assertions.assertEquals("QKB345", subcontract.getQKB());
+        Assertions.assertEquals("SAA20987", subcontract.getSAA20());
+        Assertions.assertEquals("SAAOF567", subcontract.getSAAOF());
+        Assertions.assertEquals("SKA678", subcontract.getSKA());
+        Assertions.assertEquals("STT20987", subcontract.getSTT20());
+        Assertions.assertEquals("URK567", subcontract.getURK());
+        Assertions.assertEquals("RELFK678", subcontract.getRELFK());
+        Assertions.assertEquals("UAINF345", subcontract.getUAINF());
+        Assertions.assertEquals("ETT30987", subcontract.getETT30());
+        Assertions.assertEquals("UAKSL567", subcontract.getUAKSL());
+        Assertions.assertEquals("SPKEY678", subcontract.getSPKEY());
+        Assertions.assertEquals("MENG234", subcontract.getMENG2());
+        Assertions.assertEquals("CINFO567", subcontract.getCINFO());
+        Assertions.assertEquals("ATT40567", subcontract.getATT40());
+        Assertions.assertEquals("STLIK234", subcontract.getSTLIK());
+        Assertions.assertEquals("OKEYN567", subcontract.getOKEYN());
+        Assertions.assertEquals("ABI234", subcontract.getABI());
+        Assertions.assertEquals("EBI567", subcontract.getEBI());
+        Assertions.assertEquals("SBI234", subcontract.getSBI());
+        Assertions.assertEquals("TOURK567", subcontract.getTOURK());
+        Assertions.assertEquals("EINH2567", subcontract.getEINH2());
+        Assertions.assertEquals("EINH3567", subcontract.getEINH3());
+        Assertions.assertEquals("EINH4567", subcontract.getEINH4());
+        Assertions.assertEquals("MENG3567", subcontract.getMENG3());
+        Assertions.assertEquals("MENG4567", subcontract.getMENG4());
+        Assertions.assertEquals("XCABA567", subcontract.getXCABA());
+    }
+}

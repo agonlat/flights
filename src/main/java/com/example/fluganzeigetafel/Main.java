@@ -1,20 +1,10 @@
 package com.example.fluganzeigetafel;
-import com.example.fluganzeigetafel.Data.*;
-import com.example.fluganzeigetafel.Controller.DataController;
-import com.example.fluganzeigetafel.Controller.FileController;
-import com.example.fluganzeigetafel.Controller.PrintController;
-import com.example.fluganzeigetafel.Controller.ViewController;
-import com.example.fluganzeigetafel.Utility.FilterAndSearchMethods;
-import com.example.fluganzeigetafel.Utility.UtilityMethods;
+import com.example.fluganzeigetafel.Flights.Data.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -53,6 +43,8 @@ public class Main extends Application {
 
 
 
+        Image img = new Image(getClass().getResourceAsStream("/Icons/AIRPLANE.png"));
+        stage.getIcons().add(img);
 
 
 
@@ -60,6 +52,8 @@ public class Main extends Application {
 
 
         Scene scene = new Scene(tableLayout, width, height);
+
+
         stage.setScene(scene);
         stage.show();
     }

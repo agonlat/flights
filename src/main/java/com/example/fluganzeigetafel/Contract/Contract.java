@@ -1,10 +1,9 @@
 package com.example.fluganzeigetafel.Contract;
 
 
-import com.example.fluganzeigetafel.Data.DataInterface;
-import com.example.fluganzeigetafel.Data.Flight;
-import javafx.scene.chart.PieChart;
+import com.example.fluganzeigetafel.Contract.Subcontracts.Subcontract;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class Contract {
@@ -482,15 +481,97 @@ public class Contract {
     private String PKNAM;
     private String FELFK;
 
+    public String getRELFK() {
+        return RELFK;
+    }
 
-    public Contract( String ATTBE, String ATTEN, String AUAGE, String AUKEY, String AUKNL, String AUKNS, String AUPIR,
-                     String AUSAA, String AUSAU, String DISPO, String EINHE, String ETTBE, String ETTEN, String FGKEY,
-                     String JTP, String KEYLK, String KEYLE, String KEYLF, String LUPDN, String LUPDT, String LUPDV,
-                     String MENGE, String ORTFR, String ORTTO, String STTBE, String STTEN, String UAZAK, String UAZPL,
-                     String XAU, String ZINFO, String DIB, String PLKEY, String AUDAT, String AUABF, String ATT20,
-                     String RELFK, String CINFO, String FDAEN, String FLAGS, String MITAR, String MAD, String STLIK,
-                     String PKART, String PKL, String PKLAS, String PKLEA, String PKNAM, String PLE, String EINH2,
-                     String EINH3, String EINH4, String MENG2, String MENG3, String MENG4) {
+    public void setRELFK(String RELFK) {
+        this.RELFK = RELFK;
+    }
+
+    private String RELFK;
+
+    private ArrayList<Subcontract> subcontractList = new ArrayList<>();
+
+
+    public void setAUKEY(String AUKEY) {
+        this.AUKEY = AUKEY;
+    }
+
+
+
+    public Contract(String AUKEY) {
+        this.ATTBE = "";
+        this.ATTEN = "";
+        this.AUAGE = "";
+        this.AUKEY = AUKEY;
+        this.AUKNL = "";
+        this.AUKNS = "";
+        this.AUPIR = "";
+        this.AUSAA = "";
+        this.AUSAU = "";
+        this.DISPO = "";
+        this.EINHE = "";
+        this.ETTBE = "";
+        this.ETTEN = "";
+        this.FGKEY = "";
+        this.JTP = "";
+        this.KEYLK = "";
+        this.KEYLE = "";
+        this.KEYLF = "";
+        this.LUPDN = "";
+        this.LUPDT = "";
+        this.LUPDV = "";
+        this.MENGE = "";
+        this.ORTFR = "";
+        this.ORTTO = "";
+        this.STTBE = "";
+        this.STTEN = "";
+        this.UAZAK = "";
+        this.UAZPL = "";
+        this.XAU = "";
+        this.ZINFO = "";
+        this.DIB = "";
+        this.PLKEY = "";
+        this.AUDAT = "";
+        this.AUABF = "";
+        this.ATT20 = "";
+        this.RELFK = "";
+        this.CINFO = "";
+        this.FDAEN = "";
+        this.FLAGS = "";
+        this.MITAR = "";
+        this.MAD = "";
+        this.STLIK = "";
+        this.PKART = "";
+        this.PKL = "";
+        this.PKLAS = "";
+        this.PKLEA = "";
+        this.PKNAM = "";
+        this.PLKEY = "";
+        this.EINH2 = "";
+        this.EINH3 = "";
+        this.EINH4 = "";
+        this.MENG2 = "";
+        this.MENG3 = "";
+        this.MENG4 = "";
+        this.FELFK = "";
+        rows = new ArrayList<>();
+    }
+
+    public Contract() {
+        this.rows = new ArrayList<>();
+    }
+
+
+    public Contract(String ATTBE, String ATTEN, String AUAGE, String AUKEY, String AUKNL, String AUKNS, String AUPIR,
+                    String AUSAA, String AUSAU, String DISPO, String EINHE, String ETTBE, String ETTEN, String FGKEY,
+                    String JTP, String KEYLK, String KEYLE, String KEYLF, String LUPDN, String LUPDT, String LUPDV,
+                    String MENGE, String ORTFR, String ORTTO, String STTBE, String STTEN, String UAZAK, String UAZPL,
+                    String XAU, String ZINFO, String DIB, String PLKEY, String AUDAT, String AUABF, String ATT20,
+                    String RELFK, String CINFO, String FDAEN, String FLAGS, String MITAR, String MAD, String STLIK,
+                    String PKART, String PKL, String PKLAS, String PKLEA, String PKNAM, String PLE, String EINH2,
+                    String EINH3, String EINH4, String MENG2, String MENG3, String MENG4) {
 
         this.AUKEY = AUKEY;
         this.DISPO = DISPO;
@@ -549,13 +630,58 @@ public class Contract {
         rows = new ArrayList<>();
     }
 
-    private  ArrayList<CSVRow> rows;
+    private ArrayList<CSVRow> rows;
 
-    public  ArrayList<CSVRow> getCSVRows() {
-        return rows;
+    public static ArrayList<CSVRow> generateListOfCSVRows(Contract contract) {
+
+            Class<?> clazz = contract.getClass();
+            Field[] fields = clazz.getDeclaredFields();
+            ArrayList<CSVRow> rows = new ArrayList<>();
+
+            for (Field field : fields) {
+                field.setAccessible(true);
+
+                try {
+
+                    if (field.get(contract) != null && !field.get(contract).toString().isEmpty()) {
+                        CSVRow row = new CSVRow(field.getName(), field.get(contract).toString());
+
+
+                        if (!row.getValue().isEmpty() && !row.getValue().contains(";")&& !row.getValue().contains("["))
+                        rows.add(row);
+                    }
+
+
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+
+            return rows;
+
+
     }
 
+        public ArrayList<CSVRow> getCSVRows() {
+            return rows;
+        }
 
 
+        public ArrayList<Subcontract> getSubContractsList () {
+            return this.subcontractList;
+        }
 
-}
+        public void deleteSubContract(String aukey) {
+        for (Subcontract subcontract : getSubContractsList()) {
+            if (subcontract.getAUKEY().trim().equals(aukey.trim())) {
+                this.subcontractList.remove(subcontract);
+            }
+        }
+        }
+
+        public void addSubContractToSubContractList (Subcontract subcontract){
+            this.subcontractList.add(subcontract);
+        }
+    }
+

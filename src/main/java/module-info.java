@@ -4,12 +4,16 @@ module com.example.fluganzeigetafel {
     requires java.desktop;
 
 
+
     requires com.google.zxing;
-    requires pdfbox.app;
+
     requires org.junit.jupiter.api;
     requires org.junit.platform.commons;
 
+    requires opencsv;
+    requires org.apache.pdfbox;
 
+    opens com.example.fluganzeigetafel.Flights.Utility to org.junit.jupiter.api;
     opens com.example.fluganzeigetafel.Contract to javafx.base;
     opens com.example.fluganzeigetafel to javafx.fxml;
     exports com.example.fluganzeigetafel;
@@ -19,7 +23,7 @@ module com.example.fluganzeigetafel {
     exports com.example.fluganzeigetafel.Flights.Manager;
     opens com.example.fluganzeigetafel.Flights.Manager to javafx.fxml;
     exports com.example.fluganzeigetafel.Flights.Utility;
-    opens com.example.fluganzeigetafel.Flights.Utility to javafx.fxml;
+
     exports com.example.fluganzeigetafel.CustomDialogs;
     opens com.example.fluganzeigetafel.CustomDialogs to javafx.fxml;
     exports com.example.fluganzeigetafel.Flights.Data;

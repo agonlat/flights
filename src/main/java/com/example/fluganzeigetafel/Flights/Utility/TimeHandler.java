@@ -10,10 +10,9 @@ public class TimeHandler {
    public static String getTime(String input) {
         input = input.trim();
 
-        if (!ValidationUtil.checkNewInternalTimeFormat(input))
-            return input;
 
-        SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 
 
         try {
@@ -26,7 +25,7 @@ public class TimeHandler {
         } catch (ParseException e) {
             // Handle parsing exception
 
-            return input;
+            return "";
         }
     }
 

@@ -14,6 +14,14 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import java.util.*;
 
 public class SubContractTable extends TableView {
+
+    private Subcontract subcontract = new Subcontract();
+
+    public Subcontract getSubcontract() {
+    return subcontract;
+    }
+
+
     public SubContractTable() {
         this.setEditable(true);
         this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -28,21 +36,703 @@ public class SubContractTable extends TableView {
         for (String s: cols) {
             TableColumn<CSVRow, String> column = new TableColumn<CSVRow, String>(s);
             column.setCellValueFactory(new PropertyValueFactory<>(s.toLowerCase()));
+            column.setCellFactory(TextFieldTableCell.forTableColumn());
+            if (s.equals("Value")) {
+
+                column.setOnEditCommit(e -> {
+                    CSVRow row = e.getRowValue();
+
+                    String newValue = e.getNewValue();
+
+                    String des = row.getDesignation();
+
+                    switch (des) {
+                        case "ATTBE":
+                            column.setEditable(true);
+                            if (Validation.checkATTBE(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATTBE(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATTEN":
+                            column.setEditable(true);
+                            if (Validation.checkATTEN(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATTEN(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "AUKEY":
+                            column.setEditable(true);
+                            if (Validation.checkAUKEY(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setAUKEY(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+
+                        case "ETTBE":
+                            column.setEditable(true);
+                            if (Validation.checkETTBE(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setETTBE(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ETTEN":
+                            column.setEditable(true);
+                            if (Validation.checkETTEN(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setETTEN(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "INDNR":
+                            column.setEditable(true);
+                            if (Validation.checkINDNR(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setINDNR(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "LUPDN":
+                            column.setEditable(true);
+                            if (Validation.checkLUPDN(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setLUPDN(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "LUPDT":
+                            column.setEditable(true);
+                            if (Validation.checkLUPDT(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setLUPDT(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "LUPDV":
+                            column.setEditable(true);
+                            if (Validation.checkLUPDV(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setLUPDV(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "LZUAU":
+                            column.setEditable(true);
+                            if (Validation.checkLZUAU(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setLZUAU(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "MENGE":
+                            column.setEditable(true);
+                            if (Validation.checkMENGE(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setMENGE(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+
+                        case "STTBE":
+                            column.setEditable(true);
+                            if (Validation.checkSTTBE(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSTTBE(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "STTEN":
+                            column.setEditable(true);
+                            if (Validation.checkSTTEN(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSTTEN(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "UAKEY":
+                            column.setEditable(true);
+                            if (Validation.checkUAKEY(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUAKEY(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "UAPIR":
+                            column.setEditable(true);
+                            if (Validation.checkUAPIR(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUAPIR(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "UASAA":
+                            column.setEditable(true);
+                            if (Validation.checkUASAA(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUASAA(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "UASAU":
+                            column.setEditable(true);
+                            if (Validation.checkUASAU(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUASAU(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "XUA":
+                            column.setEditable(true);
+                            if (Validation.checkXUA(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setXUA(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ZINFO":
+                            column.setEditable(true);
+                            if (Validation.checkZINFO(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setZINFO(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+
+                        case "ORTFR":
+                            column.setEditable(true);
+                            if (Validation.checkORTFR(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setORTFR(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ORTTO":
+                            column.setEditable(true);
+                            if (Validation.checkORTTO(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setORTTO(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+
+                        case "UAREE":
+                            column.setEditable(true);
+                            if (Validation.checkUAREE(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUAREE(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "FGKEY":
+                            column.setEditable(true);
+                            if (Validation.checkFGKEY(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setFGKEY(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "UAABF":
+                            column.setEditable(true);
+                            if (Validation.checkUAABF(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUAABF(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+
+                        case "SPREK":
+                            column.setEditable(true);
+                            if (Validation.checkSPREK(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSPREK(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATT30":
+                            column.setEditable(true);
+                            if (Validation.checkATT30(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATT30(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATT50":
+                            column.setEditable(true);
+                            if (Validation.checkATT50(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATT50(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATT55":
+                            column.setEditable(true);
+                            if (Validation.checkATT55(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATT55(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATT60":
+                            column.setEditable(true);
+                            if (Validation.checkATT60(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATT60(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATT70":
+                            column.setEditable(true);
+                            if (Validation.checkATT70(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATT70(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATT75":
+                            column.setEditable(true);
+                            if (Validation.checkATT75(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATT75(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATTER":
+                            column.setEditable(true);
+                            if (Validation.checkATTER(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATTER(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "UAAGE":
+                            column.setEditable(true);
+                            if (Validation.checkUAAGE(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUAAGE(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "EINHE":
+                            column.setEditable(true);
+                            if (Validation.checkEINHE(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setEINHE(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATT20":
+                            column.setEditable(true);
+                            if (Validation.checkATT20(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATT20(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "QKB":
+                            column.setEditable(true);
+                            if (Validation.checkQKB(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setQKB(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "SAA20":
+                            column.setEditable(true);
+                            if (Validation.checkSAA20(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSAA20(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "SAAOF":
+                            column.setEditable(true);
+                            if (Validation.checkSAAOF(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSAAOF(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+
+                        case "SKA":
+                            column.setEditable(true);
+                            if (Validation.checkSKA(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSKA(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "STT20":
+                            column.setEditable(true);
+                            if (Validation.checkSTT20(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSTT20(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "URK":
+                            column.setEditable(true);
+                            if (Validation.checkURK(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setURK(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "RELFK":
+                            column.setEditable(true);
+                            if (Validation.checkRELFK(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setRELFK(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "UAINF":
+                            column.setEditable(true);
+                            if (Validation.checkUAINF(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUAINF(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ETT30":
+                            column.setEditable(true);
+                            if (Validation.checkETT30(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setETT30(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "UAKSL":
+                            column.setEditable(true);
+                            if (Validation.checkUAKSL(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setUAKSL(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "SPKEY":
+                            column.setEditable(true);
+                            if (Validation.checkSPKEY(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSPKEY(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "MENG2":
+                            column.setEditable(true);
+                            if (Validation.checkMENG2(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setMENG2(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "CINFO":
+                            column.setEditable(true);
+                            if (Validation.checkCINFO(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setCINFO(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ATT40":
+                            column.setEditable(true);
+                            if (Validation.checkATT40(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setATT40(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "STLIK":
+                            column.setEditable(true);
+                            if (Validation.checkSTLIK(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSTLIK(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "OKEYN":
+                            column.setEditable(true);
+                            if (Validation.checkOKEYN(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setOKEYN(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "ABI":
+                            column.setEditable(true);
+                            if (Validation.checkABI(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setABI(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "EBI":
+                            column.setEditable(true);
+                            if (Validation.checkEBI(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setEBI(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "SBI":
+                            column.setEditable(true);
+                            if (Validation.checkSBI(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setSBI(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "TOURK":
+                            column.setEditable(true);
+                            if (Validation.checkTOURK(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setTOURK(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+
+                        case "EINH2":
+                            column.setEditable(true);
+                            if (Validation.checkEINH2(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setEINH2(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "EINH3":
+                            column.setEditable(true);
+                            if (Validation.checkEINH3(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setEINH3(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "EINH4":
+                            column.setEditable(true);
+                            if (Validation.checkEINH4(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setEINH4(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "MENG3":
+                            column.setEditable(true);
+                            if (Validation.checkMENG3(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setMENG3(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+                            break;
+                        case "MENG4":
+                            column.setEditable(true);
+                            if (Validation.checkMENG4(newValue)) {
+                                row.setValue(newValue);
+                                getSubcontract().setMENG4(newValue);
+                                this.refresh();
+                            } else {
+                                ErrorDialog dialog = new ErrorDialog("Wrong input!");
+                                this.refresh();
+                            }
+
+                            break;
+
+
+                        default:
+                            this.refresh();
+
+
+                    }
+
+
+                });
 
 
 
 
-
-
-
+            }
             this.getColumns().add(column);
 
-
-
-
-        }
-
-    }
+        }}
 
     public SubContractTable createGenericTable(String dispo) {
 
@@ -213,9 +903,15 @@ public class SubContractTable extends TableView {
                 break;
             default:
                 System.out.println("Invalid dispo value" + dispo);
+
         }
 
 return this;
-    }}
+    }
+
+    public void setSubContract(Subcontract subcontract) {
+        this.subcontract = subcontract;
+    }
+    }
 
 

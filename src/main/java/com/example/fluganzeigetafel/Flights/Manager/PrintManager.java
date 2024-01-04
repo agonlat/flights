@@ -9,7 +9,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.common.BitMatrix;
@@ -35,8 +35,8 @@ public class PrintManager {
             document.addPage(page);
 
             PDPageContentStream stream = new PDPageContentStream(document, page);
-            PDType1Font font = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
-            stream.setFont(font, 25);
+           // PDType1Font font = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+            stream.setFont(PDType1Font.HELVETICA, 25);
 
 
             stream.beginText();
@@ -60,8 +60,8 @@ public class PrintManager {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
             Date date = new Date();
 
-            PDType1Font rect = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
-            stream.setFont(rect, 12);
+          //  PDType1Font rect = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+            stream.setFont(PDType1Font.HELVETICA, 12);
 
             stream.setNonStrokingColor(Color.BLACK);
             stream.beginText();
@@ -183,8 +183,8 @@ public class PrintManager {
                         PDPage pg = new PDPage(PDRectangle.A4);
                     document.addPage(pg);
                     stream = new PDPageContentStream(document, pg, PDPageContentStream.AppendMode.APPEND, true);
-                        PDType1Font ft = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
-                        stream.setFont(ft, 12);
+                      //  PDType1Font ft = new PDType1Font(PDType1Font.HELVETICA);
+                        stream.setFont(PDType1Font.HELVETICA, 12);
                     countFor60 = true;
                     y = pg.getMediaBox().getHeight()-50;
 
@@ -315,8 +315,8 @@ public class PrintManager {
             document.addPage(page);
 
             PDPageContentStream stream = new PDPageContentStream(document, page);
-            PDType1Font font = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
-            stream.setFont(font, 25);
+           // PDType1Font font = new PDType1Font(PDType1Font.HELVETICA.FontName.HELVETICA);
+            stream.setFont(PDType1Font.HELVETICA, 25);
 
 
             stream.beginText();
@@ -340,8 +340,8 @@ public class PrintManager {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
             Date date = new Date();
 
-            PDType1Font rect = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
-            stream.setFont(rect, 12);
+           // PDType1Font rect = new PDType1Font(PDType1Font.HELVETICA);
+            stream.setFont(PDType1Font.HELVETICA, 12);
 
             stream.setNonStrokingColor(Color.BLACK);
             stream.beginText();

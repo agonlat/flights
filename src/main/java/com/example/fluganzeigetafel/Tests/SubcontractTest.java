@@ -1,4 +1,4 @@
-package Tests;
+package com.example.fluganzeigetafel.Tests;
 
 import com.example.fluganzeigetafel.Contract.Subcontracts.Subcontract;
 import org.junit.jupiter.api.Assertions;

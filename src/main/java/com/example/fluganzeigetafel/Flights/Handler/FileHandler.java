@@ -1,15 +1,15 @@
 package com.example.fluganzeigetafel.Flights.Handler;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.example.fluganzeigetafel.Contract.Contract;
 import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Utility.TimeHandler;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class FileHandler {

@@ -4,31 +4,29 @@ import com.example.fluganzeigetafel.Contract.CSVRow;
 import com.example.fluganzeigetafel.Contract.Contract;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
-import javafx.scene.chart.PieChart;
+import com.opencsv.CSVReader;
 
-
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 public class FileHandler {
     public ArrayList<Contract> readCSV_toList(String filepath) {
         DataInterface.getInstance().setFilePath(filepath);
         boolean check = true;
 
         ArrayList<Contract> list = new ArrayList<>();
-        try {
-            BufferedReader bf = new BufferedReader(new FileReader(filepath));
-            String line;
-            int i = 0;
-            while ((line = bf.readLine()) != null && i < 53) {
-                if (check) {
-                    check = false;
-                    continue;
-                }
 
-                String[] values = line.split(",");
+        String values[] = null;
+
+        try {
+           CSVReader reader = new CSVReader(new FileReader(filepath));
+            while ((values = reader.readNext()) != null) {
+
+
+
+
+
                 String[] cols = {
                         "ATTBE", "ATTEN", "AUAGE", "AUKEY", "AUKNL", "AUKNS", "AUPIR", "AUSAA", "AUSAU", "DISPO",
                         "EINHE", "ETTBE", "ETTEN", "FGKEY", "JTP", "KEYLK", "KEYLE", "KEYLF", "LUPDN", "LUPDT",
@@ -40,7 +38,6 @@ public class FileHandler {
 
 
 
-                i++;
 
                 Contract contract = new Contract(
                         values[Arrays.asList(cols).indexOf("ATTBE")],      // ATTBE
@@ -99,47 +96,47 @@ public class FileHandler {
                         values[Arrays.asList(cols).indexOf("MENG4")]       // MENG4
                 );
 
+
                 for (int j = 0; j < values.length; j++) {
-                    CSVRow row = new CSVRow(cols[j],  values[j]);
-                    if (!row.getValue().isEmpty() && !row.getValue().contains(";"))
-                    contract.getCSVRows().add(row);
+                    CSVRow row = new CSVRow(cols[j], values[j]);
+                    //if (!row.getValue().isEmpty())
+                        contract.getCSVRows().add(row);
                 }
 
 
-
-
-
                 list.add(contract);
-
-
 
             }
 
 
 
 
-
-            return list;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+
         }
+        return list;
     }
 
+
+
     public void addContractsToFlights(ArrayList<Contract> list) {
-        System.out.println("INB");
+
         ArrayList<Contract> contracts = list;
-        System.out.println("d"+contracts.size());
+
 
         for (Flight f : DataInterface.getInstance().getFlights()) {
             for (Contract contract : contracts) {
                 if (f.getKnr().trim().equals(contract.getAUKNL()) || f.getKnr().trim().equals(contract.getAUKNS()) ){
+                    if (f.getLsk().trim().equals("L"))
+                        contract.setAUKNL(f.getLsk().trim());
+                    if (f.getLsk().trim().equals("S")) {
+                        contract.setAUKNS(f.getLsk().trim());
+                    }
                     f.addContract(contract);
-                    System.err.println("FOUND" + f.getKnr());
-                    System.err.println("sd" + f.getContracts().size());
+
+
                     ArrayList<CSVRow > cs = Contract.generateListOfCSVRows(contract);
-                    System.out.println("sdsdg" + cs.size());
+
                     f.addCSV(cs);
 
                 }

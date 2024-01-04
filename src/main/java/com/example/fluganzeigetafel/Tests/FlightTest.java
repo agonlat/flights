@@ -1,4 +1,4 @@
-package Tests;
+package com.example.fluganzeigetafel.Tests;
 
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import org.junit.jupiter.api.Assertions;

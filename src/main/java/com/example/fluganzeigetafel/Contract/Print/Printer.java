@@ -13,7 +13,6 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 
 import java.awt.*;
 import java.io.File;
@@ -31,9 +30,9 @@ public class Printer {
             document.addPage(page);
 
             PDPageContentStream stream = new PDPageContentStream(document, page);
-            PDType1Font font = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+           // PDType1Font font = new PDType1Font();
 
-            stream.setFont(font, 25);
+            stream.setFont(PDType1Font.HELVETICA, 25);
             stream.beginText();
             stream.newLineAtOffset(50, page.getMediaBox().getHeight() - 50);
             Flight f= (Flight)DataInterface.getFlightsTable().getSelectionModel().getSelectedItem();
@@ -46,7 +45,7 @@ public class Printer {
             stream.lineTo(page.getMediaBox().getWidth() - 50, page.getMediaBox().getHeight() - 75);
             stream.stroke();
 
-            stream.setFont(font, 12);
+            stream.setFont(PDType1Font.HELVETICA, 12);
             float y = page.getMediaBox().getHeight() - 100;
             float x = 50;
             int i = 0;
@@ -142,11 +141,11 @@ public class Printer {
                     PDPageContentStream stream = new PDPageContentStream(document, page);
 
 
-                    PDType1Font font = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+              //      PDType1Font font = new PDType1Font(PDType1Font.HELVETICA);
 
 
 
-                stream.setFont(font, 25);
+                stream.setFont(PDType1Font.HELVETICA, 25);
                 stream.beginText();
                 stream.newLineAtOffset(50, page.getMediaBox().getHeight() - 50);
                 stream.showText("Contract " + f.getKnr());
@@ -158,7 +157,7 @@ public class Printer {
                 stream.lineTo(page.getMediaBox().getWidth() - 50, page.getMediaBox().getHeight() - 75);
                 stream.stroke();
 
-                stream.setFont(font, 12);
+                stream.setFont(PDType1Font.HELVETICA, 12);
                 float y = page.getMediaBox().getHeight() - 100;
                 float x = 50;
                 int i = 0;

@@ -3,11 +3,13 @@ package com.example.fluganzeigetafel;
 
 import com.example.fluganzeigetafel.Contract.CSVRow;
 import com.example.fluganzeigetafel.Contract.Contract;
+import com.example.fluganzeigetafel.Contract.Subcontracts.Subcontract;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Data.FlightsTable;
 import com.example.fluganzeigetafel.Flights.Data.TabPaneView;
 import com.example.fluganzeigetafel.Flights.Utility.UtilityMethods;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class DataInterface {
@@ -20,6 +22,48 @@ public class DataInterface {
     private String filePath;
     private List<Flight> temporaryFlights;
     private int changedFlightsCounter;
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
+
+    private boolean isOpen = false;
+
+
+    public boolean isPendingStatus() {
+        return pendingStatus;
+    }
+
+    public void setPendingStatus(boolean pendingStatus) {
+        this.pendingStatus = pendingStatus;
+    }
+
+    private boolean pendingStatus = false;
+    public boolean isCheck() {
+        return check;
+    }
+
+
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    private boolean check = true;
+
+    public ArrayList<Subcontract> getSubcontractsList() {
+        return subcontractsList;
+    }
+
+    public void setSubcontractsList(ArrayList<Subcontract> subcontractsList) {
+        this.subcontractsList = subcontractsList;
+    }
+
+    private ArrayList<Subcontract> subcontractsList;
 
     public ArrayList<ArrayList<CSVRow>> getRows() {
         return rows;
@@ -59,6 +103,8 @@ public class DataInterface {
     public int getChangedFlightsCounter() {
         return changedFlightsCounter;
     }
+
+
 
     public void incrementCounter() {
         this.changedFlightsCounter++;

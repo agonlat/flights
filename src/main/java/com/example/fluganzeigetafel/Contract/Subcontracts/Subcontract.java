@@ -7,8 +7,23 @@ import com.example.fluganzeigetafel.DataInterface;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Subcontract {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Subcontract that = (Subcontract) obj;
+
+        return Objects.equals(UAKEY, that.UAKEY);
+    }
+
+    @Override
+    public int hashCode() {
+        return AUKEY != null ? AUKEY.hashCode() : 0;
+    }
     private String ATTBE, ATTEN, AUKEY, CBDFK, ETTBE, ETTEN, INDNR, LUPDN, LUPDT, LUPDV, LZUAU,
             MENGE, STTBE, STTEN, UAKEY, UAPIR, UASAA, UASAU, XUA, ZINFO, DFKEY, ORTFR, ORTTO,
             UAART, UAREE, FGKEY, UAABF, REKEY, SPREK, ATT30, ATT50, ATT55, ATT60, ATT70, ATT75,

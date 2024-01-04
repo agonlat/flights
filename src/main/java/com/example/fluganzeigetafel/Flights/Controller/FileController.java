@@ -1,5 +1,6 @@
 package com.example.fluganzeigetafel.Flights.Controller;
 
+import com.example.fluganzeigetafel.Contract.Contract;
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
@@ -38,7 +39,9 @@ public class FileController {
                 @Override
                 protected Void call() throws Exception {
                     com.example.fluganzeigetafel.Contract.Handler.FileHandler cr = new com.example.fluganzeigetafel.Contract.Handler.FileHandler();
-                    DataInterface.getInstance().setContracts(cr.readCSV_toList("src/main/resources/generated_data.csv"));
+                    ArrayList<Contract> contractArrayList = cr.readCSV_toList("src/main/resources/au-20240102 (1).csv");
+                    DataInterface.getInstance().setContracts(contractArrayList);
+
 
                     cr.addContractsToFlights(DataInterface.getInstance().getContracts());
 

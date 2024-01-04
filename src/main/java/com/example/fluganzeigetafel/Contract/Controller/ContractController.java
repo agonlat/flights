@@ -66,7 +66,7 @@ public class ContractController {
                     }
 
                     // Create a new instance of Tab for each tab
-                    Tab tab = new Tab("Contract " + f.getKnr(), contractTable);
+                    Tab tab = new Tab("Contract " + contractTable.getContract().getAUKEY(), contractTable);
 
                     // Add all CSVRows for the current contract to the ContractTable
                     ObservableList<CSVRow> list = FXCollections.observableArrayList(row);

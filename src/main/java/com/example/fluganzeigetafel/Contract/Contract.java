@@ -672,10 +672,13 @@ public class Contract {
             return this.subcontractList;
         }
 
-        public void deleteSubContract(String aukey) {
+        public void deleteSubContract(String uakey) {
         for (Subcontract subcontract : getSubContractsList()) {
-            if (subcontract.getAUKEY().trim().equals(aukey.trim())) {
+
+            if (subcontract.getUAKEY().trim().equals(uakey.trim())) {
+
                 this.subcontractList.remove(subcontract);
+                return;
             }
         }
         }
@@ -683,5 +686,13 @@ public class Contract {
         public void addSubContractToSubContractList (Subcontract subcontract){
             this.subcontractList.add(subcontract);
         }
+
+    public Subcontract getSubContractByUAKEY(String uakey) {
+        for (Subcontract subcontract : this.getSubContractsList()) {
+            if (subcontract.getUAKEY().trim().equals(uakey))
+                return  subcontract;
+        }
+        return null;
+    }
     }
 

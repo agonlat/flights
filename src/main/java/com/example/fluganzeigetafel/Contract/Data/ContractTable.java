@@ -104,7 +104,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -116,7 +116,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -128,7 +128,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -141,7 +141,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -154,7 +154,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -166,7 +166,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -178,7 +178,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -190,7 +190,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -202,7 +202,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -214,7 +214,7 @@ public class ContractTable extends TableView {
 
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -226,7 +226,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -238,7 +238,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -250,7 +250,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -262,7 +262,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -274,7 +274,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -286,7 +286,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -298,7 +298,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -310,7 +310,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -322,7 +322,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -334,7 +334,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -346,7 +346,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -358,7 +358,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -370,7 +370,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -382,7 +382,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -394,7 +394,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -407,7 +407,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -419,7 +419,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -431,7 +431,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -443,7 +443,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -455,7 +455,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -467,7 +467,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -479,7 +479,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -491,7 +491,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -503,7 +503,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -515,7 +515,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -527,7 +527,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -539,7 +539,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -551,7 +551,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -563,7 +563,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -575,7 +575,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -587,7 +587,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -599,7 +599,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -611,7 +611,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -623,7 +623,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -635,7 +635,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -647,7 +647,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -659,7 +659,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -671,7 +671,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -683,7 +683,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 
@@ -695,7 +695,7 @@ public class ContractTable extends TableView {
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
-                                 row.setValue(e.getOldValue());
+                                 this.refresh();
                              }
                              break;
 

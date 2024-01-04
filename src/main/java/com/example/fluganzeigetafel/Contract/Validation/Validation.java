@@ -1,5 +1,8 @@
 package com.example.fluganzeigetafel.Contract.Validation;
 
+import com.example.fluganzeigetafel.Contract.Subcontracts.Subcontract;
+import com.example.fluganzeigetafel.DataInterface;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +25,16 @@ public class Validation {
     // V10
     public static boolean checkDISPO(String input) {
         // Additional checks if needed
-        return input.length() <= 10;
+
+        String[] validValues = {"CLEAN", "OPTIBUS", "LUCHS", "COBRA2", "MAUSGEP", "FUCHS2", "PUMA2", "MAUSLAST", "PND-ABF", "PANDA-ANK", "KFZ", "ENTEISUNG", "BAGTR"};
+
+        for (String validValue : validValues) {
+            if (input.equals(validValue)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // V1
@@ -401,6 +413,199 @@ public class Validation {
             return false;
         }
     }
+
+
+    public static boolean checkUAKEY_Existence(String value) {
+        for (Subcontract subcontract : DataInterface.getInstance().getSubcontractsList()) {
+            if (subcontract.getUAKEY().trim().equals(value)) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Check if REFKEY is a number with max 10 digits
+    public static boolean checkREFKEY(String value) {
+        return value.matches("\\d{1,10}");
+    }
+
+    // Check if UAABF is a string with max 10 characters
+    public static boolean checkUAABF(String value) {
+        return value.matches(".{1,10}");
+    }
+
+    // Check if UAREE is a string with max 3 characters
+    public static boolean checkUAREE(String value) {
+        return value.matches(".{1,3}");
+    }
+
+    public static boolean checkUAAR(String value) {
+        return value.matches("\\d{8}");
+    }
+
+    // Check if UASAU is a number with max 2 digits
+    public static boolean checkUASAU(String value) {
+        return value.matches("\\d{1,2}");
+    }
+
+    // Check if UASAA is a number with max 2 digits
+    public static boolean checkUASAA(String value) {
+        return value.matches("\\d{1,2}");
+    }
+
+    // Check if UAPIR is a single character
+    public static boolean checkUAPIR(String value) {
+        return value.matches(".");
+    }
+
+    // Check if UAKEY is a number with max 10 digits
+    public static boolean checkUAKEY(String value) {
+        return value.matches("\\d{1,10}");
+    }
+
+    // Check if CZAU is a string (no specific format mentioned)
+    public static boolean checkCZAU(String value) {
+        return value.matches(".*");
+    }
+
+    // Check if INDNR is a number with max 3 digits
+    public static boolean checkINDNR(String value) {
+        return value.matches("\\d{1,3}");
+    }
+
+    public static boolean checkSAAUF(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkSAA20(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkQKB(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkUAAGE(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkATTER(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkATT75(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkATT70(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkATT60(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkATT55(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkATT50(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkATT30(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkSREK(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkXLBA(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkTOURK(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkSBI(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkEBI(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkABI(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkOKEYN(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkATT40(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkSPKEY(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkUAKSL(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkETT30(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkUAINF(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkURK(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkSTT20(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkSKA(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+
+
+    public static boolean checkLZUAU(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkXUA(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkUUART(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkSPREK(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+    public static boolean checkSAAOF(String value) {
+        return value.matches("\\w{1,10}");
+    }
+
+
+
+
+
+
 
 public static boolean checkDISPOExistence(String input) {
         List<String> list = new ArrayList<>(List.of("BAGTR","CLEAN", "COBRA2", "ENTEISUNG", "FUCHS2", "KFZ", "LUCHS",

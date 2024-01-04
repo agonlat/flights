@@ -12,8 +12,6 @@ import com.example.fluganzeigetafel.CustomDialogs.QuestionDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Data.TabPaneView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -31,6 +29,7 @@ public class GraphicPane {
 
     Map<String, List<String>> expectedColumnsMap = new HashMap<>();
     private String val;
+    boolean first = true;
 
 
     public GraphicPane(HBox hbox, ContractTable contractTable) {
@@ -43,10 +42,10 @@ public class GraphicPane {
 
         // DISPO: OPTIBUS
         expectedColumnsMap.put("OPTIBUS", Arrays.asList(
-                "AUKEY", "DISPO", "DIB", "JTP", "AUSAA", "AUSAU", "AUKNL", "AUKNS", "FGKEY", "PLKEY", "ORTFR",
-                "ORTTO", "MENGE", "EINHE", "UAZPL", "UAZAK", "AUAGE", "STTBE", "STTEN", "ETTBE", "ETTEN", "ATTBE",
-                "ATTEN", "ATT20", "AUPIR", "ZINFO", "LUPDN", "LUPDT", "LUPDV", "KEYLK", "KEYLE", "KEYLF", "XAU",
-                "AUDAT", "AUABF", "MITAR", "FDAEN", "FLAGS", "CINFO", "MAD"
+                "AUKEY", "DISPO", "DIB", "JTP", "AUSAA", "AUSAU", "AUKNL", "AUKNS", "FGKEY", "ORTFR",
+                "ORTTO","EINHE", "UAZPL", "UAZAK", "AUAGE", "STTBE", "STTEN", "ETTBE", "ETTEN", "ATTBE",
+                "ATTEN", "ATT20", "ZINFO", "LUPDN", "LUPDT", "LUPDV", "KEYLK", "KEYLE", "KEYLF", "XAU",
+                "AUDAT", "AUABF", "MITAR", "FLAGS", "CINFO", "MAD"
         ));
 
 
@@ -68,7 +67,7 @@ public class GraphicPane {
                 "ATT20", "AUABF", "AUAGE", "AUAGE", "AUAGE", "AUAGE", "AUDAT", "AUKEY", "AUKNL",
                 "AUKNS", "AUPIR", "AUPIR", "AUSAA", "AUSAU", "CINFO", "DIB", "DISPO", "ETTBE", "ETTEN",
                 "FLAGS", "JTP", "KEYLE", "KEYLF", "KEYLK", "LUPDN", "LUPDT", "LUPDV",
-                "MENGE", "MENG3", "MITAR", "MITAR", "MITAR", "ORTFR", "ORTTO", "STTBE", "STTEN",
+                "MENGE", "MENG3", "MITAR",  "ORTFR", "ORTTO", "STTBE", "STTEN",
                 "UAZAK", "XAU", "ZINFO"
         ));
 
@@ -142,58 +141,141 @@ public class GraphicPane {
         Button printAll = new Button("Print all contracts");
         TreeView view = getTreeViewOfSubContracts();
 
+        DataInterface.getInstance().getTabPaneView().getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
+            if (oldTab != null) {
+                if (oldTab.getText().contains("DISPO")) {
+                    DataInterface.getInstance().setOpen(false);
+                    DataInterface.getInstance().setPendingStatus(false);
+
+                }
+            }
+        });
+
         createSubcontractButton.setOnAction(e->{
-            TabPaneView paneView = DataInterface.getInstance().getTabPaneView();
 
 
 
 
 
+            if (DataInterface.getInstance().isPendingStatus() == false && DataInterface.getInstance().isOpen() == false) {
 
 
-                    Flight f = (Flight) DataInterface.flightsTable.getSelectionModel().getSelectedItem();
+                DataInterface.getInstance().setOpen(true);
+
+                TextInputDialog dialogText = new TextInputDialog();
+                dialogText.setTitle("Input dialog");
+                dialogText.setContentText("Enter UAKEY");
+
+                Optional<String> resultText = dialogText.showAndWait();
+
+                String resultString;
+
+                if (resultText.isPresent()) {
+                    resultString = resultText.get();
+                    if (Validation.checkUAKEY(resultString) && Validation.checkUAKEY_Existence(resultString) == false) {
+                        TabPaneView paneView = DataInterface.getInstance().getTabPaneView();
 
 
+                        Flight f = (Flight) DataInterface.flightsTable.getSelectionModel().getSelectedItem();
 
 
-                    SubContractTable table = new SubContractTable();
-                     String val = f.getContracts().get(0).getDISPO();
+                        Subcontract subcontract = new Subcontract();
+                        TreeItem<String> item = null;
 
-                    table.createGenericTable(f.getContracts().get(0).getDISPO());
 
-                    HBox box = new HBox();
+                        SubContractTable table = new SubContractTable();
+                        Contract cc = f.getContractByAukey(contractTable.getContract().getAUKEY());
 
-                    Button deleteB = new Button("Delete subcontract");
-                    deleteB.setMinWidth(250);
-                    deleteB.setOnAction(event->{
-                        int index = DataInterface.getInstance().getTabPaneView().getSelectionModel().getSelectedIndex();
+                        String val = cc.getDISPO();
 
-                        QuestionDialog dialog = new QuestionDialog();
-                        dialog.showAndWait().ifPresent(result -> {
-                            Contract c = null;
-                            if (result == ButtonType.OK) {
-                                 c = f.getContractByAukey(contractTable.getContract().getAUKEY());
+                        table = table.createGenericTable(f.getContracts().get(0).getDISPO());
+                        subcontract.setAUKEY(contractTable.getContract().getAUKEY());
+                        subcontract.setUAKEY(resultString);
+                        table.refresh();
 
+
+                        HBox box = new HBox();
+
+                        Button deleteB = new Button("Delete subcontract");
+                        Button save = new Button("Save");
+                        save.setMinWidth(250);
+                        SubContractTable finalTable1 = table;
+                        SubContractTable finalTable2 = table;
+                        save.setOnAction(ee -> {
+
+                            ObservableList<CSVRow> rows = finalTable2.getItems();
+
+                            for (CSVRow row : rows) {
+                                if (row.getValue().isBlank()) {
+                                    ErrorDialog d = new ErrorDialog("Empty value: " + row.getDesignation());
+
+                                    return;
+                                }
                             }
 
 
+                            finalTable1.setSubContract(subcontract);
+                            cc.addSubContractToSubContractList(subcontract);
+                            finalTable1.refresh();
 
-
-
-
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Success");
+                            alert.setContentText("Subcontract successfully saved!");
+                            alert.showAndWait();
                         });
-                    });
-                    VBox vbox = new VBox();
-                    vbox.getChildren().add(deleteB);
+                        deleteB.setMinWidth(250);
+                        SubContractTable finalTable = table;
+                        deleteB.setOnAction(event -> {
+                            int index = DataInterface.getInstance().getTabPaneView().getSelectionModel().getSelectedIndex();
+
+                            QuestionDialog dialog = new QuestionDialog();
 
 
-                     box.getChildren().addAll(table, vbox);
-                     System.out.println(table.getItems().size());
-                     HBox.setHgrow(table, Priority.ALWAYS);
+                            dialog.showAndWait().ifPresent(result -> {
+                                Contract c = null;
+                                if (result == ButtonType.OK) {
 
-                    Tab tab = new Tab("Subcontract" + contractTable.getContract().getAUKEY() + "_DISPO_" + val,box);
 
-                    DataInterface.getInstance().getTabPaneView().getTabs().add(tab);
+                                    c = f.getContractByAukey(contractTable.getContract().getAUKEY());
+                                    Subcontract delSub = c.getSubContractByUAKEY(finalTable.getSubcontract().getUAKEY());
+
+                                    DataInterface.getInstance().getTabPaneView().getTabs().remove(index);
+
+
+                                    c.deleteSubContract(delSub.getUAKEY());
+                                } else {
+
+                                }
+                            });
+                        });
+                        VBox vbox = new VBox();
+                        vbox.getChildren().addAll(deleteB, save);
+
+
+                        box.getChildren().addAll(table, vbox);
+
+                        HBox.setHgrow(table, Priority.ALWAYS);
+
+
+                        TreeItem<String> selectedItem = null;
+
+
+                        Tab tab = new Tab("Subcontract" + resultString + "_DISPO_" + val, box);
+
+                        DataInterface.getInstance().getTabPaneView().getTabs().add(tab);
+
+                    } else {
+                        ErrorDialog dialogErr = new ErrorDialog("Wrong input");
+                    }
+                }
+
+                DataInterface.getInstance().setPendingStatus(true);
+            }
+            else {
+                ErrorDialog dialog = new ErrorDialog("Cannot create subcontract! There is a pending creation");
+
+            }
+
 
 
         });
@@ -202,7 +284,7 @@ public class GraphicPane {
 
 
 
-
+        delete.setMinWidth(250);
 
 
 
@@ -291,10 +373,10 @@ public class GraphicPane {
 
         hbox.getChildren().add(box);
 
-
     }
 
     public TreeView getTreeViewOfSubContracts() {
+
         boolean check = true;
         Flight f = (Flight) DataInterface.flightsTable.getSelectionModel().getSelectedItem();
         Contract contract = null;
@@ -302,8 +384,19 @@ public class GraphicPane {
         TreeItem<String> rootItem = new TreeItem<>("Sub contracts");
         rootItem.setExpanded(true);
         SubContractFileHandler fl = new SubContractFileHandler();
-        ArrayList<Subcontract> sub = fl.readCSVtoListOfSubContracts("src/main/resources/TestSUBCONTRACT.csv");
-        fl.addSubContractsToContracts(sub);
+        ArrayList<Subcontract> sub = null;
+        if (DataInterface.getInstance().isCheck()) {
+          ;
+            sub = fl.readCSVtoListOfSubContracts("src/main/resources/ua.csv");
+            DataInterface.getInstance().setSubcontractsList(sub);
+            DataInterface.getInstance().setCheck(false);
+            sub = DataInterface.getInstance().getSubcontractsList();
+            fl.addSubContractsToContracts(sub);
+        }
+
+
+
+
 
         // Iterate through all tabs in the TabPane
         TreeView<String> view = null;
@@ -331,10 +424,14 @@ public class GraphicPane {
 
             if (!contract.getSubContractsList().isEmpty()) {
 
+
+                rootItem.getChildren().clear();
                 for (Subcontract subcontract : contract.getSubContractsList()) {
-                    TreeItem<String> treeItem = new TreeItem<>(subcontract.getAUKEY());
+                    TreeItem<String> treeItem = new TreeItem<>(subcontract.getUAKEY());
                     rootItem.getChildren().add(treeItem);
                 }
+
+
             }
 
             // You may return the TreeView or perform further actions
@@ -344,23 +441,6 @@ public class GraphicPane {
 
 
 
-
-
-              /*      TabPaneView tabPaneView = DataInterface.getInstance().getTabPaneView();
-                    SubContractTable subContractTable = new SubContractTable();
-
-                    // Use newValue.getValue() to get the value of the selected tree item
-                    String aukeyValue = newValue.getValue();
-
-                    // Assuming you have a method to find a Subcontract by AUKEY in your SubContractFileHandler
-                    Subcontract subcontract = finalTable.findSubContractByAUKEY(aukeyValue);
-                    subContractTable.getItems().addAll(subcontract.getCSVRows());
-
-                    Tab taba = new Tab(aukeyValue, subContractTable);
-                    tabPaneView.addTab(taba);
-                }
-
-*/
 
 
         }
@@ -376,6 +456,8 @@ public class GraphicPane {
         return view;
     }
     private void handleMouseClicked(MouseEvent event, TreeView view, Contract c) {
+        TreeItem<String> sel = (TreeItem<String>) view.getSelectionModel().getSelectedItem();
+        String val = sel.getValue();
         Node node = event.getPickResult().getIntersectedNode();
         // Accept clicks only on node cells, and not on empty spaces of the TreeView
         if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
@@ -388,6 +470,34 @@ public class GraphicPane {
             deleteB.setMinWidth(250);
             VBox vb = new VBox();
             vb.getChildren().add(deleteB);
+            deleteB.setOnAction(ee->{
+                int index = DataInterface.getInstance().getTabPaneView().getSelectionModel().getSelectedIndex();
+
+                QuestionDialog dialog = new QuestionDialog();
+                dialog.showAndWait().ifPresent(result -> {
+                    Contract cc = null;
+                    if (result == ButtonType.OK) {
+
+                        cc = c;
+                        Subcontract delSub = cc.getSubContractByUAKEY(val);
+
+                        DataInterface.getInstance().getTabPaneView().getTabs().remove(index);
+
+
+                        cc.deleteSubContract(delSub.getUAKEY());
+                        view.refresh();
+
+
+
+                    }
+
+
+
+
+
+
+                });
+            });
 
 
             HBox box = new HBox();
@@ -397,8 +507,12 @@ public class GraphicPane {
 
 
 
+            ArrayList<CSVRow> subRows = c.getSubContractByUAKEY(val).getCSVRows();
+            Subcontract subcontract = c.getSubContractByUAKEY(val);
+            subContractTable.setSubContract(subcontract);
 
-            subContractTable.getItems().addAll(DataInterface.getInstance().getContracts().get(0).getSubContractsList().get(0).getCSVRows());
+
+            subContractTable.getItems().addAll(subRows);
 
 
 
@@ -421,8 +535,6 @@ public class GraphicPane {
         TreeView view = new TreeView(rootItem);
 
 
-        TreeItem<String> sub = new TreeItem<>("Subcontract 1");
-        rootItem.getChildren().addAll(sub);
 
 
         delete.setOnAction(e -> {
@@ -433,6 +545,9 @@ public class GraphicPane {
             dialog.showAndWait().ifPresent(result -> {
                 if (result == ButtonType.OK)
                     DataInterface.getInstance().getTabPaneView().getTabs().remove(index);
+
+
+
             });
 
         });
@@ -490,13 +605,17 @@ public class GraphicPane {
         box.getChildren().addAll(delete, createSubcontractButton, createContractButton, print, printAll, view);
 
 
+
         ContractTable table = new ContractTable();
+
         Contract contract = new Contract(val);
+        contract.setAUKEY(val);
         List<String> expectedColumns = expectedColumnsMap.get(val);
 
 
         for (int j = 0; j < expectedColumns.size(); j++) {
             String val = "";
+
 
 
             CSVRow row = new CSVRow(expectedColumns.get(j), val);
@@ -524,12 +643,12 @@ public class GraphicPane {
         hBox.getChildren().addAll(table, boxx);
 
 
-        Tab tab = new Tab("Contract " + val, hBox);
+        Tab tab = new Tab("Contract " + contract.getAUKEY(), hBox);
         table.setContract(contract);
 
         f.addContract(contract);
         f.addCSV(contract.getCSVRows());
-        System.out.println(f.getContracts().size());
+
 
 
         DataInterface.getInstance().getTabPaneView().addTab(tab);
@@ -540,7 +659,7 @@ public class GraphicPane {
         public CustomTreeCell() {
             this.setOnMouseClicked(event -> {
                 if (!isEmpty() && getTreeItem() != null) {
-                    System.out.println("Item clicked: " + getItem());
+
                     // Add your custom logic here
                 }
             });

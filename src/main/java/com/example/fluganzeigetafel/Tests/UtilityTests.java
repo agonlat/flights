@@ -1,8 +1,8 @@
-package Tests;
+package com.example.fluganzeigetafel.Tests;
+
 import com.example.fluganzeigetafel.Flights.Utility.UtilityMethods;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 public class UtilityTests {

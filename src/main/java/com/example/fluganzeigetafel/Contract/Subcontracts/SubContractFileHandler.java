@@ -2,8 +2,8 @@ package com.example.fluganzeigetafel.Contract.Subcontracts;
 
 import com.example.fluganzeigetafel.Contract.Contract;
 import com.example.fluganzeigetafel.DataInterface;
+import com.opencsv.CSVReader;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,17 +19,15 @@ public class SubContractFileHandler {
         ArrayList<Subcontract> listOfSubContracts = new ArrayList<>();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
-            String line;
 
-            while ((line = bufferedReader.readLine()) != null) {
+            String[] values = null;
+            CSVReader reader = new CSVReader(new FileReader(path));
+
+            while ((values = reader.readNext()) != null) {
                 if (check) {
                     check = false;
                     continue;
                 }
-
-                String[] values = parseCSVLine(line);
-
 
                 ArrayList<String> headersList = new ArrayList<>(List.of("ATTBE", "ATTEN", "AUKEY", "CBDFK", "ETTBE", "ETTEN", "INDNR", "LUPDN", "LUPDT", "LUPDV", "LZUAU",
                         "MENGE", "STTBE", "STTEN", "UAKEY", "UAPIR", "UASAA", "UASAU", "XUA", "ZINFO", "DFKEY", "ORTFR", "ORTTO",
@@ -123,33 +121,12 @@ public class SubContractFileHandler {
         }
 
     }
-    private static String[] parseCSVLine(String line) {
-        List<String> values = new ArrayList<>();
-        StringBuilder currentValue = new StringBuilder();
-        boolean insideQuotes = false;
-
-        for (char c : line.toCharArray()) {
-            if (c == ',' && !insideQuotes) {
-                values.add(currentValue.toString().trim());
-                currentValue.setLength(0); // Clear StringBuilder for the next value
-            } else if (c == '"') {
-                insideQuotes = !insideQuotes;
-            } else {
-                currentValue.append(c);
-            }
-        }
-
-        // Add the last value
-        values.add(currentValue.toString().trim());
-
-        return values.toArray(new String[0]);
-    }
-
 
 
 
 
     public void addSubContractsToContracts(ArrayList<Subcontract> list) {
+
         ArrayList<Contract> contractList = DataInterface.getInstance().getContracts();
 
         ArrayList<Subcontract> subcontractsList = list;

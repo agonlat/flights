@@ -36,6 +36,7 @@ public class MenuBarView {
         MenuItem statisticalDataItem = new MenuItem("Statistical Data");
         statisticalDataItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/Icons/info-circle-fill.png"))));
         menuBar = new MenuBar();
+        viewMenu.getItems().add(changeViewOptionsItem);
         menuBar.getMenus().setAll(fileMenu, viewMenu, dataMenu);
 
         fileMenu.getItems().addAll(changeFlightItem,loadFlightsItem,exportItem);

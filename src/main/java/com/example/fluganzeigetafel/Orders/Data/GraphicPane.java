@@ -140,11 +140,11 @@ boolean subPaneCreated = false;
                 "ATT20", "UPDN", "LUPDT", "LUPDV", "KEYLK",
                 "KEYLE", "KEYLF", "XAU", "UDAT"));
 
-        Button delete = new Button("Delete Contract");
-        Button createSubcontractButton = new Button("Create subcontract");
-        Button createContractButton = new Button("Create contract");
-        Button print = new Button("Print contract");
-        Button printAll = new Button("Print all contracts");
+        Button delete = new Button("Delete Order");
+        Button createSuborderButton = new Button("Create suborder");
+        Button createOrderButton = new Button("Create order");
+        Button print = new Button("Print order");
+        Button printAll = new Button("Print all orders");
 
 
         DataInterface.getInstance().getTabPaneView().getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
@@ -157,7 +157,7 @@ boolean subPaneCreated = false;
             }
         });
 
-        createSubcontractButton.setOnAction(e->{
+        createSuborderButton.setOnAction(e->{
 
 
 
@@ -486,6 +486,8 @@ boolean subPaneCreated = false;
                 }
 
 
+
+
                 if (s.equals("AUKEY")) {
                     field.setText(orderTable.getOrder().getAUKEY());
                     field.setEditable(false);
@@ -602,7 +604,7 @@ boolean subPaneCreated = false;
 
                         HBox box = new HBox();
 
-                        Button deleteB = new Button("Delete subcontract");
+                        Button deleteB = new Button("Delete suborder");
 
 
                         SubOrderTable finalTable1 = table;
@@ -666,7 +668,7 @@ boolean subPaneCreated = false;
 
                     DataInterface.getInstance().getUakeyDatabase().add(resultString);
                     box.getChildren().addAll(table1, vbox);
-                    Tab tab = new Tab("Subcontract" + resultString + "_DISPO_" + val, box);
+                        Tab tab = new Tab("Suborder" + resultString + "_DISPO_" + val, box);
 
                     table1.getItems().addAll(csvRows);
                     table1.setSubOrder(suborder);
@@ -769,7 +771,7 @@ boolean subPaneCreated = false;
             printer.createPDFMULT(f.getContracts());
         });
 
-        createContractButton.setOnAction(e -> {
+        createOrderButton.setOnAction(e -> {
 
                     String items[] = {"CLEAN", "OPTIBUS", "LUCHS", "COBRA2", "MAUSGEP", "FUCHS2", "PUMA2", "PND-ABF",
                             "PND-ANK", "KFZ", "ENTEISUNG", "BAGTR", "MAUSLAST"};
@@ -919,7 +921,12 @@ boolean subPaneCreated = false;
 
 
                                         }
-
+                                        if (label.getId().equals("DISPO")) {
+                                            field.setText(result);
+                                            field.setEditable(false);
+                                            Background background = new Background(new BackgroundFill(Color.LIGHTGREY,null,null));
+                                            field.setBackground(background);
+                                        }
                                         if (label.getId().equals("AUKNS")) {
                                             if (finalF.getLsk().trim().equals("S")) {
                                                 field.setText(finalF.getKnr());
@@ -1071,16 +1078,16 @@ boolean subPaneCreated = false;
 
 
         delete.setMinWidth(250);
-        createSubcontractButton.setMinWidth(250);
+        createSuborderButton.setMinWidth(250);
         print.setMinWidth(250);
-        createContractButton.setMinWidth(250);
+        createOrderButton.setMinWidth(250);
         printAll.setMinWidth(250);
 
         TreeView view =
                 getTreeViewOfSubContracts(orderTable);
         VBox box = new VBox();
         VBox.setVgrow(view, Priority.ALWAYS);
-        box.getChildren().addAll(delete, createSubcontractButton, createContractButton, print, printAll, view);
+        box.getChildren().addAll(delete, createSuborderButton, createOrderButton, print, printAll, view);
 
 
         hbox.getChildren().add(box);
@@ -1094,7 +1101,7 @@ boolean subPaneCreated = false;
         Flight f = (Flight) DataInterface.flightsTable.getSelectionModel().getSelectedItem();
 
 
-        TreeItem<String> rootItem = new TreeItem<>("Sub orders");
+        TreeItem<String> rootItem = new TreeItem<>("Suborders");
         rootItem.setExpanded(true);
 
         OrderTable orderTable = table;

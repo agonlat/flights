@@ -9,8 +9,10 @@ public class TimeHandler {
 
    public static String getTime(String input) {
         input = input.trim();
+        input = input + ":00";
 
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+
 
         try {
             Date date = inputFormat.parse(input);

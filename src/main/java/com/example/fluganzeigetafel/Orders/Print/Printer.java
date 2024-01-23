@@ -61,7 +61,7 @@ public class Printer {
             }
 
 
-            ArrayList<CSVRow> rs = table.getCsvRows();
+            ArrayList<CSVRow> rs = table.getOrder().getCSVRows();
 
 
             for (CSVRow row : rs) {

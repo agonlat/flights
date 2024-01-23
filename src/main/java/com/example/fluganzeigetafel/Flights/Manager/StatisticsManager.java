@@ -16,13 +16,16 @@ import javafx.stage.Stage;
 import java.util.Map;
 
 public class StatisticsManager {
-
+private Stage stage;
+private Image img;
+private GridPane pane;
+private Scene scene;
     public StatisticsManager() {
-        Stage stage = new Stage();
-        Image img = new Image(getClass().getResourceAsStream("/Icons/info-circle-fill.png"));
-        stage.getIcons().add(img);
-        GridPane pane = new GridPane();
-        Scene scene = new Scene(pane);
+         stage = new Stage();
+         img = new Image(getClass().getResourceAsStream("/Icons/info-circle-fill.png"));
+         stage.getIcons().add(img);
+         pane = new GridPane();
+         scene = new Scene(pane);
 
         Button printButton = new Button("Print");
 

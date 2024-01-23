@@ -117,13 +117,13 @@ public class ValidationUtil {
             Date dateStand = dateFormat.parse(itt2);
 
             if (dateInput.compareTo(dateStand) < 0)
-                return false;
+                return true;
 
 
 
             return  true;
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            return false;
         }
 
     }

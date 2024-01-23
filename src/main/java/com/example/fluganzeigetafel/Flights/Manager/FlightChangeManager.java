@@ -38,7 +38,7 @@ public class FlightChangeManager {
     private  Button approveButton;
 
     private Label flightInfo;
-    private Flight f;
+    private Flight flight;
     private boolean checkStageClose;
 
 private GridPane gridPane;
@@ -133,15 +133,15 @@ private GridPane gridPane;
         flightNoTextField.textProperty().addListener((observable, newValue, oldValue)-> {
             if (!flightNoTextField.getText().trim().isEmpty() && ValidationUtil.checkFlightNumberFormat(flightNoTextField.getText().trim())
             ) {
-                 f = ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim());
+                 flight = ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim());
 
-                if (f != null) {
+                if (flight != null) {
 
 
-                    newTerminalCombo.setValue(f.getTer());
-                    newSAACombo.setValue(f.getSaa());
-                    flightInfo.setText("FNR: " + f.getFnr() + " " + "KNR: " + f.getKnr() + " " + "ITT: "+ f.getItt() + " " + "TER: "+ f.getTer() + " " + "POS: " + f.getPos()
-                            + " " + "SAA: " + f.getSaa());
+                    newTerminalCombo.setValue(flight.getTer());
+                    newSAACombo.setValue(flight.getSaa());
+                    flightInfo.setText("FNR: " + flight.getFnr() + " " + "KNR: " + flight.getKnr() + " " + "ITT: "+ flight.getItt() + " " + "TER: "+ flight.getTer() + " " + "POS: " + flight.getPos()
+                            + " " + "SAA: " + flight.getSaa());
                     stage.setWidth(450);
                     ColumnConstraints columnConstraints = new ColumnConstraints();
                     columnConstraints.setFillWidth(true);
@@ -223,7 +223,7 @@ private GridPane gridPane;
             if (ValidationUtil.checkFlightNumberFormat(flightNoTextField.getText().trim())) {
                 if (ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim()) != null) {
                     if (newIttTextField.getText().isBlank() && newPosTextField.getText().isBlank() &&
-                    newSAACombo.getValue().toString().equals(f.getSaa()) && newTerminalCombo.getValue().toString().equals(f.getTer()) ) {
+                    newSAACombo.getValue().toString().equals(flight.getSaa()) && newTerminalCombo.getValue().toString().equals(flight.getTer()) ) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Warning");
                         alert.setContentText("Nothing to change. Flight remains the same");
@@ -301,13 +301,13 @@ private GridPane gridPane;
                 flightToUpdate.setSaa(newSAACombo.getValue().toString());
             }
 
-            flightInfo.setText("FNR: " + f.getFnr() + " " + "KNR: " + f.getKnr() + " " + "ITT: "+ f.getItt() + " " + "TER: "+ f.getTer() + " " + "POS: " + f.getPos()
-                    + " " + "SAA: " + f.getSaa());
+            flightInfo.setText("FNR: " + flight.getFnr() + " " + "KNR: " + flight.getKnr() + " " + "ITT: "+ flight.getItt() + " " + "TER: "+ flight.getTer() + " " + "POS: " + flight.getPos()
+                    + " " + "SAA: " + flight.getSaa());
             DataInterface.flightsTable.refresh();
             DataInterface.getInstance().incrementCounter();
 
 
-            DataInterface.getInstance().getChangedFlightsSet().add(f);
+            DataInterface.getInstance().getChangedFlightsSet().add(flight);
 
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

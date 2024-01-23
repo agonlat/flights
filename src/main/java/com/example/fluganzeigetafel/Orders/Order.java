@@ -1,12 +1,11 @@
-package com.example.fluganzeigetafel.Contract;
+package com.example.fluganzeigetafel.Orders;
 
 
-import com.example.fluganzeigetafel.Contract.Subcontracts.Subcontract;
-
+import com.example.fluganzeigetafel.Orders.Suborders.Suborder;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class Contract {
+public class Order {
     public String getAUKEY() {
         return AUKEY;
     }
@@ -491,7 +490,7 @@ public class Contract {
 
     private String RELFK;
 
-    private ArrayList<Subcontract> subcontractList = new ArrayList<>();
+    private ArrayList<Suborder> suborderList = new ArrayList<>();
 
 
     public void setAUKEY(String AUKEY) {
@@ -500,7 +499,7 @@ public class Contract {
 
 
 
-    public Contract(String AUKEY) {
+    public Order(String AUKEY) {
         this.ATTBE = "";
         this.ATTEN = "";
         this.AUAGE = "";
@@ -559,19 +558,19 @@ public class Contract {
         rows = new ArrayList<>();
     }
 
-    public Contract() {
+    public Order() {
         this.rows = new ArrayList<>();
     }
 
 
-    public Contract(String ATTBE, String ATTEN, String AUAGE, String AUKEY, String AUKNL, String AUKNS, String AUPIR,
-                    String AUSAA, String AUSAU, String DISPO, String EINHE, String ETTBE, String ETTEN, String FGKEY,
-                    String JTP, String KEYLK, String KEYLE, String KEYLF, String LUPDN, String LUPDT, String LUPDV,
-                    String MENGE, String ORTFR, String ORTTO, String STTBE, String STTEN, String UAZAK, String UAZPL,
-                    String XAU, String ZINFO, String DIB, String PLKEY, String AUDAT, String AUABF, String ATT20,
-                    String RELFK, String CINFO, String FDAEN, String FLAGS, String MITAR, String MAD, String STLIK,
-                    String PKART, String PKL, String PKLAS, String PKLEA, String PKNAM, String PLE, String EINH2,
-                    String EINH3, String EINH4, String MENG2, String MENG3, String MENG4) {
+    public Order(String ATTBE, String ATTEN, String AUAGE, String AUKEY, String AUKNL, String AUKNS, String AUPIR,
+                 String AUSAA, String AUSAU, String DISPO, String EINHE, String ETTBE, String ETTEN, String FGKEY,
+                 String JTP, String KEYLK, String KEYLE, String KEYLF, String LUPDN, String LUPDT, String LUPDV,
+                 String MENGE, String ORTFR, String ORTTO, String STTBE, String STTEN, String UAZAK, String UAZPL,
+                 String XAU, String ZINFO, String DIB, String PLKEY, String AUDAT, String AUABF, String ATT20,
+                 String RELFK, String CINFO, String FDAEN, String FLAGS, String MITAR, String MAD, String STLIK,
+                 String PKART, String PKL, String PKLAS, String PKLEA, String PKNAM, String PLE, String EINH2,
+                 String EINH3, String EINH4, String MENG2, String MENG3, String MENG4) {
 
         this.AUKEY = AUKEY;
         this.DISPO = DISPO;
@@ -632,9 +631,9 @@ public class Contract {
 
     private ArrayList<CSVRow> rows;
 
-    public static ArrayList<CSVRow> generateListOfCSVRows(Contract contract) {
+    public static ArrayList<CSVRow> generateListOfCSVRows(Order order) {
 
-            Class<?> clazz = contract.getClass();
+            Class<?> clazz = order.getClass();
             Field[] fields = clazz.getDeclaredFields();
             ArrayList<CSVRow> rows = new ArrayList<>();
 
@@ -643,8 +642,8 @@ public class Contract {
 
                 try {
 
-                    if (field.get(contract) != null && !field.get(contract).toString().isEmpty()) {
-                        CSVRow row = new CSVRow(field.getName(), field.get(contract).toString());
+                    if (field.get(order) != null && !field.get(order).toString().isEmpty()) {
+                        CSVRow row = new CSVRow(field.getName(), field.get(order).toString());
 
 
                         if (!row.getValue().isEmpty() && !row.getValue().contains(";")&& !row.getValue().contains("["))
@@ -668,29 +667,29 @@ public class Contract {
         }
 
 
-        public ArrayList<Subcontract> getSubContractsList () {
-            return this.subcontractList;
+        public ArrayList<Suborder> getSubOrdersList() {
+            return this.suborderList;
         }
 
-        public void deleteSubContract(String uakey) {
-        for (Subcontract subcontract : getSubContractsList()) {
+        public void deleteSubOrder(String uakey) {
+        for (Suborder suborder : getSubOrdersList()) {
 
-            if (subcontract.getUAKEY().trim().equals(uakey.trim())) {
+            if (suborder.getUAKEY().trim().equals(uakey.trim())) {
 
-                this.subcontractList.remove(subcontract);
+                this.suborderList.remove(suborder);
                 return;
             }
         }
         }
 
-        public void addSubContractToSubContractList (Subcontract subcontract){
-            this.subcontractList.add(subcontract);
+        public void addSubOrderToSubOrdersList(Suborder suborder){
+            this.suborderList.add(suborder);
         }
 
-    public Subcontract getSubContractByUAKEY(String uakey) {
-        for (Subcontract subcontract : this.getSubContractsList()) {
-            if (subcontract.getUAKEY().trim().equals(uakey))
-                return  subcontract;
+    public Suborder getSubOrderByUAKEY(String uakey) {
+        for (Suborder suborder : this.getSubOrdersList()) {
+            if (suborder.getUAKEY().trim().equals(uakey))
+                return suborder;
         }
         return null;
     }

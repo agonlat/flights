@@ -15,10 +15,6 @@ public class TabPaneView extends TabPane {
         this.getTabs().add(flightsTab);
         VBox.setVgrow(this, Priority.ALWAYS);
 
-
-
-
-
     }
 
     public TabPane getTabPaneView() {

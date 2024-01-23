@@ -1,11 +1,9 @@
-package com.example.fluganzeigetafel.Contract.Data;
+package com.example.fluganzeigetafel.Orders.Data;
 
-import com.example.fluganzeigetafel.Contract.CSVRow;
-import com.example.fluganzeigetafel.Contract.Contract;
-import com.example.fluganzeigetafel.Contract.Subcontracts.Subcontract;
-import com.example.fluganzeigetafel.Contract.Validation.Validation;
 import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
-import com.example.fluganzeigetafel.DataInterface;
+import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Order;
+import com.example.fluganzeigetafel.Orders.Validation.Validation;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,45 +12,22 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.util.ArrayList;
 
-public class ContractTable extends TableView {
-    public Contract getContract() {
+public class OrderTable extends TableView {
+    public Order getOrder() {
 
-        return contract;
-    }
-
-    public  Subcontract findSubContractByAUKEY(String aukey) {
-        ArrayList<Contract> contracts = DataInterface.getInstance().getContracts();
-
-        for (Contract contract : contracts) {
-            for (Subcontract subcontract : contract.getSubContractsList()) {
-                if (subcontract.getAUKEY().equals(aukey)) {
-                    return subcontract;
-                }
-            }
-
-
-        }
-        return null; // Contract not found
-    }
-
-    public static Contract findContractByAUKEY(String aukey) {
-        ArrayList<Contract> contracts = DataInterface.getInstance().getContracts();
-
-        for (Contract contract : contracts) {
-            if (contract.getAUKEY().equals(aukey)) {
-                return contract;
-            }
-        }
-
-        return null; // Contract not found
+        return order;
     }
 
 
-    public void setContract(Contract contract) {
-       this.contract = contract;
+
+
+
+
+    public void setOrder(Order order) {
+       this.order = order;
     }
 
-    private static Contract contract = new Contract();
+    private Order order = new Order();
 
     public  ArrayList<CSVRow> getCsvRows() {
         return csvRows;
@@ -67,7 +42,7 @@ public class ContractTable extends TableView {
     }
 
 
-    public ContractTable() {
+    public OrderTable() {
       this.setEditable(true);
       this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
       this.setPlaceholder(new Label(""));
@@ -100,7 +75,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkATTBE(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setATTBE(newValue);
+                                 order.setATTBE(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -112,7 +87,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkATTEN(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setATTEN(newValue);
+                                 order.setATTEN(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -124,7 +99,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkAUAGE(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setAUAGE(newValue);
+                                 order.setAUAGE(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -137,7 +112,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkAUPIR(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setAUPIR(newValue);
+                                 order.setAUPIR(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -150,7 +125,7 @@ public class ContractTable extends TableView {
                              if (Validation.checkAUSAA(newValue)) {
                                  row.setValue(newValue);
 
-                                 contract.setAUSAA(newValue);
+                                 order.setAUSAA(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -162,7 +137,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkAUSAU(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setAUSAU(newValue);
+                                 order.setAUSAU(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -174,7 +149,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkDISPO(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setDISPO(newValue);
+                                 order.setDISPO(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -186,7 +161,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkEINHE(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setEINHE(newValue);
+                                 order.setEINHE(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -198,7 +173,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkETTBE(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setETTBE(newValue);
+                                 order.setETTBE(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -210,7 +185,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkETTEN(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setETTEN(newValue);this.refresh();
+                                 order.setETTEN(newValue);this.refresh();
 
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -222,7 +197,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkFGKEY(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setFGKEY(newValue);
+                                 order.setFGKEY(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -234,7 +209,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkJTP(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setJTP(newValue);
+                                 order.setJTP(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -246,7 +221,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkKEYLK(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setKEYLK(newValue);
+                                 order.setKEYLK(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -258,7 +233,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkKEYLE(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setKEYLE(newValue);
+                                 order.setKEYLE(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -270,7 +245,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkKEYLF(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setKEYLF(newValue);
+                                 order.setKEYLF(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -282,7 +257,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkLUPDN(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setLUPDN(newValue);
+                                 order.setLUPDN(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -294,7 +269,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkLUPDT(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setLUPDT(newValue);
+                                 order.setLUPDT(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -306,7 +281,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkLUPDV(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setLUPDV(newValue);
+                                 order.setLUPDV(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -318,7 +293,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkMENGE(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setMENGE(newValue);
+                                 order.setMENGE(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -330,7 +305,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkORTFR(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setORTFR(newValue);
+                                 order.setORTFR(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -342,7 +317,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkORTTO(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setORTTO(newValue);
+                                 order.setORTTO(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -354,7 +329,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkSTTBE(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setSTTBE(newValue);
+                                 order.setSTTBE(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -366,7 +341,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkSTTEN(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setSTTEN(newValue);
+                                 order.setSTTEN(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -378,7 +353,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkUAZAK(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setUAZAK(newValue);
+                                 order.setUAZAK(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -390,7 +365,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkUAZPL(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setUAZPL(newValue);
+                                 order.setUAZPL(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -403,7 +378,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkXAU(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setXAU(newValue);
+                                 order.setXAU(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -415,7 +390,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkZINFO(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setZINFO(newValue);
+                                 order.setZINFO(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -427,7 +402,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkDIB(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setDIB(newValue);
+                                 order.setDIB(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -439,7 +414,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkPLKEY(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setPLKEY(newValue);
+                                 order.setPLKEY(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -451,7 +426,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkAUDAT(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setAUDAT(newValue);
+                                 order.setAUDAT(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -463,7 +438,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkAUABF(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setAUABF(newValue);
+                                 order.setAUABF(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -475,7 +450,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkATT20(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setATT20(newValue);
+                                 order.setATT20(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -487,7 +462,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkRELFK(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setRELFK(newValue);
+                                 order.setRELFK(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -499,7 +474,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkCINFO(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setCINFO(newValue);
+                                 order.setCINFO(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -511,7 +486,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkFDAEN(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setFDAEN(newValue);
+                                 order.setFDAEN(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -523,7 +498,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkFLAGS(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setFLAGS(newValue);
+                                 order.setFLAGS(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -535,7 +510,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkMITAR(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setMITAR(newValue);
+                                 order.setMITAR(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -547,7 +522,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkMAD(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setMAD(newValue);
+                                 order.setMAD(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -559,7 +534,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkSTLIK(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setSTLIK(newValue);
+                                 order.setSTLIK(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -571,7 +546,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkPKART(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setPKART(newValue);
+                                 order.setPKART(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -583,7 +558,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkPKL(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setPKL(newValue);
+                                 order.setPKL(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -595,7 +570,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkPKLAS(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setPKLAS(newValue);
+                                 order.setPKLAS(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -607,7 +582,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkPKLEA(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setPKLEA(newValue);
+                                 order.setPKLEA(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -619,7 +594,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkPKNAM(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setPKNAM(newValue);
+                                 order.setPKNAM(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -631,7 +606,7 @@ public class ContractTable extends TableView {
                              column.setEditable(true);
                              if (Validation.checkEINH2(newValue)) {
                                  row.setValue(newValue);
-                                 contract.setEINH2(newValue);
+                                 order.setEINH2(newValue);
                                  this.refresh();
                              } else {
                                  ErrorDialog dialog = new ErrorDialog("Wrong input!");

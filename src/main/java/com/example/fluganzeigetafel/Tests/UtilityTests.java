@@ -1,8 +1,8 @@
 package com.example.fluganzeigetafel.Tests;
 
 import com.example.fluganzeigetafel.Flights.Utility.UtilityMethods;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.*;
 
 
 public class UtilityTests {
@@ -15,17 +15,18 @@ public class UtilityTests {
         String thirdTest = UtilityMethods.getAirlineCode("SRR4114");
         String fourthTest = UtilityMethods.getAirlineCode("4567887");
 
-        Assertions.assertEquals("X3", firstTest);
-        Assertions.assertEquals("LH", secondTest);
-        Assertions.assertEquals("SRR", thirdTest);
-        Assertions.assertEquals("456", fourthTest);
-        Assertions.assertEquals("", "");
+        Assert.assertEquals("X3", firstTest);
+        Assert.assertEquals("LH", secondTest);
+        Assert.assertEquals("SRR", thirdTest);
+        Assert.assertEquals("456", fourthTest);
+        Assert.assertEquals("", "");
 
     }
 
+    @Test
     public void testLeaveOneWhiteSpace() {
         String firstTest = UtilityMethods.leaveOneWhiteSpace("X3  45");
-        Assertions.assertEquals("X3  45", firstTest);
+        Assert.assertEquals("X3 45", firstTest);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.example.fluganzeigetafel.Flights.Controller;
 
-import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
+import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Manager.StatisticsManager;
 
 public class DataController {

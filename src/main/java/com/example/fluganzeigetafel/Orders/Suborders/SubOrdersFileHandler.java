@@ -1,6 +1,6 @@
-package com.example.fluganzeigetafel.Contract.Subcontracts;
+package com.example.fluganzeigetafel.Orders.Suborders;
 
-import com.example.fluganzeigetafel.Contract.Contract;
+import com.example.fluganzeigetafel.Orders.Order;
 import com.example.fluganzeigetafel.DataInterface;
 import com.opencsv.CSVReader;
 
@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubContractFileHandler {
+public class SubOrdersFileHandler {
 
-    public ArrayList<Subcontract> readCSVtoListOfSubContracts(String path) {
+    public ArrayList<Suborder> readCSVtoListOfSubOrders(String path) {
         boolean check = true;
 
 
-        ArrayList<Subcontract> listOfSubContracts = new ArrayList<>();
+        ArrayList<Suborder> suborderArrayList = new ArrayList<>();
 
         try {
 
@@ -37,7 +37,7 @@ public class SubContractFileHandler {
                         "EINH3", "EINH4", "MENG3", "MENG4", "XCABA"));
 
 
-                Subcontract subcontract = new Subcontract(
+                Suborder suborder = new Suborder(
                         values[headersList.indexOf("ATTBE")],
                         values[headersList.indexOf("ATTEN")],
                         values[headersList.indexOf("AUKEY")],
@@ -106,13 +106,13 @@ public class SubContractFileHandler {
                 );
 
 
-                listOfSubContracts.add(subcontract);
+                suborderArrayList.add(suborder);
 
 
             }
 
 
-            return listOfSubContracts;
+            return suborderArrayList;
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -125,22 +125,22 @@ public class SubContractFileHandler {
 
 
 
-    public void addSubContractsToContracts(ArrayList<Subcontract> list) {
+    public void addSubOrdersToOrders(ArrayList<Suborder> list) {
 
-        ArrayList<Contract> contractList = DataInterface.getInstance().getContracts();
-
-        ArrayList<Subcontract> subcontractsList = list;
+        ArrayList<Order> orderList = DataInterface.getInstance().getContracts();
 
 
 
 
 
 
-        for (Contract contract : contractList) {
-            for (Subcontract subcontract : list) {
-                if (contract.getAUKEY().trim().equals(subcontract.getAUKEY())) {
-                    if (!contract.getSubContractsList().contains(subcontract))
-                        contract.addSubContractToSubContractList(subcontract);
+
+
+        for (Order order : orderList) {
+            for (Suborder suborder : list) {
+                if (order.getAUKEY().trim().equals(suborder.getAUKEY())) {
+                    if (!order.getSubOrdersList().contains(suborder))
+                        order.addSubOrderToSubOrdersList(suborder);
 
                     }
                 }

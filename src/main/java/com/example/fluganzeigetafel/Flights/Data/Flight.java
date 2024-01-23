@@ -1,8 +1,8 @@
 package com.example.fluganzeigetafel.Flights.Data;
 
-import com.example.fluganzeigetafel.Contract.CSVRow;
-import com.example.fluganzeigetafel.Contract.Contract;
-import com.example.fluganzeigetafel.Contract.Data.ContractTable;
+import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Order;
+import com.example.fluganzeigetafel.Orders.Data.OrderTable;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -21,46 +21,45 @@ public class Flight {
     private String mad;
     private String saa;
 
-    public ArrayList<ContractTable> getTables() {
+    public ArrayList<OrderTable> getTables() {
+
         return tables;
     }
 
-    public void addTables(ContractTable... tables) {
-        for (ContractTable view : tables)
-            this.tables.add(view);
+    public void addTables(OrderTable... tables) {
+        for (int i = 0; i < tables.length; i++) {
+
+            this.tables.add(tables[i]);
+
+        }
     }
 
-    public void addTables(ArrayList<ContractTable> tables) {
-        this.tables.addAll(tables);
-    }
 
-    public void deleteTable(ContractTable table) {
+
+    public void deleteTable(OrderTable table) {
         this.tables.remove(table);
     }
 
-    private ArrayList<ContractTable> tables = new ArrayList<>();
+    private ArrayList<OrderTable> tables = new ArrayList<>();
 
-    private ArrayList<Contract> contracts;
-    public void addContract(Contract contract) {
-        this.contracts.add(contract);
+    private ArrayList<Order> orders;
+    public void addContract(Order order) {
+        this.orders.add(order);
     }
 
     public void addCSV(ArrayList<CSVRow> rows) {
         this.csv.add(rows);
     }
 
-    public Contract getContractByAukey(String aukey) {
-        for (Contract contract : this.contracts) {
-            if (contract.getAUKEY().trim().equals(aukey.trim())) {
-                return contract;
+    public Order getContractByAukey(String aukey) {
+        for (Order order : this.orders) {
+            if (order.getAUKEY().trim().equals(aukey.trim())) {
+                return order;
             }
         }
         return null;
     }
 
-    public void setCsv(ArrayList<ArrayList<CSVRow>> csv) {
-        this.csv = csv;
-    }
 
     public ArrayList<ArrayList<CSVRow>> getCsvListOfList() {
         return csv;
@@ -69,8 +68,8 @@ public class Flight {
     private ArrayList<ArrayList<CSVRow>> csv = new ArrayList<>();
 
 
-    public ArrayList<Contract> getContracts() {
-        return contracts;
+    public ArrayList<Order> getContracts() {
+        return orders;
     }
 
 
@@ -188,7 +187,7 @@ public class Flight {
         this.ter = ter;
         this.mad = mad;
         this.saa = saa;
-        this.contracts = new ArrayList<>();
+        this.orders = new ArrayList<>();
     }
 
 

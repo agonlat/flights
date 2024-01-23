@@ -1,4 +1,4 @@
-package com.example.fluganzeigetafel.Contract;
+package com.example.fluganzeigetafel.Orders;
 
 public class CSVRow {
     private String designation;

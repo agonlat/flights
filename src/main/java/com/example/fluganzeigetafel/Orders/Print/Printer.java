@@ -1,8 +1,8 @@
-package com.example.fluganzeigetafel.Contract.Print;
+package com.example.fluganzeigetafel.Orders.Print;
 
-import com.example.fluganzeigetafel.Contract.CSVRow;
-import com.example.fluganzeigetafel.Contract.Contract;
-import com.example.fluganzeigetafel.Contract.Data.ContractTable;
+import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Order;
+import com.example.fluganzeigetafel.Orders.Data.OrderTable;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import javafx.scene.Node;
@@ -23,20 +23,20 @@ import java.util.Date;
 
 public class Printer {
 
-    public void createPDF(Contract contract) {
+    public void createPDF(Order order) {
         try {
             PDDocument document = new PDDocument();
             PDPage page = new PDPage(PDRectangle.A4);
             document.addPage(page);
 
             PDPageContentStream stream = new PDPageContentStream(document, page);
-           // PDType1Font font = new PDType1Font();
+
 
             stream.setFont(PDType1Font.HELVETICA, 25);
             stream.beginText();
             stream.newLineAtOffset(50, page.getMediaBox().getHeight() - 50);
             Flight f= (Flight)DataInterface.getFlightsTable().getSelectionModel().getSelectedItem();
-            stream.showText("Contract " + f.getKnr());
+            stream.showText("Order " + f.getKnr());
             stream.endText();
 
             stream.moveTo(50, page.getMediaBox().getHeight() - 75);
@@ -51,11 +51,11 @@ public class Printer {
             int i = 0;
 
             Tab tab = DataInterface.getInstance().getTabPaneView().getSelectionModel().getSelectedItem();
-            ContractTable table = null;
+            OrderTable table = null;
             HBox selectedContent = (HBox) tab.getContent();
             for (Node node : selectedContent.getChildren()) {
-                if (node instanceof ContractTable) {
-                    table = (ContractTable) node;
+                if (node instanceof OrderTable) {
+                    table = (OrderTable) node;
                     break;
                 }
             }
@@ -105,7 +105,7 @@ public class Printer {
 
             stream.close();
             String currentDir = System.getProperty("user.dir");
-            String filePath = currentDir + File.separator + "Contracts"+f.getKnr()+".pdf";
+            String filePath = currentDir + File.separator + "Orders"+f.getKnr()+".pdf";
             document.save(filePath);
 
             // Close the document
@@ -122,7 +122,7 @@ public class Printer {
     }
 
 
-    public void createPDFMULT(ArrayList<Contract> contracts) {
+    public void createPDFMULT(ArrayList<Order> orders) {
         try {
 
             PDDocument document = new PDDocument();
@@ -141,14 +141,13 @@ public class Printer {
                     PDPageContentStream stream = new PDPageContentStream(document, page);
 
 
-              //      PDType1Font font = new PDType1Font(PDType1Font.HELVETICA);
 
 
 
                 stream.setFont(PDType1Font.HELVETICA, 25);
                 stream.beginText();
                 stream.newLineAtOffset(50, page.getMediaBox().getHeight() - 50);
-                stream.showText("Contract " + f.getKnr());
+                stream.showText("Order " + f.getKnr());
                 stream.endText();
 
                 stream.moveTo(50, page.getMediaBox().getHeight() - 75);
@@ -205,7 +204,7 @@ public class Printer {
             }
 
             String currentDir = System.getProperty("user.dir");
-            String filePath = currentDir + File.separator + "Contracts"+f.getKnr()+".pdf";
+            String filePath = currentDir + File.separator + "Orders"+f.getKnr()+".pdf";
             document.save(filePath);
 
             // Close the document

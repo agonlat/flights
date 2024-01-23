@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class UtilityMethods {
     public static String getAirlineCode(String input) {
-        // X3 45, LH 23, SRR4114, 4567887
+
         if (input.isBlank()) {
             return "";
         }

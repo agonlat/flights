@@ -1,8 +1,6 @@
 package com.example.fluganzeigetafel.Flights.Handler;
 
-import com.example.fluganzeigetafel.Contract.Contract;
 import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
-import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Utility.TimeHandler;
 
@@ -16,7 +14,7 @@ public class FileHandler {
 
 
     public ArrayList<Flight> readCSV_File(final String path) {
-        boolean chk = true;
+        boolean isHeadersLine = true;
 
         List<Flight> list = new ArrayList<>();
 
@@ -25,25 +23,25 @@ public class FileHandler {
             String line;
 
             while ((line = bf.readLine()) != null) {
-                if (chk) {
-                    chk = false;
+                if (isHeadersLine) {
+                    isHeadersLine = false;
                     continue;
                 }
 
                     String[] values = line.split(",");
                 Flight flight = new Flight(
-                        values[0].replace("\"", ""),  // fnr
-                        values[1].replace("\"", ""),  // knr
-                        values[2].replace("\"", ""),  // reg
-                        values[3].replace("\"", ""),  // typ
-                        values[4].replace("\"", ""),  // ha0
-                        values[5].replace("\"", ""),  // lsk
-                        values[6].replace("\"", ""),  // stt
-                        values[7].replace("\"", ""),  // itt
-                        values[8].replace("\"", ""),  // pos
-                        values[9].replace("\"", ""),  // ter
-                        values[10].replace("\"", ""), // mad
-                        values[11].replace("\"", "")  // saa
+                        values[0].replace("\"", "").trim(),  // fnr
+                        values[1].replace("\"", "").trim(),  // knr
+                        values[2].replace("\"", "").trim(),  // reg
+                        values[3].replace("\"", "").trim(),  // typ
+                        values[4].replace("\"", "").trim(),  // ha0
+                        values[5].replace("\"", "").trim(),  // lsk
+                        values[6].replace("\"", "").trim(),  // stt
+                        values[7].replace("\"", "").trim(),  // itt
+                        values[8].replace("\"", "").trim(),  // pos
+                        values[9].replace("\"", "").trim(),  // ter
+                        values[10].replace("\"", "").trim(), // mad
+                        values[11].replace("\"", "").trim()  // saa
                 );
 
                 if (!flight.getStt().isBlank())
@@ -59,15 +57,7 @@ public class FileHandler {
 
 
         }
-        for (Flight flight : DataInterface.getInstance().getFlights()) {
-            ArrayList<Contract> contractList = DataInterface.getInstance().getContracts();
-            for (Contract contract : contractList) {
-                String aukey = contract.getAUKEY();
-                if (aukey.equals(flight.getKnr())) {
-                    flight.getContracts().add(contract);
-                }
-            }
-        }
+
 
 
 

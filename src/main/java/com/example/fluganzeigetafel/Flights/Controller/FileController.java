@@ -1,11 +1,14 @@
 package com.example.fluganzeigetafel.Flights.Controller;
 
-import com.example.fluganzeigetafel.Contract.Contract;
 import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
+import com.example.fluganzeigetafel.CustomDialogs.PopupSuccess;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Handler.FileHandler;
 import com.example.fluganzeigetafel.Flights.Manager.FlightChangeManager;
+import com.example.fluganzeigetafel.Orders.Order;
+import com.example.fluganzeigetafel.Orders.Suborders.SubOrdersFileHandler;
+import com.example.fluganzeigetafel.Orders.Suborders.Suborder;
 import javafx.concurrent.Task;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -38,13 +41,17 @@ public class FileController {
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    com.example.fluganzeigetafel.Contract.Handler.FileHandler cr = new com.example.fluganzeigetafel.Contract.Handler.FileHandler();
-                    ArrayList<Contract> contractArrayList = cr.readCSV_toList("src/main/resources/au-20240102 (1).csv");
-                    DataInterface.getInstance().setContracts(contractArrayList);
+                    DataInterface.getInstance().setThreadRunning(true);
+                    com.example.fluganzeigetafel.Orders.Handler.FileHandler cr = new com.example.fluganzeigetafel.Orders.Handler.FileHandler();
+                    ArrayList<Order> orderArrayList = cr.readCSV_toList("src/main/resources/au.csv");
+                    DataInterface.getInstance().setContracts(orderArrayList);
 
 
-                    cr.addContractsToFlights(DataInterface.getInstance().getContracts());
-
+                    cr.addOrdersToFlights(DataInterface.getInstance().getContracts());
+                    SubOrdersFileHandler fileHandler = new SubOrdersFileHandler();
+                    ArrayList<Suborder> suborderArrayList = fileHandler.readCSVtoListOfSubOrders("src/main/resources/ua.csv");
+                    fileHandler.addSubOrdersToOrders(suborderArrayList);
+                    DataInterface.getInstance().setSubcontractsList(suborderArrayList);
 
 
                     return null;
@@ -53,12 +60,17 @@ public class FileController {
 
 
 
+task.setOnSucceeded(e->{
+    DataInterface.getInstance().setThreadRunning(false);
+    PopupSuccess success = new PopupSuccess("Orders and suborders loaded successfully", stage);
 
+});
 
 
 
 
             new Thread(task).start();
+
 
 
 

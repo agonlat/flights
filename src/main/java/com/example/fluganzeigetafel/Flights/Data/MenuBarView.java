@@ -28,21 +28,18 @@ public class MenuBarView {
 
 
 
-
-
-
         // Create View menu items
         MenuItem changeViewOptionsItem = new MenuItem("Change View Options");
         changeViewOptionsItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/Icons/view-stacked.png"))));
-        MenuItem settingsItem = new MenuItem("Settings");
-        settingsItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/Icons/gear.png"))));
+
+
         MenuItem statisticalDataItem = new MenuItem("Statistical Data");
         statisticalDataItem.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/Icons/info-circle-fill.png"))));
         menuBar = new MenuBar();
         menuBar.getMenus().setAll(fileMenu, viewMenu, dataMenu);
 
         fileMenu.getItems().addAll(changeFlightItem,loadFlightsItem,exportItem);
-        viewMenu.getItems().addAll(changeViewOptionsItem, settingsItem);
+
         dataMenu.getItems().add(statisticalDataItem);
 
         loadFlightsItem.setOnAction(e-> FileController.fileLoadAction(stage));
@@ -50,7 +47,7 @@ public class MenuBarView {
         changeFlightItem.setOnAction(e-> FileController.flightChangeAction(stage));
         changeViewOptionsItem.setOnAction(e-> ViewController.changeViewOptionAction());
         statisticalDataItem.setOnAction(e-> DataController.statisticalDataAction());
-        settingsItem.setOnAction(e-> DataController.settingsActions());
+
     }
 
     public MenuBar getMenuBar(){

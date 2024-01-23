@@ -1,21 +1,18 @@
-package com.example.fluganzeigetafel.Contract.Subcontracts;
+package com.example.fluganzeigetafel.Orders.Suborders;
 
-import com.example.fluganzeigetafel.Contract.CSVRow;
-import com.example.fluganzeigetafel.Contract.Contract;
-import com.example.fluganzeigetafel.DataInterface;
+import com.example.fluganzeigetafel.Orders.CSVRow;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public class Subcontract {
+public class Suborder {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        Subcontract that = (Subcontract) obj;
+        Suborder that = (Suborder) obj;
 
         return Objects.equals(UAKEY, that.UAKEY);
     }
@@ -32,17 +29,17 @@ public class Subcontract {
             EINH3, EINH4, MENG3, MENG4, XCABA;
 
 
-    public Subcontract(String ATTBE, String ATTEN, String AUKEY, String CBDFK, String ETTBE, String ETTEN,
-                       String INDNR, String LUPDN, String LUPDT, String LUPDV, String LZUAU, String MENGE,
-                       String STTBE, String STTEN, String UAKEY, String UAPIR, String UASAA, String UASAU,
-                       String XUA, String ZINFO, String DFKEY, String ORTFR, String ORTTO, String UAART,
-                       String UAREE, String FGKEY, String UAABF, String REKEY, String SPREK, String ATT30,
-                       String ATT50, String ATT55, String ATT60, String ATT70, String ATT75, String ATTER,
-                       String UAAGE, String EINHE, String ATT20, String QKB, String SAA20, String SAAOF,
-                       String SKA, String STT20, String URK, String RELFK, String UAINF, String ETT30,
-                       String UAKSL, String SPKEY, String MENG2, String CINFO, String ATT40, String STLIK,
-                       String OKEYN, String ABI, String EBI, String SBI, String TOURK,
-                       String EINH2, String EINH3, String EINH4, String MENG3, String MENG4, String XCABA) {
+    public Suborder(String ATTBE, String ATTEN, String AUKEY, String CBDFK, String ETTBE, String ETTEN,
+                    String INDNR, String LUPDN, String LUPDT, String LUPDV, String LZUAU, String MENGE,
+                    String STTBE, String STTEN, String UAKEY, String UAPIR, String UASAA, String UASAU,
+                    String XUA, String ZINFO, String DFKEY, String ORTFR, String ORTTO, String UAART,
+                    String UAREE, String FGKEY, String UAABF, String REKEY, String SPREK, String ATT30,
+                    String ATT50, String ATT55, String ATT60, String ATT70, String ATT75, String ATTER,
+                    String UAAGE, String EINHE, String ATT20, String QKB, String SAA20, String SAAOF,
+                    String SKA, String STT20, String URK, String RELFK, String UAINF, String ETT30,
+                    String UAKSL, String SPKEY, String MENG2, String CINFO, String ATT40, String STLIK,
+                    String OKEYN, String ABI, String EBI, String SBI, String TOURK,
+                    String EINH2, String EINH3, String EINH4, String MENG3, String MENG4, String XCABA) {
 
 
         this.ATTBE = ATTBE;
@@ -112,7 +109,7 @@ public class Subcontract {
         this.XCABA = XCABA;
     }
 
-    public Subcontract() {
+    public Suborder() {
 
     }
 

@@ -1,7 +1,7 @@
-package com.example.fluganzeigetafel.Contract.Handler;
+package com.example.fluganzeigetafel.Orders.Handler;
 
-import com.example.fluganzeigetafel.Contract.CSVRow;
-import com.example.fluganzeigetafel.Contract.Contract;
+import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Order;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.opencsv.CSVReader;
@@ -11,11 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 public class FileHandler {
-    public ArrayList<Contract> readCSV_toList(String filepath) {
+    public ArrayList<Order> readCSV_toList(String filepath) {
         DataInterface.getInstance().setFilePath(filepath);
         boolean check = true;
 
-        ArrayList<Contract> list = new ArrayList<>();
+        ArrayList<Order> list = new ArrayList<>();
 
         String values[] = null;
 
@@ -39,7 +39,7 @@ public class FileHandler {
 
 
 
-                Contract contract = new Contract(
+                Order order = new Order(
                         values[Arrays.asList(cols).indexOf("ATTBE")],      // ATTBE
                         values[Arrays.asList(cols).indexOf("ATTEN")],      // ATTEN
                         values[Arrays.asList(cols).indexOf("AUAGE")],      // AUAGE
@@ -99,12 +99,11 @@ public class FileHandler {
 
                 for (int j = 0; j < values.length; j++) {
                     CSVRow row = new CSVRow(cols[j], values[j]);
-                    //if (!row.getValue().isEmpty())
-                        contract.getCSVRows().add(row);
+                        order.getCSVRows().add(row);
                 }
 
 
-                list.add(contract);
+                list.add(order);
 
             }
 
@@ -119,23 +118,23 @@ public class FileHandler {
 
 
 
-    public void addContractsToFlights(ArrayList<Contract> list) {
+    public void addOrdersToFlights(ArrayList<Order> list) {
 
-        ArrayList<Contract> contracts = list;
+        ArrayList<Order> orders = list;
 
 
         for (Flight f : DataInterface.getInstance().getFlights()) {
-            for (Contract contract : contracts) {
-                if (f.getKnr().trim().equals(contract.getAUKNL()) || f.getKnr().trim().equals(contract.getAUKNS()) ){
+            for (Order order : orders) {
+                if (f.getKnr().trim().equals(order.getAUKNL()) || f.getKnr().trim().equals(order.getAUKNS()) ){
                     if (f.getLsk().trim().equals("L"))
-                        contract.setAUKNL(f.getLsk().trim());
+                        order.setAUKNL(f.getLsk().trim());
                     if (f.getLsk().trim().equals("S")) {
-                        contract.setAUKNS(f.getLsk().trim());
+                        order.setAUKNS(f.getLsk().trim());
                     }
-                    f.addContract(contract);
+                    f.addContract(order);
 
 
-                    ArrayList<CSVRow > cs = Contract.generateListOfCSVRows(contract);
+                    ArrayList<CSVRow > cs = Order.generateListOfCSVRows(order);
 
                     f.addCSV(cs);
 

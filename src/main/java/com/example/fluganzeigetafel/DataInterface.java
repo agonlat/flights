@@ -1,27 +1,45 @@
 package com.example.fluganzeigetafel;
 
 
-import com.example.fluganzeigetafel.Contract.CSVRow;
-import com.example.fluganzeigetafel.Contract.Contract;
-import com.example.fluganzeigetafel.Contract.Subcontracts.Subcontract;
+import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Order;
+import com.example.fluganzeigetafel.Orders.Suborders.Suborder;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Data.FlightsTable;
 import com.example.fluganzeigetafel.Flights.Data.TabPaneView;
 import com.example.fluganzeigetafel.Flights.Utility.UtilityMethods;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class DataInterface {
 
     private ArrayList<CSVRow> contractDataRow;
-    private ArrayList<Contract> contracts;
+    private ArrayList<Order> orders;
     private static DataInterface instance;
     private List<Flight> flights;
     private TabPaneView pane;
     private String filePath;
     private List<Flight> temporaryFlights;
     private int changedFlightsCounter;
+
+    public boolean isThreadRunning() {
+        return isThreadRunning;
+    }
+
+    public void setThreadRunning(boolean threadRunning) {
+        isThreadRunning = threadRunning;
+    }
+
+    private boolean isThreadRunning = false;
+    private ArrayList<String> uakeyDatabase;
+
+    public void addUAKEY(String uakey) {
+        this.uakeyDatabase.add(uakey);
+    }
+
+    public ArrayList<String> getUakeyDatabase() {
+        return this.uakeyDatabase;
+    }
 
     public boolean isOpen() {
         return isOpen;
@@ -55,15 +73,15 @@ public class DataInterface {
 
     private boolean check = true;
 
-    public ArrayList<Subcontract> getSubcontractsList() {
+    public ArrayList<Suborder> getSubcontractsList() {
         return subcontractsList;
     }
 
-    public void setSubcontractsList(ArrayList<Subcontract> subcontractsList) {
+    public void setSubcontractsList(ArrayList<Suborder> subcontractsList) {
         this.subcontractsList = subcontractsList;
     }
 
-    private ArrayList<Subcontract> subcontractsList;
+    private ArrayList<Suborder> subcontractsList;
 
     public ArrayList<ArrayList<CSVRow>> getRows() {
         return rows;
@@ -147,7 +165,8 @@ public class DataInterface {
         temporaryFlights = new ArrayList<>();
         changedFlightsSet = new HashSet<>();
         contractDataRow = new ArrayList<>();
-        contracts = new ArrayList<>();
+        orders = new ArrayList<>();
+        uakeyDatabase = new ArrayList<>();
 
     }
 
@@ -221,11 +240,11 @@ public class DataInterface {
     }
 
 
-    public ArrayList<Contract> getContracts() {
-        return this.contracts;
+    public ArrayList<Order> getContracts() {
+        return this.orders;
     }
 
-    public void setContracts(ArrayList<Contract> contr) {
-        this.contracts = contr;
+    public void setContracts(ArrayList<Order> contr) {
+        this.orders = contr;
     }
 }

@@ -1,8 +1,8 @@
 package com.example.fluganzeigetafel.Tests;
 
 import com.example.fluganzeigetafel.Flights.Data.Flight;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.*;
 
 public class FlightTest {
     @Test
@@ -25,17 +25,17 @@ public class FlightTest {
         flight.setSaa("01");
 
         // Test getter methods
-        Assertions.assertEquals("F123", flight.getFnr());
-        Assertions.assertEquals("K456", flight.getKnr());
-        Assertions.assertEquals("ABC123", flight.getReg());
-        Assertions.assertEquals("Boeing 737", flight.getTyp());
-        Assertions.assertEquals("HA123", flight.getHa0());
-        Assertions.assertEquals("LSK456", flight.getLsk());
-        Assertions.assertEquals("Scheduled", flight.getStt());
-        Assertions.assertEquals("2023-12-20T12:00:00Z", flight.getItt());
-        Assertions.assertEquals("123A", flight.getPos());
-        Assertions.assertEquals("1", flight.getTer());
-        Assertions.assertEquals("MAD123", flight.getMad());
-        Assertions.assertEquals("01", flight.getSaa());
+        Assert.assertEquals("F123", flight.getFnr());
+        Assert.assertEquals("K456", flight.getKnr());
+        Assert.assertEquals("ABC123", flight.getReg());
+        Assert.assertEquals("Boeing 737", flight.getTyp());
+        Assert.assertEquals("HA123", flight.getHa0());
+        Assert.assertEquals("LSK456", flight.getLsk());
+        Assert.assertEquals("Scheduled", flight.getStt());
+        Assert.assertEquals("2023-12-20T12:00:00Z", flight.getItt());
+        Assert.assertEquals("123A", flight.getPos());
+        Assert.assertEquals("1", flight.getTer());
+        Assert.assertEquals("MAD123", flight.getMad());
+        Assert.assertEquals("01", flight.getSaa());
     }
 }

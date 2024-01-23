@@ -1,6 +1,6 @@
 package com.example.fluganzeigetafel.Flights.Data;
 
-import com.example.fluganzeigetafel.Contract.Controller.ContractController;
+import com.example.fluganzeigetafel.Orders.Controller.ContractController;
 import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Utility.ValidationUtil;
@@ -19,58 +19,7 @@ public class FlightsTable extends TableView   {
 
     public FlightsTable() {
 
-      /*  this.setSortPolicy(param -> {
-            FXCollections.sort(this.getItems(), (o1, o2) -> {
-                Flight ob1 = (Flight)o1;
-                Flight ob2= (Flight)o2;
 
-                // Compare each column based on its type
-                if (!ob1.getFnr().equals(ob2.getFnr())) {
-                    return ob1.getFnr().compareTo(ob2.getFnr());
-                }
-                if (!ob1.getKnr().equals(ob2.getKnr())) {
-                    return ob1.getKnr().compareTo(ob2.getKnr());
-                }
-                if (!ob1.getReg().equals(ob2.getReg())) {
-                    return ob1.getReg().compareTo(ob2.getReg());
-                }
-                if (!ob1.getTyp().equals(ob2.getTyp())) {
-                    return ob1.getTyp().compareTo(ob2.getTyp());
-                }
-                // Repeat the pattern for the remaining columns
-                if (!ob1.getHa0().equals(ob2.getHa0())) {
-                    return ob1.getHa0().compareTo(ob2.getHa0());
-                }
-                if (!ob1.getLsk().equals(ob2.getLsk())) {
-                    return ob1.getLsk().compareTo(ob2.getLsk());
-                }
-                if (!ob1.getStt().equals(ob2.getStt())) {
-                    return ob1.getStt().compareTo(ob2.getStt());
-                }
-                if (!ob1.getItt().equals(ob2.getItt())) {
-                    return ob1.getItt().compareTo(ob2.getItt());
-                }
-                if (!ob1.getTer().equals(ob2.getTer())) {
-                    return ob1.getTer().compareTo(ob2.getTer());
-                }
-                if (!ob1.getPos().equals(ob2.getPos())) {
-                    return ob1.getPos().compareTo(ob2.getPos());
-                }
-                if (!ob1.getMad().equals(ob2.getMad())) {
-                    return ob1.getMad().compareTo(ob2.getMad());
-                }
-                if (!ob1.getSaa().equals(ob2.getSaa())) {
-                    return ob1.getSaa().compareTo(ob2.getSaa());
-                }
-
-                // If all specified columns are equal, return 0
-                return 0;
-            });
-
-            return true;
-        });
-
-        */
 
         this.setEditable(true);
 
@@ -137,8 +86,7 @@ public class FlightsTable extends TableView   {
                     setText(item);
 
                     // Set text color to blue for the first column
-              //  Flight f = (Flight) DataInterface.getFlightsTable().getSelectionModel().getSelectedItem();
-              //  if (f != null && !f.getContracts().isEmpty())
+
                     setStyle("-fx-text-fill: blue;-fx-alignment: center");
                 } else {
                     setText(null);
@@ -155,8 +103,6 @@ public class FlightsTable extends TableView   {
 
 
 
-        // Handle click events
-        // Handle click events
         cell.setOnMouseClicked(e -> {
 
             ContractController.addTabs(cell);

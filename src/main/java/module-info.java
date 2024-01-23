@@ -3,21 +3,19 @@ module com.example.fluganzeigetafel {
     requires javafx.fxml;
     requires java.desktop;
 
-
-
     requires com.google.zxing;
 
-    requires org.junit.jupiter.api;
-    requires org.junit.platform.commons;
+    requires junit; // Replace org.junit.jupiter.api and org.junit.platform.commons with junit
 
     requires opencsv;
     requires org.apache.pdfbox;
 
-    opens com.example.fluganzeigetafel.Flights.Utility to org.junit.jupiter.api;
-    opens com.example.fluganzeigetafel.Contract to javafx.base;
+    opens com.example.fluganzeigetafel.Flights.Utility to junit; // Replace org.junit.jupiter.api with junit
+    opens com.example.fluganzeigetafel.Orders to javafx.base;
     opens com.example.fluganzeigetafel to javafx.fxml;
     exports com.example.fluganzeigetafel;
 
+    exports com.example.fluganzeigetafel.Tests;
     exports com.example.fluganzeigetafel.Flights.Controller;
     opens com.example.fluganzeigetafel.Flights.Controller to javafx.fxml;
     exports com.example.fluganzeigetafel.Flights.Manager;

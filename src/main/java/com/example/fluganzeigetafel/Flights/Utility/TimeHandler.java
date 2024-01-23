@@ -10,20 +10,15 @@ public class TimeHandler {
    public static String getTime(String input) {
         input = input.trim();
 
-
-
-        SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
 
         try {
             Date date = inputFormat.parse(input);
             String formattedDate = date.toString().substring(11,19);
 
-
-
             return formattedDate;
         } catch (ParseException e) {
-            // Handle parsing exception
+
 
             return "";
         }

@@ -8,6 +8,7 @@ public class ErrorDialog {
     public ErrorDialog(String text) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
+        alert.setHeaderText("Error");
         alert.setContentText(text);
         alert.getDialogPane().setMinWidth(Region.USE_PREF_SIZE);
         alert.showAndWait();

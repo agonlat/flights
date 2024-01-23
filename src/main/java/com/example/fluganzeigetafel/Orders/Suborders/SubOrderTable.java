@@ -1,10 +1,11 @@
-package com.example.fluganzeigetafel.Contract.Subcontracts;
+package com.example.fluganzeigetafel.Orders.Suborders;
 
-import com.example.fluganzeigetafel.Contract.CSVRow;
-import com.example.fluganzeigetafel.Contract.Validation.Validation;
+import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Validation.Validation;
 import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,16 +14,16 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.util.*;
 
-public class SubContractTable extends TableView {
+public class SubOrderTable extends TableView {
 
-    private Subcontract subcontract = new Subcontract();
+    private Suborder suborder = new Suborder();
 
-    public Subcontract getSubcontract() {
-    return subcontract;
+    public Suborder getSubOrder() {
+    return suborder;
     }
 
 
-    public SubContractTable() {
+    public SubOrderTable() {
         this.setEditable(true);
         this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.setPlaceholder(new Label(""));
@@ -51,7 +52,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATTBE(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATTBE(newValue);
+                                getSubOrder().setATTBE(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -62,7 +63,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATTEN(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATTEN(newValue);
+                                getSubOrder().setATTEN(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -73,7 +74,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkAUKEY(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setAUKEY(newValue);
+                                getSubOrder().setAUKEY(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -85,7 +86,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkETTBE(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setETTBE(newValue);
+                                getSubOrder().setETTBE(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -96,7 +97,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkETTEN(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setETTEN(newValue);
+                                getSubOrder().setETTEN(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -107,7 +108,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkINDNR(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setINDNR(newValue);
+                                getSubOrder().setINDNR(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -118,7 +119,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkLUPDN(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setLUPDN(newValue);
+                                getSubOrder().setLUPDN(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -129,7 +130,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkLUPDT(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setLUPDT(newValue);
+                                getSubOrder().setLUPDT(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -140,7 +141,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkLUPDV(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setLUPDV(newValue);
+                                getSubOrder().setLUPDV(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -151,7 +152,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkLZUAU(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setLZUAU(newValue);
+                                getSubOrder().setLZUAU(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -162,7 +163,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkMENGE(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setMENGE(newValue);
+                                getSubOrder().setMENGE(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -174,7 +175,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSTTBE(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSTTBE(newValue);
+                                getSubOrder().setSTTBE(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -185,7 +186,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSTTEN(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSTTEN(newValue);
+                                getSubOrder().setSTTEN(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -196,7 +197,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUAKEY(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUAKEY(newValue);
+                                getSubOrder().setUAKEY(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -207,7 +208,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUAPIR(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUAPIR(newValue);
+                                getSubOrder().setUAPIR(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -218,7 +219,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUASAA(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUASAA(newValue);
+                                getSubOrder().setUASAA(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -229,7 +230,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUASAU(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUASAU(newValue);
+                                getSubOrder().setUASAU(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -240,7 +241,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkXUA(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setXUA(newValue);
+                                getSubOrder().setXUA(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -251,7 +252,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkZINFO(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setZINFO(newValue);
+                                getSubOrder().setZINFO(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -263,7 +264,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkORTFR(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setORTFR(newValue);
+                                getSubOrder().setORTFR(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -274,7 +275,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkORTTO(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setORTTO(newValue);
+                                getSubOrder().setORTTO(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -286,7 +287,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUAREE(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUAREE(newValue);
+                                getSubOrder().setUAREE(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -297,7 +298,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkFGKEY(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setFGKEY(newValue);
+                                getSubOrder().setFGKEY(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -308,7 +309,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUAABF(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUAABF(newValue);
+                                getSubOrder().setUAABF(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -320,7 +321,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSPREK(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSPREK(newValue);
+                                getSubOrder().setSPREK(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -331,7 +332,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATT30(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATT30(newValue);
+                                getSubOrder().setATT30(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -342,7 +343,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATT50(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATT50(newValue);
+                                getSubOrder().setATT50(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -353,7 +354,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATT55(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATT55(newValue);
+                                getSubOrder().setATT55(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -364,7 +365,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATT60(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATT60(newValue);
+                                getSubOrder().setATT60(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -375,7 +376,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATT70(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATT70(newValue);
+                                getSubOrder().setATT70(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -386,7 +387,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATT75(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATT75(newValue);
+                                getSubOrder().setATT75(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -397,7 +398,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATTER(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATTER(newValue);
+                                getSubOrder().setATTER(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -408,7 +409,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUAAGE(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUAAGE(newValue);
+                                getSubOrder().setUAAGE(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -419,7 +420,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkEINHE(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setEINHE(newValue);
+                                getSubOrder().setEINHE(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -430,7 +431,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATT20(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATT20(newValue);
+                                getSubOrder().setATT20(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -441,7 +442,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkQKB(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setQKB(newValue);
+                                getSubOrder().setQKB(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -452,7 +453,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSAA20(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSAA20(newValue);
+                                getSubOrder().setSAA20(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -463,7 +464,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSAAOF(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSAAOF(newValue);
+                                getSubOrder().setSAAOF(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -475,7 +476,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSKA(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSKA(newValue);
+                                getSubOrder().setSKA(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -486,7 +487,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSTT20(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSTT20(newValue);
+                                getSubOrder().setSTT20(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -497,7 +498,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkURK(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setURK(newValue);
+                                getSubOrder().setURK(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -508,7 +509,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkRELFK(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setRELFK(newValue);
+                                getSubOrder().setRELFK(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -519,7 +520,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUAINF(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUAINF(newValue);
+                                getSubOrder().setUAINF(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -530,7 +531,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkETT30(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setETT30(newValue);
+                                getSubOrder().setETT30(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -541,7 +542,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkUAKSL(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setUAKSL(newValue);
+                                getSubOrder().setUAKSL(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -552,7 +553,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSPKEY(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSPKEY(newValue);
+                                getSubOrder().setSPKEY(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -563,7 +564,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkMENG2(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setMENG2(newValue);
+                                getSubOrder().setMENG2(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -574,7 +575,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkCINFO(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setCINFO(newValue);
+                                getSubOrder().setCINFO(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -585,7 +586,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkATT40(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setATT40(newValue);
+                                getSubOrder().setATT40(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -596,7 +597,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSTLIK(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSTLIK(newValue);
+                                getSubOrder().setSTLIK(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -607,7 +608,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkOKEYN(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setOKEYN(newValue);
+                                getSubOrder().setOKEYN(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -618,7 +619,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkABI(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setABI(newValue);
+                                getSubOrder().setABI(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -629,7 +630,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkEBI(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setEBI(newValue);
+                                getSubOrder().setEBI(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -640,7 +641,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkSBI(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setSBI(newValue);
+                                getSubOrder().setSBI(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -651,7 +652,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkTOURK(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setTOURK(newValue);
+                                getSubOrder().setTOURK(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -663,7 +664,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkEINH2(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setEINH2(newValue);
+                                getSubOrder().setEINH2(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -674,7 +675,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkEINH3(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setEINH3(newValue);
+                                getSubOrder().setEINH3(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -685,7 +686,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkEINH4(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setEINH4(newValue);
+                                getSubOrder().setEINH4(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -696,7 +697,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkMENG3(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setMENG3(newValue);
+                                getSubOrder().setMENG3(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -707,7 +708,7 @@ public class SubContractTable extends TableView {
                             column.setEditable(true);
                             if (Validation.checkMENG4(newValue)) {
                                 row.setValue(newValue);
-                                getSubcontract().setMENG4(newValue);
+                                getSubOrder().setMENG4(newValue);
                                 this.refresh();
                             } else {
                                 ErrorDialog dialog = new ErrorDialog("Wrong input!");
@@ -734,7 +735,7 @@ public class SubContractTable extends TableView {
 
         }}
 
-    public SubContractTable createGenericTable(String dispo) {
+    public SubOrderTable createGenericTable(String dispo) {
 
         Map<String, List<String>> dispoSystems = new HashMap<>();
         ArrayList<CSVRow> rows = new ArrayList<>();
@@ -902,15 +903,19 @@ public class SubContractTable extends TableView {
                 this.setItems(lists);
                 break;
             default:
-                System.out.println("Invalid dispo value" + dispo);
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("Error");
+               alert.setContentText("An internal error occured!");
+               alert.setHeaderText("ERROR");
+               alert.showAndWait();
 
         }
 
 return this;
     }
 
-    public void setSubContract(Subcontract subcontract) {
-        this.subcontract = subcontract;
+    public void setSubOrder(Suborder suborder) {
+        this.suborder = suborder;
     }
     }
 

@@ -3,6 +3,7 @@ package com.example.fluganzeigetafel.Orders.Controller;
 import com.example.fluganzeigetafel.CustomDialogs.Popup;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
+import com.example.fluganzeigetafel.Flights.Data.MainGraphicElements;
 import com.example.fluganzeigetafel.Orders.CSVRow;
 import com.example.fluganzeigetafel.Orders.Data.OrderTable;
 import com.example.fluganzeigetafel.Orders.Data.GraphicPane;
@@ -62,6 +63,30 @@ public class ContractController {
 
                         // Add the ContractTable to a new tab in the TabPane
                         DataInterface.getInstance().getTabPaneView().addTab(tab);
+                        DataInterface.getInstance().getTabPaneView().getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
+                            if (newTab != null) {
+                                if (newTab.getText().equals("Flights")) {
+                                    MainGraphicElements.setButtonVisible(false);
+                                    MainGraphicElements.setButtonText("");
+                                    MainGraphicElements.setSubButtonVisible(false);
+                                } else {
+                                    MainGraphicElements.setButtonVisible(true);
+                                    MainGraphicElements.setButtonText("Show data about orders");
+                                    MainGraphicElements.setSubButtonVisible(true);
+
+
+
+
+
+                                }
+                            } else {
+                                // No tab is selected (tab closed), hide the button
+                                MainGraphicElements.setButtonVisible(false);
+                                MainGraphicElements.setButtonText("");
+                                MainGraphicElements.setSubButtonVisible(false);
+                            }
+                        });
+
                     }
 
 

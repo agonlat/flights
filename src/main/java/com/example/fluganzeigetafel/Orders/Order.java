@@ -662,6 +662,20 @@ public class Order {
 
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private  String title;
+
+    public Order(String title, String arg) {
+        this.title = title;
+    }
+
         public ArrayList<CSVRow> getCSVRows() {
             return rows;
         }

@@ -4,6 +4,7 @@ import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.CustomDialogs.PopupSuccess;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
+import com.example.fluganzeigetafel.Flights.Data.FlightsTable;
 import com.example.fluganzeigetafel.Flights.Handler.FileHandler;
 import com.example.fluganzeigetafel.Flights.Manager.FlightChangeManager;
 import com.example.fluganzeigetafel.Orders.Order;
@@ -32,15 +33,15 @@ public class FileController {
 
             ArrayList<Flight> flights = fileHandler.readCSV_File(dataInterface.getFilePath());
             dataInterface.addFlights(flights);
-
-            dataInterface.flightsTable.populateTable(flights);
-            DataInterface.flightsTable.refresh();
+            FlightsTable table = dataInterface.flightsTable.populateTable(flights);
 
 
 
             Task<Void> task = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
+
+                    DataInterface.flightsTable.refresh();
                     DataInterface.getInstance().setThreadRunning(true);
                     com.example.fluganzeigetafel.Orders.Handler.FileHandler cr = new com.example.fluganzeigetafel.Orders.Handler.FileHandler();
                     ArrayList<Order> orderArrayList = cr.readCSV_toList("src/main/resources/au.csv");
@@ -48,12 +49,16 @@ public class FileController {
 
 
                     cr.addOrdersToFlights(DataInterface.getInstance().getContracts());
-                    SubOrdersFileHandler fileHandler = new SubOrdersFileHandler();
-                    ArrayList<Suborder> suborderArrayList = fileHandler.readCSVtoListOfSubOrders("src/main/resources/ua.csv");
-                    fileHandler.addSubOrdersToOrders(suborderArrayList);
+                    FlightsTable.addOrderItems(table);
+                    DataInterface.flightsTable.refresh();
+                    SubOrdersFileHandler fileHandlerd = new SubOrdersFileHandler();
+                    ArrayList<Suborder> suborderArrayList = fileHandlerd.readCSVtoListOfSubOrders("src/main/resources/ua.csv");
+                    fileHandlerd.addSubOrdersToOrders(suborderArrayList);
                     DataInterface.getInstance().setSubcontractsList(suborderArrayList);
+                    DataInterface.flightsTable.refresh();
 
 
+                    FlightsTable.addSubOrderItems(table);
                     return null;
                 }
             };

@@ -12,16 +12,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-
 import java.util.ArrayList;
 
 public class ContractController {
 
 
-    public static void addTabs(TableCell<Flight, String> cell) {
+    public static void addTabs(TreeTableCell<Flight, String> cell) {
         if (DataInterface.getInstance().isThreadRunning()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Please wait until the orders and suborders are loaded! A popup should appear after finishing");

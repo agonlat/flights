@@ -1,6 +1,5 @@
 package com.example.fluganzeigetafel.Flights.Data;
 
-import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Controller.PrintController;
 import com.example.fluganzeigetafel.Flights.Utility.FilterAndSearchMethods;
@@ -59,35 +58,15 @@ public class MainGraphicElements {
         showSubDataButton.setVisible(false);
         showDataButton.setMinWidth(150);
         showDataButton.setOnAction(e->{
-            OrderStats stats = new OrderStats();
+            OrderStats stats = new OrderStats(DataInterface.getCurrentFlight().getContracts());
         });
         HBox boxTabs = new HBox();
 
-        Button closeTabsButton = new Button("Close all tabs");
-
-        closeTabsButton.setOnAction(e->
-                {
-
-                    if (DataInterface.getInstance().getFlights().isEmpty()) {
-                        LoadFlightsDialog loadFlightsDialog = new LoadFlightsDialog();
-                    } else {
-
-                        int size = DataInterface.getInstance().getTabPaneView().getTabs().size();
-                        DataInterface.getInstance().getTabPaneView().getTabs().remove(1,size);
-                        DataInterface.getInstance().setFirstTime(true);
-
-                        for (Flight f : DataInterface.getInstance().getFlights())
-                            f.setCurrentTabsLoaded(false);
 
 
-                    }
-                    }
 
-        );
 
-        pane.setLeft(boxTabs);
-        boxTabs.getChildren().addAll(closeTabsButton, showDataButton, showSubDataButton);
-        boxTabs.setMargin(closeTabsButton, new Insets(5,5,5,5));
+
 
 
          FilterAndSearchMethods.filterFlights(filterTextField);

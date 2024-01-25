@@ -7,7 +7,7 @@ import com.example.fluganzeigetafel.Orders.Data.OrderTable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Flight {
+public class Flight  {
     private String fnr;
     private String knr;
     private String reg;
@@ -21,6 +21,7 @@ public class Flight {
     private String mad;
     private String saa;
 
+    private String title;
     public ArrayList<OrderTable> getTables() {
 
         return tables;
@@ -32,6 +33,9 @@ public class Flight {
             this.tables.add(tables[i]);
 
         }
+    }
+    public Flight(String title) {
+        this.title = title;
     }
 
 

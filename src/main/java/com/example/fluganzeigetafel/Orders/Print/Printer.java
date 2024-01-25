@@ -1,13 +1,9 @@
 package com.example.fluganzeigetafel.Orders.Print;
 
-import com.example.fluganzeigetafel.Orders.CSVRow;
-import com.example.fluganzeigetafel.Orders.Order;
-import com.example.fluganzeigetafel.Orders.Data.OrderTable;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
-import javafx.scene.Node;
-import javafx.scene.control.Tab;
-import javafx.scene.layout.HBox;
+import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Order;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -35,8 +31,8 @@ public class Printer {
             stream.setFont(PDType1Font.HELVETICA, 25);
             stream.beginText();
             stream.newLineAtOffset(50, page.getMediaBox().getHeight() - 50);
-            Flight f= (Flight)DataInterface.getFlightsTable().getSelectionModel().getSelectedItem();
-            stream.showText("Order " + f.getKnr());
+
+            stream.showText("Order " + order.getAUKEY());
             stream.endText();
 
             stream.moveTo(50, page.getMediaBox().getHeight() - 75);
@@ -50,18 +46,8 @@ public class Printer {
             float x = 50;
             int i = 0;
 
-            Tab tab = DataInterface.getInstance().getTabPaneView().getSelectionModel().getSelectedItem();
-            OrderTable table = null;
-            HBox selectedContent = (HBox) tab.getContent();
-            for (Node node : selectedContent.getChildren()) {
-                if (node instanceof OrderTable) {
-                    table = (OrderTable) node;
-                    break;
-                }
-            }
 
-
-            ArrayList<CSVRow> rs = table.getOrder().getCSVRows();
+           ArrayList<CSVRow> rs = order.getCSVRows();
 
 
             for (CSVRow row : rs) {
@@ -105,7 +91,7 @@ public class Printer {
 
             stream.close();
             String currentDir = System.getProperty("user.dir");
-            String filePath = currentDir + File.separator + "Orders"+f.getKnr()+".pdf";
+            String filePath = currentDir + File.separator + "Orders"+order.getAUKEY()+".pdf";
             document.save(filePath);
 
             // Close the document

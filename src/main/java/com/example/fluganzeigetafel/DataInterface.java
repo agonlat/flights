@@ -22,6 +22,22 @@ public class DataInterface {
     private List<Flight> temporaryFlights;
     private int changedFlightsCounter;
 
+    public static Flight getCurrentFlight() {
+        return currentFlight;
+    }
+
+    public static void setCurrentFlight(Flight currentFlight) {
+        DataInterface.currentFlight = currentFlight;
+    }
+
+    private static Flight currentFlight;
+public Order getOrderByAUKEY(String aukey) {
+    for (Order order : getContracts()) {
+        if (order.getAUKEY().equals(aukey.trim()))
+            return order;
+    }
+    return null;
+}
     public boolean isThreadRunning() {
         return isThreadRunning;
     }

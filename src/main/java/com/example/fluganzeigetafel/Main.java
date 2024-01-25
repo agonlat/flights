@@ -3,12 +3,12 @@ package com.example.fluganzeigetafel;
 import com.example.fluganzeigetafel.Flights.Data.FlightsTable;
 import com.example.fluganzeigetafel.Flights.Data.MainGraphicElements;
 import com.example.fluganzeigetafel.Flights.Data.MenuBarView;
-import com.example.fluganzeigetafel.Flights.Data.TabPaneView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -42,9 +42,11 @@ public class Main extends Application {
 
 
         VBox tableLayout = new VBox();
-        TabPaneView paneView = new TabPaneView(tableLayout);
-        DataInterface.getInstance().setTabPaneView(paneView);
-        tableLayout.getChildren().addAll(new MenuBarView(stage).getMenuBar(),pane,paneView.getTabPaneView());
+
+        VBox.setVgrow(table, Priority.ALWAYS);
+
+
+        tableLayout.getChildren().addAll(new MenuBarView(stage).getMenuBar(),pane,table);
 
 
 

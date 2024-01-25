@@ -1,7 +1,5 @@
 package com.example.fluganzeigetafel.Statistics;
 
-import com.example.fluganzeigetafel.DataInterface;
-import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Orders.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,9 +14,9 @@ import java.util.Map;
 
 public class OrderStats extends Stage {
 //JTP DISPO MAD
-    public OrderStats() {
-        Flight f = (Flight)DataInterface.getFlightsTable().getSelectionModel().getSelectedItem();
-        ArrayList<Order> orders = f.getContracts();
+    public OrderStats(ArrayList<Order> orderList) {
+
+        ArrayList<Order> orders = orderList;
         Map<String, Integer> dispoMap = new HashMap<>();
         Map<String, Integer> jtpMap = new HashMap<>();
         Map<String, Integer> madMap = new HashMap<>();
@@ -96,7 +94,7 @@ public class OrderStats extends Stage {
 
         // Set up the scene and stage
         this.setScene(new Scene(box));
-        this.setTitle("Order stats about: " + f.getFnr());
+        this.setTitle("Order stats");
         this.show();
 
 

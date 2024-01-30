@@ -43,7 +43,7 @@ public class FilterAndSearchMethods {
             List<Flight> arrayList = new ArrayList<>(filteredFlights);
             DataInterface.getInstance().addTemporaryFlights(arrayList);
         // Update the TableView with the filtered list
-     //   DataInterface.flightsTable.populateTable(filteredFlights);
+        DataInterface.flightsTable.populateTable(filteredFlights);
 
         // Refresh the TableView
         DataInterface.flightsTable.refresh();

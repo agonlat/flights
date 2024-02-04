@@ -1,4 +1,4 @@
-package com.example.fluganzeigetafel.Statistics;
+package com.example.fluganzeigetafel.Orders.Statistics;
 
 import com.example.fluganzeigetafel.Orders.Order;
 import javafx.collections.FXCollections;

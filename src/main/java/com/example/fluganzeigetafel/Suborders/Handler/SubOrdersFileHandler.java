@@ -1,12 +1,14 @@
-package com.example.fluganzeigetafel.Orders.Suborders;
+package com.example.fluganzeigetafel.Suborders.Handler;
 
 import com.example.fluganzeigetafel.Orders.Order;
 import com.example.fluganzeigetafel.DataInterface;
+import com.example.fluganzeigetafel.Suborders.Suborder;
 import com.opencsv.CSVReader;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,7 +143,9 @@ public class SubOrdersFileHandler {
                 if (order.getAUKEY().trim().equals(suborder.getAUKEY())) {
                     if (!order.getSubOrdersList().contains(suborder))
                         order.addSubOrderToSubOrdersList(suborder);
-
+                    suborder.setCreationDate(LocalDateTime.now());
+                    suborder.setChanges(0);
+                    suborder.setLastChange(null);
                     }
                 }
             }

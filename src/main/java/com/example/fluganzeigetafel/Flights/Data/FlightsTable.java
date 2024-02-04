@@ -1,18 +1,31 @@
 package com.example.fluganzeigetafel.Flights.Data;
 
+import com.example.fluganzeigetafel.CustomDialogs.OrderContextMenu;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Orders.Order;
-import com.example.fluganzeigetafel.Orders.OrderForm;
-import com.example.fluganzeigetafel.Orders.Suborders.Suborder;
-import javafx.event.EventHandler;
+import com.example.fluganzeigetafel.Orders.Statistics.OrderChangesStats;
+import com.example.fluganzeigetafel.Orders.Forms.OrderForm;
+import com.example.fluganzeigetafel.Suborders.Statistics.SuborderChangeStats;
+import com.example.fluganzeigetafel.Suborders.Suborder;
+import com.example.fluganzeigetafel.Suborders.Forms.SuborderForm;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+
+/**
+ * This is the class which represents the flights in a TreeTableView. It extends TreeTableView.
+ * @author latifiagon
+ */
 
 public class FlightsTable extends TreeTableView   {
     public static Node getOdsuComponent() {
@@ -38,7 +51,11 @@ public class FlightsTable extends TreeTableView   {
 
     int selectedIndex = 0;
 
+    /**
+     * This constructor creates the Flight table and handles are operations like listening to events or generating the TreeItems.
+     */
     public FlightsTable() {
+
 
         String[] columnNames = {"Flight no", "Control no", "Registration", "Type", "Harbor", "Landing-takeoff-sign", "Sched. time", "Intern. time", "Position", "Terminal", "Client", "Status"};
         String[] propertyNames = {"fnr", "knr", "reg", "typ", "ha0", "lsk", "stt", "itt", "pos", "ter", "mad", "saa"};
@@ -66,50 +83,86 @@ public class FlightsTable extends TreeTableView   {
             });
 
             i++;
+
         }
 
 
 
 
-        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        this.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<Flight>>() {
             @Override
-            public void handle(MouseEvent event) {
+            public void changed(ObservableValue<? extends TreeItem<Flight>> observable,
+                                TreeItem<Flight> oldValue, TreeItem<Flight> newValue) {
                 Scene scene = getScene();
                 VBox vBox = (VBox) scene.getRoot();
 
-                if (getOdsuComponent() != null) {
-                    vBox.getChildren().remove(getOdsuComponent());
-
-                }
-
-                // Get the selected item
-                TreeItem<Flight> selectedItem = (TreeItem<Flight>) getSelectionModel().getSelectedItem();
 
 
+                // Check if the item is selected (not just expanded/collapsed)
+                if (newValue != null && newValue != oldValue) {
+                    // Get the selected item
+                    TreeItem<Flight> selectedItem = (TreeItem<Flight>) getSelectionModel().getSelectedItem();
 
-                // Check if the selected item is an order or suborder
-                if (selectedItem != null) {
-                    String selectedItemValue = selectedItem.getValue().getFnr();
+                    // Check if the selected item is an order or suborder
+
+                    if (selectedItem != null) {
+
+                        if (DataInterface.getInstance().isThreadRunning()) {
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setContentText("Please wait until the orders and suborders are loaded! A popup should appear after finishing");
+                            alert.setHeaderText("WARNING");
+                            alert.showAndWait();
+                            selectedItem.setExpanded(false);
+                            return;
+                        }
+                        String selectedItemValue = selectedItem.getValue().getFnr();
+
+                        TreeItem<Flight> flightTreeItem = selectedItem.getParent();
+                        DataInterface.setCurrentFlight(flightTreeItem.getValue());
+
+                        OrderForm orderForm = new OrderForm();
+                        Order order = null;
+                        Suborder suborder = null;
+
+                        if ("Order".equals(selectedItem.getValue().getKnr())) {
+                            System.out.println("ORDER SELECTED: " + selectedItem.getValue().getFnr());
+                            order = DataInterface.getInstance().getOrderByAUKEY(selectedItemValue);
+
+                            VBox orderLayout = orderForm.createOrderForm(order);
+
+                            HBox infoBox = new HBox();
+                            BorderPane pane = OrderChangesStats.createStats(order);
+                            infoBox.getChildren().addAll(orderLayout, pane);
+                            HBox.setHgrow(pane, javafx.scene.layout.Priority.ALWAYS);
+
+                            vBox.getChildren().addAll(infoBox);
+                            setOdsuComponent(infoBox);
+                            DataInterface.getInstance().setCurrentItem(selectedItem);
+
+                        } else if ("Suborder".equals(selectedItem.getValue().getKnr())) {
+                            System.out.println("SUBORDER SELECTED");
+                            SuborderForm suborderForm = new SuborderForm();
+                            TreeItem<Flight> ff = selectedItem.getParent();
+                            Order orderC = DataInterface.getInstance().getOrderByAUKEY(ff.getValue().getFnr());
+
+                            suborder = orderC.getSubOrderByUAKEY(selectedItem.getValue().getFnr().trim());
+
+                            VBox suborderLayout = suborderForm.createSubOrderForm(suborder, orderC);
+
+                            HBox infoBox = new HBox();
+                            BorderPane pane = SuborderChangeStats.createStats(suborder);
+                            infoBox.getChildren().addAll(suborderLayout, pane);
+                            HBox.setHgrow(pane, javafx.scene.layout.Priority.ALWAYS);
 
 
-                    TreeItem<Flight> flightTreeItem= selectedItem.getParent();
-                    DataInterface.setCurrentFlight(flightTreeItem.getValue());
-
-                    OrderForm orderForm = new OrderForm();
-                    Order order  = null;
-                    if (selectedItem.getValue().getKnr().equals("Order")) {
-                        order = DataInterface.getInstance().getOrderByAUKEY(selectedItemValue);
-                        VBox orderLayout = orderForm.createOrderForm(order);
-                        setOdsuComponent(orderLayout);
-                        boolean t = getOdsuComponent() == null;
-                        System.out.println(t);
-                        vBox.getChildren().add(orderLayout);
+                            vBox.getChildren().addAll(infoBox);
+                            setOdsuComponent(infoBox);
+                            DataInterface.getInstance().setCurrentItem(selectedItem);
+                        } else {
+                            DataInterface.setCurrentFlight(selectedItem.getValue());
+                        }
+                        Platform.runLater(() -> getSelectionModel().clearSelection());
                     }
-
-                    else
-                        return;
-
-
                 }
             }
         });
@@ -124,10 +177,11 @@ public class FlightsTable extends TreeTableView   {
         this.setEditable(true);
         DataInterface.flightsTable = this;
         this.refresh();
+        setContextMenu(new OrderContextMenu());
     }
 
     public FlightsTable populateTable(ArrayList<Flight> flights) {
-        TreeItem<Flight> rootItem = new TreeItem<>(new Flight("Flights"));
+        TreeItem<Flight> rootItem = new TreeItem<>(new Flight("Flights","","","","","","","","","","",""));
         rootItem.setExpanded(true);
 
 
@@ -137,6 +191,9 @@ public class FlightsTable extends TreeTableView   {
         }
 
         this.setRoot(rootItem);
+
+
+
         this.refresh();
         return this;
     }
@@ -147,7 +204,7 @@ public class FlightsTable extends TreeTableView   {
 
         for (TreeItem<Flight> item : root.getChildren()) {
            Flight f = (Flight) item.getValue();
-           ArrayList<Order> orderList = f.getContracts();
+           ArrayList<Order> orderList = f.getOrders();
 
            for (Order order : orderList) {
                TreeItem<Flight> orderTreeItem = new TreeItem<>(
@@ -170,10 +227,10 @@ public class FlightsTable extends TreeTableView   {
 
         for (TreeItem<Flight> item : root.getChildren()) {
             Flight f = (Flight) item.getValue();
-            ArrayList<Order> orderList = f.getContracts();
+            ArrayList<Order> orderList = f.getOrders();
 
           for (TreeItem<Flight> orderItem : item.getChildren()) {
-             Order order = f.getContractByAukey(orderItem.getValue().getFnr());
+             Order order = f.getOrderByAUKEY(orderItem.getValue().getFnr());
 
              for (Suborder suborder : order.getSubOrdersList()) {
                  TreeItem<Flight> subOrderItem = new TreeItem<>(new Flight(suborder.getUAKEY(),"Suborder","","","","","","","","","",""));
@@ -188,4 +245,8 @@ public class FlightsTable extends TreeTableView   {
 
 
 
+    public void populateTable(ObservableList<TreeItem<Flight>> flights) {
+        DataInterface.flightsTable.getRoot().getChildren().clear();
+        DataInterface.flightsTable.getRoot().getChildren().addAll(flights);
+    }
 }

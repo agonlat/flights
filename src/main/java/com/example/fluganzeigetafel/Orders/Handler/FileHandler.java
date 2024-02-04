@@ -1,15 +1,17 @@
 package com.example.fluganzeigetafel.Orders.Handler;
 
-import com.example.fluganzeigetafel.Orders.CSVRow;
-import com.example.fluganzeigetafel.Orders.Order;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
+import com.example.fluganzeigetafel.Orders.Data.CSVRow;
+import com.example.fluganzeigetafel.Orders.Order;
 import com.opencsv.CSVReader;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 public class FileHandler {
     public ArrayList<Order> readCSV_toList(String filepath) {
         DataInterface.getInstance().setFilePath(filepath);
@@ -131,7 +133,10 @@ public class FileHandler {
                     if (f.getLsk().trim().equals("S")) {
                         order.setAUKNS(f.getLsk().trim());
                     }
-                    f.addContract(order);
+                    order.setCreationDate(LocalDateTime.now());
+                    order.setChanges(0);
+                    order.setLastChange(null);
+                    f.addOrder(order);
 
 
                     ArrayList<CSVRow > cs = Order.generateListOfCSVRows(order);

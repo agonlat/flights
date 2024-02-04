@@ -9,7 +9,17 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+
+/**
+ * This custom popup is needed for the thread which load the flights, the Orders and Suborders.
+ * @author latifiagon
+ */
 public class PopupSuccess extends Stage {
+    /**
+     * This constructor creates the popup with a time duration of 5 seconds. The content will be displayed on the main stage.
+     * @param msg The text to be displayed
+     * @param stage The stage where the popup should be displayed
+     */
     public PopupSuccess(String msg, Stage stage) {
         Label popupLabel = new Label(msg);
         StackPane popupLayout = new StackPane(popupLabel);

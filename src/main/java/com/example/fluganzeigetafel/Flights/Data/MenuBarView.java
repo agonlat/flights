@@ -10,8 +10,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+/**
+ * This class is represents the MenuBar.
+ */
 public class MenuBarView {
     private MenuBar menuBar;
+
+    /**
+     * This construcotr creates the MenuBar with the elements File, View and Data.
+     * @param stage
+     */
     public MenuBarView(Stage stage) {
         final Menu fileMenu = new Menu("File");
         final Menu viewMenu = new Menu("View");

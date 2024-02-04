@@ -1,12 +1,16 @@
 package com.example.fluganzeigetafel.Flights.Data;
 
-import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Data.CSVRow;
 import com.example.fluganzeigetafel.Orders.Order;
-import com.example.fluganzeigetafel.Orders.Data.OrderTable;
+
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * A class which represents a Flight.
+ * @author latifiagon
+ */
 public class Flight  {
     private String fnr;
     private String knr;
@@ -21,41 +25,28 @@ public class Flight  {
     private String mad;
     private String saa;
 
-    private String title;
-    public ArrayList<OrderTable> getTables() {
-
-        return tables;
-    }
-
-    public void addTables(OrderTable... tables) {
-        for (int i = 0; i < tables.length; i++) {
-
-            this.tables.add(tables[i]);
-
-        }
-    }
-    public Flight(String title) {
-        this.title = title;
-    }
-
-
-
-    public void deleteTable(OrderTable table) {
-        this.tables.remove(table);
-    }
-
-    private ArrayList<OrderTable> tables = new ArrayList<>();
 
     private ArrayList<Order> orders;
-    public void addContract(Order order) {
+
+    /**
+     * This method adds an Order to a Flight.
+     * @param order The Order to be added.
+     */
+    public void addOrder(Order order) {
         this.orders.add(order);
     }
 
+    /**
+     * This method adds a list of CSV-Rows to the Flight. CSV-Rows is a custom class used for Orders and Suborders.
+     */
     public void addCSV(ArrayList<CSVRow> rows) {
         this.csv.add(rows);
     }
 
-    public Order getContractByAukey(String aukey) {
+    /**
+     * This method is used for retrieving the Order by AUKEY. The order is searched in Orders list of the current flight.
+     */
+    public Order getOrderByAUKEY(String aukey) {
         for (Order order : this.orders) {
             if (order.getAUKEY().trim().equals(aukey.trim())) {
                 return order;
@@ -72,7 +63,7 @@ public class Flight  {
     private ArrayList<ArrayList<CSVRow>> csv = new ArrayList<>();
 
 
-    public ArrayList<Order> getContracts() {
+    public ArrayList<Order> getOrders() {
         return orders;
     }
 
@@ -177,6 +168,22 @@ public class Flight  {
     public Flight() {
 
     }
+
+    /**
+     * Constructor for a Flight
+     * @param fnr Flight no
+     * @param knr Control no
+     * @param reg Registration
+     * @param typ Type
+     * @param ha0 Harbor
+     * @param lsk Landing-takeoff sign
+     * @param stt Scheduled time
+     * @param itt Internal time
+     * @param pos Position
+     * @param ter Terminal
+     * @param mad Client
+     * @param saa Status
+     */
     public Flight(String fnr, String knr, String reg, String typ, String ha0, String lsk,
                   String stt, String itt, String pos, String ter, String mad, String saa) {
         this.fnr = fnr;
@@ -219,25 +226,5 @@ public class Flight  {
         return Objects.hash(fnr, knr, reg, typ, ha0, lsk, stt, itt, pos, ter, mad, saa);
     }
 
-
-    public boolean isTablesLoaded() {
-        return tablesLoaded;
-    }
-
-    public void setTablesLoaded(boolean bol) {
-        this.tablesLoaded = bol;
-    }
-
-    private boolean tablesLoaded = false;
-
-    public boolean isCurrentTabsLoaded() {
-        return currentTabsLoaded;
-    }
-
-    public void setCurrentTabsLoaded(boolean currentTabsLoaded) {
-        this.currentTabsLoaded = currentTabsLoaded;
-    }
-
-    private boolean currentTabsLoaded = false;
 
 }

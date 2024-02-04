@@ -28,6 +28,10 @@ import static com.example.fluganzeigetafel.Flights.Utility.UtilityMethods.leaveO
 
 public class PrintManager {
     public void createPDF(ArrayList<Flight> flights) {
+
+
+
+
         try {
             PDDocument document = new PDDocument();
             PDPage page = new PDPage(PDRectangle.A4);

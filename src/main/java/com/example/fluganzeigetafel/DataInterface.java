@@ -1,23 +1,37 @@
 package com.example.fluganzeigetafel;
 
 
-import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Data.CSVRow;
 import com.example.fluganzeigetafel.Orders.Order;
-import com.example.fluganzeigetafel.Orders.Suborders.Suborder;
+import com.example.fluganzeigetafel.Suborders.Suborder;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Data.FlightsTable;
-import com.example.fluganzeigetafel.Flights.Data.TabPaneView;
+
 import com.example.fluganzeigetafel.Flights.Utility.UtilityMethods;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TreeItem;
 
 import java.util.*;
 
 public class DataInterface {
+    private ObservableList<TreeItem<Flight>> flightItems;
 
     private ArrayList<CSVRow> contractDataRow;
+
+    public TreeItem<Flight> getCurrentItem() {
+        return currentItem;
+    }
+
+    public void setCurrentItem(TreeItem<Flight> currentItem) {
+        this.currentItem = currentItem;
+    }
+
+    private TreeItem<Flight> currentItem;
     private ArrayList<Order> orders;
     private static DataInterface instance;
     private List<Flight> flights;
-    private TabPaneView pane;
+
     private String filePath;
     private List<Flight> temporaryFlights;
     private int changedFlightsCounter;
@@ -77,27 +91,31 @@ public Order getOrderByAUKEY(String aukey) {
     }
 
     private boolean pendingStatus = false;
-    public boolean isCheck() {
-        return check;
-    }
 
-
-
-    public void setCheck(boolean check) {
-        this.check = check;
-    }
 
     private boolean check = true;
 
-    public ArrayList<Suborder> getSubcontractsList() {
-        return subcontractsList;
+    public ArrayList<Suborder> getSubordersList() {
+        return suborderArrayList;
+    }
+    public static DataInterface getInstance() {
+
+        synchronized (DataInterface.class) {
+            if (instance == null)  {
+                instance = new DataInterface();
+            }
+
+        }
+
+
+        return instance;
     }
 
-    public void setSubcontractsList(ArrayList<Suborder> subcontractsList) {
-        this.subcontractsList = subcontractsList;
+    public void setSubOrdersList(ArrayList<Suborder> subcontractsList) {
+        this.suborderArrayList = subcontractsList;
     }
 
-    private ArrayList<Suborder> subcontractsList;
+    private ArrayList<Suborder> suborderArrayList;
 
     public ArrayList<ArrayList<CSVRow>> getRows() {
         return rows;
@@ -109,28 +127,14 @@ public Order getOrderByAUKEY(String aukey) {
         this.rows = rows;
     }
 
-    public boolean isFirstTime() {
-        return isFirstTime;
-    }
-
-    public void setFirstTime(boolean firstTime) {
-        isFirstTime = firstTime;
-    }
-
-    private boolean isFirstTime = true;
-    private String contractsPath = "";
-
-    public String getContractsPath() {
-        return this.contractsPath;
-    }
-
-    public void setContractsPath(String path) {
-        this.contractsPath = path;
-    }
 
 
 
-    public static FlightsTable flightsTable;
+
+
+
+
+    public static FlightsTable flightsTable = new FlightsTable();
     private Set<Flight> changedFlightsSet;
 
 
@@ -174,7 +178,17 @@ public Order getOrderByAUKEY(String aukey) {
         return changedFlightsSet;
     }
 
+    public ObservableList<TreeItem<Flight>> getFlightItems() {
+        return flightItems;
+    }
+
+    public void setFlightItems(ObservableList<TreeItem<Flight>> flightItems) {
+        this.flightItems = flightItems;
+    }
+
     private DataInterface() {
+        flightItems = FXCollections.observableArrayList();
+
         flights = new ArrayList<>();
         filePath = "";
         changedFlightsCounter = 0;
@@ -183,30 +197,11 @@ public Order getOrderByAUKEY(String aukey) {
         contractDataRow = new ArrayList<>();
         orders = new ArrayList<>();
         uakeyDatabase = new ArrayList<>();
+        currentItem = new TreeItem<>();
 
     }
 
-    public boolean setTabPaneView(TabPaneView view) {
-        this.pane = view;
-        if (pane != null)
-            return true;
-        else return false;
-    }
-    public TabPaneView getTabPaneView() {
-       return this.pane;
-    }
-    public static DataInterface getInstance() {
 
-            synchronized (DataInterface.class) {
-                if (instance == null)  {
-                    instance = new DataInterface();
-                }
-
-            }
-
-
-        return instance;
-    }
 
     public List<Flight> getFlights() {
         return flights;
@@ -250,9 +245,24 @@ public Order getOrderByAUKEY(String aukey) {
         return false;
     }
 
-    public void setFlightsTable(FlightsTable table) {
-        flightsTable = table;
 
+
+    public ObservableList<TreeItem<Flight>> convertFlightsToItems() {
+        ObservableList<TreeItem<Flight>> list = FXCollections.observableArrayList();
+        TreeItem<Flight> root = flightsTable.getRoot();
+
+        for (Flight f : flights) {
+            TreeItem<Flight> item = new TreeItem<>(f);
+            list.add(item);
+        }
+
+
+
+
+
+
+
+        return list;
     }
 
 
@@ -263,4 +273,16 @@ public Order getOrderByAUKEY(String aukey) {
     public void setContracts(ArrayList<Order> contr) {
         this.orders = contr;
     }
+
+    public ObservableList<TreeItem<Flight>> getItemsCopy() {
+        return itemsCopy;
+    }
+
+    public void setItemsCopy(ObservableList<TreeItem<Flight>> itemsCopy) {
+        this.itemsCopy = itemsCopy;
+    }
+
+    ObservableList<TreeItem<Flight>> itemsCopy = null;
+
+
 }

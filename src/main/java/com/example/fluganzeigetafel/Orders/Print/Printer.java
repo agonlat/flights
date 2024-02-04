@@ -1,9 +1,8 @@
 package com.example.fluganzeigetafel.Orders.Print;
 
-import com.example.fluganzeigetafel.DataInterface;
-import com.example.fluganzeigetafel.Flights.Data.Flight;
-import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Data.CSVRow;
 import com.example.fluganzeigetafel.Orders.Order;
+import com.example.fluganzeigetafel.Suborders.Suborder;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -107,90 +106,79 @@ public class Printer {
 
     }
 
-
-    public void createPDFMULT(ArrayList<Order> orders) {
+    public void createPDF(Suborder suborder) {
         try {
-
             PDDocument document = new PDDocument();
             PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+
+            PDPageContentStream stream = new PDPageContentStream(document, page);
 
 
-            Flight f = (Flight) DataInterface.getFlightsTable().getSelectionModel().getSelectedItem();
+            stream.setFont(PDType1Font.HELVETICA, 25);
+            stream.beginText();
+            stream.newLineAtOffset(50, page.getMediaBox().getHeight() - 50);
+
+            stream.showText("Suborder " + suborder.getUAKEY());
+            stream.endText();
+
+            stream.moveTo(50, page.getMediaBox().getHeight() - 75);
+            stream.setStrokingColor(Color.BLACK);
+            stream.setLineWidth(1.0f);
+            stream.lineTo(page.getMediaBox().getWidth() - 50, page.getMediaBox().getHeight() - 75);
+            stream.stroke();
+
+            stream.setFont(PDType1Font.HELVETICA, 12);
+            float y = page.getMediaBox().getHeight() - 100;
+            float x = 50;
+            int i = 0;
 
 
-            for (ArrayList<CSVRow> rows :  f.getCsvListOfList()) {
-                document.addPage(page);
-                for (CSVRow row : rows) {
+            ArrayList<CSVRow> rs = suborder.getCSVRows();
 
 
-
-                    PDPageContentStream stream = new PDPageContentStream(document, page);
-
+            for (CSVRow row : rs) {
 
 
-
-
-                stream.setFont(PDType1Font.HELVETICA, 25);
+                if (i == 40) {
+                    x = 300;
+                    y = page.getMediaBox().getHeight() - 100;
+                }
                 stream.beginText();
-                stream.newLineAtOffset(50, page.getMediaBox().getHeight() - 50);
-                stream.showText("Order " + f.getKnr());
+
+                stream.newLineAtOffset(x, y);
+
+                stream.showText(row.getDesignation());
+                stream.endText();
+                stream.beginText();
+                stream.newLineAtOffset(x + 100, y);
+                stream.showText(row.getValue());
                 stream.endText();
 
-                stream.moveTo(50, page.getMediaBox().getHeight() - 75);
-                stream.setStrokingColor(Color.BLACK);
-                stream.setLineWidth(1.0f);
-                stream.lineTo(page.getMediaBox().getWidth() - 50, page.getMediaBox().getHeight() - 75);
-                stream.stroke();
+                y = y - 15;
+                i++;
 
-                stream.setFont(PDType1Font.HELVETICA, 12);
-                float y = page.getMediaBox().getHeight() - 100;
-                float x = 50;
-                int i = 0;
-
-                for (CSVRow csrow : rows) {
-                    if (i == 40) {
-                        x = 300;
-                        y = page.getMediaBox().getHeight() - 100;
-                    }
-                    stream.beginText();
-                    stream.newLineAtOffset(x, y);
-                    stream.showText(csrow.getDesignation());
-                    stream.endText();
-                    stream.beginText();
-                    stream.newLineAtOffset(x + 100, y);
-                    stream.showText(csrow.getValue());
-                    stream.endText();
-
-                    y = y - 15;
-                    i++;
-
-                }
-
-                stream.moveTo(50, 100);
-                stream.setStrokingColor(Color.BLACK);
-                stream.setLineWidth(1.0f);
-                stream.lineTo(page.getMediaBox().getWidth() - 50, 100);
-                stream.stroke();
-
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
-                Date d = new Date();
-                String formattedDate = dateFormat.format(d);
-
-                stream.beginText();
-                stream.newLineAtOffset(50, 75);
-                stream.showText("Generated on: " + formattedDate);
-                stream.endText();
-
-                stream.close();
-
-
-                    page = new PDPage(PDRectangle.A4);
-
-                }
             }
 
+            stream.moveTo(50, 100);
+            stream.setStrokingColor(Color.BLACK);
+            stream.setLineWidth(1.0f);
+            stream.lineTo(page.getMediaBox().getWidth() - 50, 100);
+            stream.stroke();
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+            Date d = new Date();
+            String formattedDate = dateFormat.format(d);
+
+            stream.beginText();
+            stream.newLineAtOffset(50, 75);
+            stream.showText("Generated on: " + formattedDate);
+            stream.endText();
+
+
+            stream.close();
             String currentDir = System.getProperty("user.dir");
-            String filePath = currentDir + File.separator + "Orders"+f.getKnr()+".pdf";
+            String filePath = currentDir + File.separator + "Suborder"+suborder.getUAKEY()+".pdf";
             document.save(filePath);
 
             // Close the document
@@ -198,9 +186,13 @@ public class Printer {
 
             // Open the created PDF file using the default PDF viewer
             Desktop.getDesktop().open(new File(filePath));
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
+
 }
 

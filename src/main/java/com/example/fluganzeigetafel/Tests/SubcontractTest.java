@@ -1,6 +1,6 @@
 package com.example.fluganzeigetafel.Tests;
 
-import com.example.fluganzeigetafel.Orders.Suborders.Suborder;
+import com.example.fluganzeigetafel.Suborders.Suborder;
 import org.junit.Test;
 import org.junit.*;
 

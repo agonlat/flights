@@ -18,21 +18,7 @@ import java.util.Optional;
 
 public class UtilityMethods {
 
-    public static boolean isNumerical(String input) {
-        try {
-            // Try parsing as an integer
-            Integer.parseInt(input);
-            return true; // If successful, it's an integer
-        } catch (NumberFormatException e1) {
-            try {
-                // Try parsing as a double
-                Double.parseDouble(input);
-                return true; // If successful, it's a double
-            } catch (NumberFormatException e2) {
-                return false; // If both parsing attempts fail, it's not numerical
-            }
-        }
-    }
+
     public static String getAirlineCode(String input) {
 
         if (input.isBlank()) {

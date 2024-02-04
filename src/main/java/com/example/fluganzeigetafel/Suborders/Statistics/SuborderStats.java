@@ -1,18 +1,12 @@
-package com.example.fluganzeigetafel.Statistics;
+package com.example.fluganzeigetafel.Suborders.Statistics;
 
-import com.example.fluganzeigetafel.DataInterface;
-import com.example.fluganzeigetafel.Flights.Data.Flight;
-import com.example.fluganzeigetafel.Orders.Data.OrderTable;
 import com.example.fluganzeigetafel.Orders.Order;
-import com.example.fluganzeigetafel.Orders.Suborders.Suborder;
+import com.example.fluganzeigetafel.Suborders.Suborder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -21,45 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SuborderStats extends Stage {
-    public SuborderStats() {
-        Flight f = (Flight) DataInterface.getFlightsTable().getSelectionModel().getSelectedItem();
-        Tab tab = DataInterface.getInstance().getTabPaneView().getSelectionModel().getSelectedItem();
-        HBox box = null;
-        TabPane pane = null;
-
-        if (tab != null) {
-            if (!(tab.getContent() instanceof TabPane)) {
-                // Content is not an instance of TabPane
-                box = (HBox) tab.getContent();
-            } else {
-                // Content is an instance of TabPane
-
-                pane = (TabPane) tab.getContent();
-                box = (HBox) pane.getTabs().get(0).getContent();
-
-                if (pane.getTabs().size() > 0) {
-                    tab = pane.getTabs().get(0);
-                }
-            }
-        }
-
-        Order order = new Order();
-        ArrayList<Suborder> suborders = new ArrayList<>();
-
-
-        for (Node node : box.getChildren()) {
-       if(node instanceof OrderTable) {
-
-                   OrderTable c = (OrderTable) node;
-                    order = c.getOrder();
-
-                    suborders =  order.getSubOrdersList();
+    public SuborderStats(Order order) {
 
 
 
-                    break;
-                }
-        }
+        ArrayList<Suborder> suborders = order.getSubOrdersList();
+
 
 
 

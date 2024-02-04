@@ -1,11 +1,8 @@
 package com.example.fluganzeigetafel.Flights.Data;
 
-import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Controller.PrintController;
 import com.example.fluganzeigetafel.Flights.Utility.FilterAndSearchMethods;
 import com.example.fluganzeigetafel.Flights.Utility.UtilityMethods;
-import com.example.fluganzeigetafel.Statistics.OrderStats;
-import com.example.fluganzeigetafel.Statistics.SuborderStats;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -17,23 +14,17 @@ import javafx.scene.layout.Priority;
 
 import java.io.FileNotFoundException;
 
+/**
+ * This class is used for the GUI elements that are on the start page.
+ */
 public class MainGraphicElements {
-    private static Button showDataButton;
-    private static Button showSubDataButton;
-
-    public static void setSubButtonVisible(boolean c) {
-        showSubDataButton.setVisible(c);
-    }
 
 
-
-    public static void setButtonVisible(boolean c) {
-        showDataButton.setVisible(c);
-    }
-
-    public static void setButtonText(String text) {
-        showDataButton.setText(text);
-    }
+    /**
+     * This method creates the GUI elements that are at the top of the Flights table, like Search Button, Filter TextField ...
+     * @param pane The BorderPane that is above the table, where these elements are.
+     * @throws FileNotFoundException
+     */
     public MainGraphicElements(BorderPane pane) throws FileNotFoundException {
 
 
@@ -48,45 +39,38 @@ public class MainGraphicElements {
         filterTextField.setPromptText("Filter flights");
         filterTextField.setMaxWidth(100);
 
-         showSubDataButton = new Button("Show data about suborders");
-         showSubDataButton.setOnAction(b -> {
-             SuborderStats stats = new SuborderStats();
-         });
 
-       showDataButton = new Button("");
-       showDataButton.setVisible(false);
-        showSubDataButton.setVisible(false);
-        showDataButton.setMinWidth(150);
-        showDataButton.setOnAction(e->{
-            OrderStats stats = new OrderStats(DataInterface.getCurrentFlight().getContracts());
-        });
+
         HBox boxTabs = new HBox();
 
 
+        Button printButton = new Button("Print current flights");
+
+        printButton.setOnAction(e-> {PrintController printController = new PrintController();
+        printController.printOnAction();});
+
+        boxTabs.getChildren().addAll(printButton, searchButton);
 
 
 
 
-
-
-         FilterAndSearchMethods.filterFlights(filterTextField);
+         FilterAndSearchMethods filter = new FilterAndSearchMethods();
+         filter.filterFlights(filterTextField);
         searchButton.setOnAction(e-> UtilityMethods.setSearchButtonAction(searchButton));
-        Button printButton = new Button("Print all flights");
-
-        printButton.setOnAction(e-> PrintController.printOnAction());
 
         HBox hBox = new HBox();
-        hBox.getChildren().addAll(printButton, searchButton,filterTextField);
-        HBox.setMargin(printButton, new Insets(5,0,5,0));
+        hBox.getChildren().addAll( filterTextField);
+        boxTabs.setSpacing(5);
+        HBox.setMargin(printButton, new Insets(5,0,5,5));
         HBox.setMargin(searchButton, new Insets(5,0,5,0));
         HBox.setMargin(filterTextField, new Insets(5,5,5,0));
 
-        HBox.setMargin(showDataButton, new Insets(5,5,5,0));
-        HBox.setMargin(showSubDataButton, new Insets(5,5,5,0));
+
         HBox.setHgrow(searchButton, Priority.ALWAYS);
         HBox.setHgrow(filterTextField, Priority.ALWAYS);
         hBox.setSpacing(5);
 
+        pane.setLeft(boxTabs);
         pane.setRight(hBox);
 
     }

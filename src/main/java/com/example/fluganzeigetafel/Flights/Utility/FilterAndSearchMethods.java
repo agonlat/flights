@@ -1,63 +1,58 @@
 package com.example.fluganzeigetafel.Flights.Utility;
 
-import com.example.fluganzeigetafel.CustomDialogs.LoadFlightsDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-
-import java.util.ArrayList;
-import java.util.List;
+import javafx.scene.control.TreeItem;
 
 public class FilterAndSearchMethods {
-    static int counter = 0;
+
+
     public static void filterFlights(TextField filterTextField) {
-
-
-
-
-
         filterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (DataInterface.getInstance().getFlights().isEmpty() && counter == 0) {
-                LoadFlightsDialog loadFlightsDialog = new LoadFlightsDialog();
-                counter++;
-                filterTextField.clear();
-                counter = 0;
+            System.out.println("Changed");
+            ObservableList<TreeItem<Flight>> treeItems = DataInterface.getInstance().getFlightItems();
+            String filter = newValue.trim().toUpperCase();
+            FilteredList<TreeItem<Flight>> filteredFlights = new FilteredList<>(FXCollections.observableArrayList(treeItems));
+
+            if (DataInterface.getInstance().isThreadRunning() && !filterTextField.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Please wait until the orders and suborders are loaded! A popup should appear after finishing");
+                alert.setHeaderText("WARNING");
+                alert.showAndWait();
+                filterTextField.setText("");
                 return;
             }
 
-        DataInterface dataInterface = DataInterface.getInstance();
-        ArrayList<Flight> flights = (ArrayList<Flight>) dataInterface.getFlights();
-
-        // Create a filtered list
-        FilteredList<Flight> filteredFlights = new FilteredList<>(FXCollections.observableArrayList(flights));
+            if (newValue.isBlank()) {
+                // If the filter is blank, reset the table to display all flights
 
 
-        String filter = newValue.trim();
+                DataInterface.getFlightsTable().populateTable(DataInterface.getInstance().getItemsCopy());
+                DataInterface.flightsTable.refresh();
 
-        // Set the filter predicate
-        filteredFlights.setPredicate(flight ->
-                flight.getFnr().startsWith(filter) || flight.getKnr().startsWith(filter));
+            } else {
+                filteredFlights = new FilteredList<>(FXCollections.observableArrayList(DataInterface.getInstance().getItemsCopy()));
 
-            List<Flight> arrayList = new ArrayList<>(filteredFlights);
-            DataInterface.getInstance().addTemporaryFlights(arrayList);
-        // Update the TableView with the filtered list
-     //   DataInterface.flightsTable.populateTable(filteredFlights);
+                filteredFlights.setPredicate(pred ->
+                        (pred.getValue().getFnr().toUpperCase().startsWith(filter) || pred.getValue().getKnr().toUpperCase().startsWith(filter)) &&
+                                (!"Order".equals(pred.getValue().getKnr()) && !"Suborder".equals(pred.getValue().getKnr()))
+                );
 
-        // Refresh the TableView
-        DataInterface.flightsTable.refresh();
+                for (TreeItem<Flight> item : filteredFlights) {
+                    DataInterface.getInstance().getTemporaryFlights().add(item.getValue());
+                }
 
-        // If the filter is empty, show all flights
-        if (newValue.isBlank()) {
-            DataInterface.getInstance().addFlights(flights);
-            DataInterface.flightsTable.populateTable(flights);
-            DataInterface.flightsTable.refresh();
-        }
+                // Clear existing items and add filtered ones
+                DataInterface.flightsTable.getRoot().getChildren().setAll(filteredFlights);
+                DataInterface.flightsTable.refresh();
+            }
         });
 
+
     }
-
-
-
 }

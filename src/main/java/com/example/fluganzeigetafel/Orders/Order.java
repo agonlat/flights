@@ -1,11 +1,70 @@
 package com.example.fluganzeigetafel.Orders;
 
 
-import com.example.fluganzeigetafel.Orders.Suborders.Suborder;
+import com.example.fluganzeigetafel.Orders.Data.CSVRow;
+import com.example.fluganzeigetafel.Suborders.Suborder;
+
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Order {
+
+    public int getChanges() {
+        return changes;
+    }
+
+    public void setChanges(int changes) {
+        this.changes = changes;
+    }
+
+    public LocalDateTime getLastChange() {
+        if (lastChange != null)
+            lastChange = LocalDateTime.parse(lastChange.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+        return lastChange;
+    }
+
+    public void setLastChange(LocalDateTime lastChange) {
+        this.lastChange = lastChange;
+    }
+
+    public LocalDateTime getCreationDate() {
+        creationDate = LocalDateTime.parse(creationDate.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+
+        return creationDate;
+    }
+    public String getLastChangeFormatted() {
+        if (lastChange != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+            return lastChange.format(formatter);
+        }
+        return ""; // or throw an exception or handle the null case as needed
+    }
+
+    // New method to get formatted date string for creationDate
+    public String getCreationDateFormatted() {
+        if (creationDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+            return creationDate.format(formatter);
+        }
+        return ""; // or throw an exception or handle the null case as needed
+    }
+
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    private int changes;
+    private LocalDateTime lastChange;
+    private LocalDateTime creationDate;
+
+
+
+
+
+
     public String getAUKEY() {
         return AUKEY;
     }
@@ -629,38 +688,43 @@ public class Order {
         rows = new ArrayList<>();
     }
 
+
+    public void setRows(ArrayList<CSVRow> rows) {
+        this.rows = rows;
+    }
+
     private ArrayList<CSVRow> rows;
 
     public static ArrayList<CSVRow> generateListOfCSVRows(Order order) {
+        Class<?> clazz = order.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        ArrayList<CSVRow> rows = new ArrayList<>();
 
-            Class<?> clazz = order.getClass();
-            Field[] fields = clazz.getDeclaredFields();
-            ArrayList<CSVRow> rows = new ArrayList<>();
+        for (Field field : fields) {
+            field.setAccessible(true);
 
-            for (Field field : fields) {
-                field.setAccessible(true);
+            try {
+                // Skip specific fields: changes, lastChange, creationDate
+                if ("changes".equals(field.getName()) || "lastChange".equals(field.getName()) || "creationDate".equals(field.getName())) {
+                    continue;
+                }
 
-                try {
+                if (field.get(order) != null && !field.get(order).toString().isEmpty()) {
+                    CSVRow row = new CSVRow(field.getName(), field.get(order).toString());
 
-                    if (field.get(order) != null && !field.get(order).toString().isEmpty()) {
-                        CSVRow row = new CSVRow(field.getName(), field.get(order).toString());
-
-
-                        if (!row.getValue().isEmpty() && !row.getValue().contains(";")&& !row.getValue().contains("["))
+                    // Exclude rows with empty values, values containing ';', or values containing '['
+                    if (!row.getValue().isEmpty() && !row.getValue().contains(";") && !row.getValue().contains("[")) {
                         rows.add(row);
                     }
-
-
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
                 }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
+        }
 
-
-            return rows;
-
-
+        return rows;
     }
+
 
     public String getTitle() {
         return title;

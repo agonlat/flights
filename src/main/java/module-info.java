@@ -28,4 +28,11 @@ module com.example.fluganzeigetafel {
     opens com.example.fluganzeigetafel.Flights.Data to javafx.fxml;
     exports com.example.fluganzeigetafel.Flights.Handler;
     opens com.example.fluganzeigetafel.Flights.Handler to javafx.fxml;
+    opens com.example.fluganzeigetafel.Orders.Statistics to javafx.base;
+    opens com.example.fluganzeigetafel.Orders.Forms to javafx.base;
+    opens com.example.fluganzeigetafel.Orders.Utilis to javafx.base;
+    opens com.example.fluganzeigetafel.Suborders.Statistics to javafx.base;
+    opens com.example.fluganzeigetafel.Orders.Data to javafx.base;
+
+
 }

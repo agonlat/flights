@@ -1,12 +1,65 @@
-package com.example.fluganzeigetafel.Orders.Suborders;
+package com.example.fluganzeigetafel.Suborders;
 
-import com.example.fluganzeigetafel.Orders.CSVRow;
+import com.example.fluganzeigetafel.Orders.Data.CSVRow;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Suborder {
+
+
+    public int getChanges() {
+        return changes;
+    }
+
+    public void setChanges(int changes) {
+        this.changes = changes;
+    }
+
+    public LocalDateTime getLastChange() {
+        if (lastChange != null)
+            lastChange = LocalDateTime.parse(lastChange.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+        return lastChange;
+    }
+
+    public void setLastChange(LocalDateTime lastChange) {
+        this.lastChange = lastChange;
+    }
+
+    public LocalDateTime getCreationDate() {
+        creationDate = LocalDateTime.parse(creationDate.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+
+        return creationDate;
+    }
+    public String getLastChangeFormatted() {
+        if (lastChange != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+            return lastChange.format(formatter);
+        }
+        return ""; // or throw an exception or handle the null case as needed
+    }
+
+    // New method to get formatted date string for creationDate
+    public String getCreationDateFormatted() {
+        if (creationDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+            return creationDate.format(formatter);
+        }
+        return ""; // or throw an exception or handle the null case as needed
+    }
+
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    private int changes;
+    private LocalDateTime lastChange;
+    private LocalDateTime creationDate;
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -648,6 +701,9 @@ public class Suborder {
                 Object value = field.get(this);
                 String valueString = (value != null) ? value.toString() : "";
 
+                if ("csvRows".equals(field.getName()) || "changes".equals(field.getName()) || "lastChange".equals(field.getName()) || "creationDate".equals(field.getName())) {
+                    continue;
+                }
 
                 CSVRow row = new CSVRow(field.getName(), valueString);
 
@@ -661,6 +717,12 @@ public class Suborder {
         }
 
         return rows;
+    }
+
+    ArrayList<CSVRow> csvRows = new ArrayList<>();
+
+    public void setRows(ArrayList<CSVRow> rows) {
+        this.csvRows = rows;
     }
 
 

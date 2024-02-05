@@ -58,7 +58,10 @@ public class MenuBarView {
         statisticalDataItem.setOnAction(e-> DataController.statisticalDataAction());
 
     }
-
+ /**
+     * This method returs the menuBar.
+     * @return menuBar
+     */
     public MenuBar getMenuBar(){
         return menuBar;
     }

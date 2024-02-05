@@ -15,21 +15,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
-/**
- * This class handles all operations for the ViewChange of the Flights, like switching between UTC and local time.
- */
-
-
-
-/**
- * This constructor creates the window for switchting between UTC and LOCAL. It also has all operations.
- */
 public class ViewChangeManager {
 
-    private ToggleButton utc;
-    private ToggleButton local;
-    private ToggleGroup group;
+   private ToggleButton utc;
+   private ToggleButton local;
+   private ToggleGroup group;
 
 
 

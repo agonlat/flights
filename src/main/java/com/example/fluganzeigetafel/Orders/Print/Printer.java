@@ -1,6 +1,5 @@
 package com.example.fluganzeigetafel.Orders.Print;
 
-import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.Orders.Data.CSVRow;
 import com.example.fluganzeigetafel.Orders.Order;
 import com.example.fluganzeigetafel.Suborders.Suborder;
@@ -16,15 +15,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-/**
- * The Printer class provides methods for creating PDF documents for orders and suborders.
- */
+
 public class Printer {
-    /**
-     * Creates a PDF document for the given order.
-     *
-     * @param order The order to create the PDF for.
-     */
+
     public void createPDF(Order order) {
         try {
             PDDocument document = new PDDocument();
@@ -53,29 +46,29 @@ public class Printer {
             int i = 0;
 
 
-            ArrayList<CSVRow> rs = order.getCSVRows();
+           ArrayList<CSVRow> rs = order.getCSVRows();
 
 
             for (CSVRow row : rs) {
 
 
-                if (i == 40) {
-                    x = 300;
-                    y = page.getMediaBox().getHeight() - 100;
-                }
-                stream.beginText();
+                    if (i == 40) {
+                        x = 300;
+                        y = page.getMediaBox().getHeight() - 100;
+                    }
+                    stream.beginText();
 
-                stream.newLineAtOffset(x, y);
+                    stream.newLineAtOffset(x, y);
 
-                stream.showText(row.getDesignation());
-                stream.endText();
-                stream.beginText();
-                stream.newLineAtOffset(x + 100, y);
-                stream.showText(row.getValue());
-                stream.endText();
+                    stream.showText(row.getDesignation());
+                    stream.endText();
+                    stream.beginText();
+                    stream.newLineAtOffset(x + 100, y);
+                    stream.showText(row.getValue());
+                    stream.endText();
 
-                y = y - 15;
-                i++;
+                    y = y - 15;
+                    i++;
 
             }
 
@@ -108,15 +101,11 @@ public class Printer {
 
 
         } catch (IOException e) {
-            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
+            throw new RuntimeException(e);
         }
 
     }
-    /**
-     * Creates a PDF document for the given suborder.
-     *
-     * @param suborder The suborder to create the PDF for.
-     */
+
     public void createPDF(Suborder suborder) {
         try {
             PDDocument document = new PDDocument();
@@ -200,9 +189,10 @@ public class Printer {
 
 
         } catch (IOException e) {
-            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
+            throw new RuntimeException(e);
         }
 
     }
 
 }
+

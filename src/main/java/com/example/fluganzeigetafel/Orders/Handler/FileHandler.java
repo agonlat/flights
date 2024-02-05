@@ -1,6 +1,5 @@
 package com.example.fluganzeigetafel.Orders.Handler;
 
-import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Orders.Data.CSVRow;
@@ -13,19 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * The FileHandler class provides methods for reading CSV files and handling orders.
- */
-
-
-
 public class FileHandler {
-    /**
-     * Reads a CSV file and converts its content into a list of orders.
-     *
-     * @param filepath The path to the CSV file.
-     * @return An ArrayList containing Order objects.
-     */
     public ArrayList<Order> readCSV_toList(String filepath) {
         DataInterface.getInstance().setFilePath(filepath);
         boolean check = true;
@@ -35,7 +22,7 @@ public class FileHandler {
         String values[] = null;
 
         try {
-            CSVReader reader = new CSVReader(new FileReader(filepath));
+           CSVReader reader = new CSVReader(new FileReader(filepath));
             while ((values = reader.readNext()) != null) {
 
 
@@ -114,7 +101,7 @@ public class FileHandler {
 
                 for (int j = 0; j < values.length; j++) {
                     CSVRow row = new CSVRow(cols[j], values[j]);
-                    order.getCSVRows().add(row);
+                        order.getCSVRows().add(row);
                 }
 
 
@@ -126,16 +113,12 @@ public class FileHandler {
 
 
         } catch (IOException e) {
-            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
+
         }
         return list;
     }
 
-    /**
-     * Adds orders to corresponding flights.
-     *
-     * @param list The list of orders to be added to flights.
-     */
+
 
     public void addOrdersToFlights(ArrayList<Order> list) {
 

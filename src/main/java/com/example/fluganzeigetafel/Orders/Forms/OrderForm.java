@@ -2,37 +2,34 @@ package com.example.fluganzeigetafel.Orders.Forms;
 
 import com.example.fluganzeigetafel.CustomDialogs.CloseDialog;
 import com.example.fluganzeigetafel.CustomDialogs.EmptyFieldsDialog;
-import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Data.FlightsTable;
 import com.example.fluganzeigetafel.Orders.Order;
 import com.example.fluganzeigetafel.Orders.Print.Printer;
-import com.example.fluganzeigetafel.Orders.Statistics.OrderStats;
-import com.example.fluganzeigetafel.Orders.Utilis.Utility;
-import com.example.fluganzeigetafel.Orders.Validation.Validation;
 import com.example.fluganzeigetafel.Suborders.Forms.SuborderForm;
 import com.example.fluganzeigetafel.Suborders.Utils.Utils;
+import com.example.fluganzeigetafel.Orders.Utilis.Utility;
+import com.example.fluganzeigetafel.Orders.Validation.Validation;
+import com.example.fluganzeigetafel.Orders.Statistics.OrderStats;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.*;
-
-/**
- * The OrderForm class represents a graphical user interface for managing orders,
- * providing operations such as editing, generating suborders, and printing.
- */
 
 public class OrderForm {
     static boolean allFieldsCorrect = true;
@@ -41,16 +38,13 @@ public class OrderForm {
     static Order orderS;
     private Font customFont;
     Map<String, List<String>> expectedColumnsMap = new HashMap<>();
+    public VBox createOrderForm()  {
+        try {
+            customFont =   Font.loadFont(new FileInputStream("src/main/resources/Fonts/LiberationSerif-Regular.ttf"), 12);
 
-
-    /**
-     * Displays a new Order with empty fields
-     *
-     * @return A VBox containing the OrderForm.
-     */
-
-    public VBox createOrderForm() {
-
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         VBox mainBox = new VBox();
         HBox buttonBox = new HBox();
@@ -66,7 +60,7 @@ public class OrderForm {
         // DISPO: OPTIBUS
         expectedColumnsMap.put("OPTIBUS", Arrays.asList(
                 "AUKEY", "DISPO", "DIB", "JTP", "AUSAA", "AUSAU", "AUKNL", "AUKNS", "FGKEY", "ORTFR",
-                "ORTTO", "EINHE", "UAZPL", "UAZAK", "AUAGE", "STTBE", "STTEN", "ETTBE", "ETTEN", "ATTBE",
+                "ORTTO","EINHE", "UAZPL", "UAZAK", "AUAGE", "STTBE", "STTEN", "ETTBE", "ETTEN", "ATTBE",
                 "ATTEN", "ATT20", "ZINFO", "LUPDN", "LUPDT", "LUPDV", "KEYLK", "KEYLE", "KEYLF", "XAU",
                 "AUDAT", "AUABF", "MITAR", "FLAGS", "CINFO", "MAD"
         ));
@@ -90,7 +84,7 @@ public class OrderForm {
                 "ATT20", "AUABF", "AUAGE", "AUAGE", "AUAGE", "AUAGE", "AUDAT", "AUKEY", "AUKNL",
                 "AUKNS", "AUPIR", "AUPIR", "AUSAA", "AUSAU", "CINFO", "DIB", "DISPO", "ETTBE", "ETTEN",
                 "FLAGS", "JTP", "KEYLE", "KEYLF", "KEYLK", "LUPDN", "LUPDT", "LUPDV",
-                "MENGE", "MENG3", "MITAR", "ORTFR", "ORTTO", "STTBE", "STTEN",
+                "MENGE", "MENG3", "MITAR",  "ORTFR", "ORTTO", "STTBE", "STTEN",
                 "UAZAK", "XAU", "ZINFO"
         ));
 
@@ -164,7 +158,7 @@ public class OrderForm {
 
         Optional<String> res = dialog.showAndWait();
 
-        res.ifPresent(result -> {
+        res.ifPresent(result->{
 
             String aukey = Utils.generateUAKEY();
             Order order = new Order();
@@ -173,6 +167,8 @@ public class OrderForm {
 
 
             ArrayList<String> labelNames = new ArrayList<>(expectedColumnsMap.get(result));
+
+
 
 
             HashMap<String, String> map = new HashMap<>();
@@ -231,6 +227,9 @@ public class OrderForm {
             map.put("RELFK", "wird in KFZ noch verwendet");
 
 
+
+
+
             Button generateSuborderButton = new Button("Generate suborder");
             Button printButton = new Button("Print");
             Button deleteOrderButton = new Button("Delete");
@@ -238,28 +237,32 @@ public class OrderForm {
             Button showOrderStatisticsButton = new Button("Show data about all orders");
             Button closeButton = new Button("Close");
 
-            closeButton.setOnAction(e -> {
+            closeButton.setOnAction(e-> {
 
 
                 if (CloseDialog.createCloseDialog()) {
 
-                    Scene scene = DataInterface.flightsTable.getScene();
+                    Scene scene =  DataInterface.flightsTable.getScene();
                     VBox b = (VBox) scene.getRoot();
                     b.getChildren().remove(FlightsTable.getOdsuComponent());
                     FlightsTable.setOdsuComponent(null);
                     DataInterface.flightsTable.refresh();
-                } else {
+                }
+                else {
                     return;
                 }
 
 
+
+
             });
 
-            printButton.setOnAction(e -> {
+            printButton.setOnAction(e->{
 
                 if (Utility.fieldsAreEmpty(orderPane.getChildren())) {
                     EmptyFieldsDialog emptyFieldsDialog = new EmptyFieldsDialog();
-                } else {
+                }
+                else {
                     Printer printer = new Printer();
                     printer.createPDF(order);
                 }
@@ -267,7 +270,7 @@ public class OrderForm {
             });
 
 
-            showOrderStatisticsButton.setOnAction(e -> {
+            showOrderStatisticsButton.setOnAction(e->{
                 if (Utility.fieldsAreEmpty(orderPane.getChildren())) {
                     EmptyFieldsDialog emptyFieldsDialog = new EmptyFieldsDialog();
                 } else {
@@ -278,11 +281,12 @@ public class OrderForm {
             });
 
 
-            generateSuborderButton.setOnAction(e -> {
+            generateSuborderButton.setOnAction(e->{
 
                 if (Utility.fieldsAreEmpty(orderPane.getChildren())) {
                     EmptyFieldsDialog emptyFieldsDialog = new EmptyFieldsDialog();
-                } else {
+                }
+                else {
                     Scene scene = DataInterface.flightsTable.getScene();
                     VBox b = (VBox) scene.getRoot();
                     b.getChildren().remove(FlightsTable.getOdsuComponent());
@@ -296,22 +300,22 @@ public class OrderForm {
 
             });
 
-            deleteOrderButton.setOnAction(e -> {
+            deleteOrderButton.setOnAction(e-> {
 
                 if (Utility.fieldsAreEmpty(orderPane.getChildren())) {
-                    Scene scene = DataInterface.flightsTable.getScene();
+                    Scene scene =  DataInterface.flightsTable.getScene();
                     VBox b = (VBox) scene.getRoot();
                     b.getChildren().remove(FlightsTable.getOdsuComponent());
                     FlightsTable.setOdsuComponent(null);
                     DataInterface.flightsTable.refresh();
-                } else {
+                } else{
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning");
                     alert.setContentText("Do you really want to delete the order?");
                     alert.setHeaderText("Warning");
-                    Optional<ButtonType> resultAction = alert.showAndWait();
+                    Optional<ButtonType> resultAction =  alert.showAndWait();
 
-                    resultAction.ifPresent(c -> {
+                    resultAction.ifPresent(c->{
                         if (c == ButtonType.OK) {
 
                             DataInterface.getCurrentFlight().getOrders().remove(order);
@@ -338,7 +342,11 @@ public class OrderForm {
                 }
 
 
+
+
             });
+
+
 
 
             Image image = new Image(getClass().getResourceAsStream("/Icons/save.png"));
@@ -358,144 +366,150 @@ public class OrderForm {
             orderPane.setPadding(new Insets(10));
 
 
-            saveButton.setOnAction(e -> {
 
-                        if (Utility.fieldsAreEmpty(orderPane.getChildren())) {
-                            EmptyFieldsDialog emptyFieldsDialog = new EmptyFieldsDialog();
-                        } else {
-                            allFieldsCorrect = true;
-                            ObservableList<Node> nodes = orderPane.getChildren();
+            saveButton.setOnAction(e->{
 
-
-                            Label label = null;
-                            for (Node node : nodes) {
-
-                                if (node instanceof Label) {
-                                    label = (Label) node;
-                                }
-
-                                if (node instanceof TextField) {
-                                    TextField field = (TextField) node;
-
-                                    checkField(label, field);
-                                    if (allFieldsCorrect == false)
-                                        return;
-                                }
-                            }
+                if (Utility.fieldsAreEmpty(orderPane.getChildren())) {
+                    EmptyFieldsDialog emptyFieldsDialog = new EmptyFieldsDialog();
+                }
+                 else {
+                    allFieldsCorrect = true;
+                    ObservableList<Node> nodes = orderPane.getChildren();
 
 
-                            if (allFieldsCorrect) {
-                                for (Node node : nodes) {
+                    Label label = null;
+                    for (Node node : nodes) {
 
-                                    if (node instanceof Label) {
-                                        label = (Label) node;
-                                    }
+                        if (node instanceof Label) {
+                            label = (Label) node;
+                        }
 
-                                    if (node instanceof TextField) {
-                                        TextField field = (TextField) node;
+                        if (node instanceof TextField) {
+                            TextField field = (TextField) node;
 
-
-                                        if (allFieldsCorrect)
-                                            performUpdate(label, field, order);
-
-
-                                    }
-                                }
-
-
-                                order.setChanges(order.getChanges());
-                                order.setLastChange(LocalDateTime.now());
-                                order.setCreationDate(LocalDateTime.now());
-
-                                DataInterface.getInstance().getContracts().add(order);
-                                DataInterface.getCurrentFlight().getOrders().add(order);
-
-                                DataInterface.getInstance().getCurrentItem().getParent().getChildren().add(
-                                        new TreeItem<Flight>(new Flight(order.getAUKEY(), "Order", "", "", "", "", "", "", "", "", "", "")));
-
-
-                                if (allFieldsCorrect) {
-                                    DataInterface.flightsTable.refresh();
-                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                    alert.setTitle("Success");
-                                    alert.setHeaderText("Success");
-                                    alert.setContentText("Changes successfully changed!");
-                                    alert.showAndWait();
-                                }
-                            }
-
-
+                            checkField(label, field);
+                            if (allFieldsCorrect == false)
+                                return;
                         }
                     }
-            );
 
 
-            Label aukeyLabel = new Label("Order ID");
-            Label dispoLabel = new Label("Disposition system");
+                    if (allFieldsCorrect) {
+                        for (Node node : nodes) {
 
-            TextField aukeyField = new TextField(aukey);
-            TextField dispoField = new TextField(result);
+                            if (node instanceof Label) {
+                                label = (Label) node;
+                            }
 
-            aukeyField.setEditable(false);
-            dispoField.setEditable(false);
-            aukeyField.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
-            dispoField.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
-
-            informationPane.add(aukeyLabel, 0, 0);
-            informationPane.add(aukeyField, 1, 0);
-
-            informationPane.add(dispoLabel, 0, 1);
-            informationPane.add(dispoField, 1, 1);
-
-            int row = 2; // Start the row index for custom fields
-            int col = 0; // Start the column index for custom fields
-
-            for (String s : labelNames) {
-
-                if (s.equals("DISPO") || s.equals("AUKEY"))
-                    continue;
-
-                Label label = new Label(map.get(s));
-                label.setId(s);
-                TextField field = new TextField();
-
-                field.setText("");
+                            if (node instanceof TextField) {
+                                TextField field = (TextField) node;
 
 
-                // Add label and field to the orderPane
-                orderPane.add(label, col, row);
-                orderPane.add(field, col + 1, row);
+                                if (allFieldsCorrect)
+                                    performUpdate(label, field, order);
 
 
-                // Move to the next row for the next custom field
-                row++;
+                            }
+                        }
 
-                // Check if we have reached the end of the current set of 10 fields
-                if (row % 12 == 2) {
-                    col += 2; // Move to the next set of columns
-                    row = 2;  // Reset the row index for the next set
+
+                           order.setChanges(order.getChanges());
+                           order.setLastChange(LocalDateTime.now());
+                           order.setCreationDate(LocalDateTime.now());
+
+                           DataInterface.getInstance().getContracts().add(order);
+                           DataInterface.getCurrentFlight().getOrders().add(order);
+
+                           DataInterface.getInstance().getCurrentItem().getParent().getChildren().add(
+                                   new TreeItem<Flight>(new Flight(order.getAUKEY(), "Order","","","","","","","","","","")));
+
+
+                        if (allFieldsCorrect) {
+                            DataInterface.flightsTable.refresh();
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Success");
+                            alert.setHeaderText("Success");
+                            alert.setContentText("Changes successfully changed!");
+                            alert.showAndWait();
+                        }
+                    }
+
+
                 }
-            }
-
-            Separator separator = new Separator(Orientation.HORIZONTAL);
-            mainBox.getChildren().addAll(buttonBox, informationPane, separator, orderPane);
+                }
+                 );
 
 
-            ObservableList<Node> nodes = (ObservableList<Node>) orderPane.getChildren();
+                Label aukeyLabel = new Label("Order ID");
+                Label dispoLabel = new Label("Disposition system");
+
+                TextField aukeyField = new TextField(aukey);
+                TextField dispoField = new TextField(result);
+
+                aukeyField.setEditable(false);
+                dispoField.setEditable(false);
+                aukeyField.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
+                dispoField.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, null, null)));
+
+                informationPane.add(aukeyLabel, 0, 0);
+                informationPane.add(aukeyField, 1, 0);
+
+                informationPane.add(dispoLabel, 0, 1);
+                informationPane.add(dispoField, 1, 1);
+
+                int row = 2; // Start the row index for custom fields
+                int col = 0; // Start the column index for custom fields
+
+                for (String s: labelNames) {
+
+                    if (s.equals("DISPO") || s.equals("AUKEY"))
+                        continue;
+
+                    Label label = new Label(map.get(s));
+                    label.setId(s);
+                    TextField field = new TextField();
+
+                    field.setText("");
 
 
-        });
+
+                    // Add label and field to the orderPane
+                    orderPane.add(label, col, row);
+                    orderPane.add(field, col + 1, row);
+
+
+                    // Move to the next row for the next custom field
+                    row++;
+
+                    // Check if we have reached the end of the current set of 10 fields
+                    if (row % 12 == 2) {
+                        col += 2; // Move to the next set of columns
+                        row = 2;  // Reset the row index for the next set
+                    }
+                }
+
+                Separator separator = new Separator(Orientation.HORIZONTAL);
+                mainBox.getChildren().addAll(buttonBox, informationPane,separator,orderPane);
+
+
+                ObservableList<Node> nodes = (ObservableList<Node>) orderPane.getChildren();
+
+
+
+
+
+
+
+
+
+
+
+            });
+
 
 
         return mainBox;
     }
-
-    /**
-     * Displays the order in the OrderForm.
-     *
-     * @param order The Order to be displayed.
-     * @return A VBox containing the OrderForm.
-     */
     public VBox createOrderForm(Order order) {
         orderS = order;
         isChanged = false;
@@ -558,6 +572,7 @@ public class OrderForm {
         map.put("RELFK", "wird in KFZ noch verwendet");
 
 
+
         VBox mainBox = new VBox();
         HBox buttonBox = new HBox();
 
@@ -568,9 +583,9 @@ public class OrderForm {
         Button showOrderStatisticsButton = new Button("Show data about all orders");
         Button closeButton = new Button("Close");
 
-        closeButton.setOnAction(e -> {
+        closeButton.setOnAction(e-> {
             if (CloseDialog.createCloseDialog()) {
-                Scene scene = DataInterface.flightsTable.getScene();
+                Scene scene =  DataInterface.flightsTable.getScene();
                 VBox b = (VBox) scene.getRoot();
                 b.getChildren().remove(FlightsTable.getOdsuComponent());
                 FlightsTable.setOdsuComponent(null);
@@ -582,20 +597,20 @@ public class OrderForm {
 
         });
 
-        printButton.setOnAction(e -> {
+        printButton.setOnAction(e->{
             Printer printer = new Printer();
             printer.createPDF(order);
         });
 
 
-        showOrderStatisticsButton.setOnAction(e -> {
+        showOrderStatisticsButton.setOnAction(e->{
             OrderStats orderStats = new OrderStats(DataInterface.getCurrentFlight().getOrders());
 
         });
 
 
-        generateSuborderButton.setOnAction(e -> {
-            Scene scene = DataInterface.flightsTable.getScene();
+        generateSuborderButton.setOnAction(e->{
+            Scene scene =  DataInterface.flightsTable.getScene();
             VBox b = (VBox) scene.getRoot();
             b.getChildren().remove(FlightsTable.getOdsuComponent());
 
@@ -608,40 +623,42 @@ public class OrderForm {
 
         });
 
-        deleteOrderButton.setOnAction(e -> {
+        deleteOrderButton.setOnAction(e-> {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setContentText("Do you really want to delete the order?");
             alert.setHeaderText("Warning");
-            Optional<ButtonType> result = alert.showAndWait();
+           Optional<ButtonType> result =  alert.showAndWait();
 
-            result.ifPresent(c -> {
-                if (c == ButtonType.OK) {
+           result.ifPresent(c->{
+               if (c == ButtonType.OK) {
 
-                    DataInterface.getCurrentFlight().getOrders().remove(order);
-
-
-                    DataInterface.getInstance().getContracts().remove(order);
-                    Scene flightsTableScene = DataInterface.flightsTable.getScene();
-                    VBox flightsTableBox = (VBox) flightsTableScene.getRoot();
-                    flightsTableBox.getChildren().remove(FlightsTable.getOdsuComponent());
-
-                    TreeItem<Flight> treeItem = DataInterface.getInstance().getCurrentItem();
-
-                    TreeItem<Flight> parent = treeItem.getParent();
-                    parent.getChildren().remove(treeItem);
+                   DataInterface.getCurrentFlight().getOrders().remove(order);
 
 
-                    DataInterface.flightsTable.refresh();
+                   DataInterface.getInstance().getContracts().remove(order);
+                  Scene flightsTableScene = DataInterface.flightsTable.getScene();
+                  VBox flightsTableBox = (VBox) flightsTableScene.getRoot();
+                  flightsTableBox.getChildren().remove(FlightsTable.getOdsuComponent());
+
+                 TreeItem<Flight> treeItem = DataInterface.getInstance().getCurrentItem();
+
+                 TreeItem<Flight> parent = treeItem.getParent();
+                 parent.getChildren().remove(treeItem);
 
 
-                } else {
-                    return;
-                }
-            });
+                 DataInterface.flightsTable.refresh();
+
+
+               } else {
+                   return;
+               }
+           });
 
 
         });
+
+
 
 
         Image image = new Image(getClass().getResourceAsStream("/Icons/save.png"));
@@ -663,62 +680,80 @@ public class OrderForm {
         orderPane.setPadding(new Insets(10));
 
 
-        saveButton.setOnAction(e -> {
+
+        saveButton.setOnAction(e->{
+
+
+
+
 
 
             allFieldsCorrect = true;
-            ObservableList<Node> nodes = orderPane.getChildren();
+           ObservableList<Node> nodes =  orderPane.getChildren();
 
 
             Label label = null;
-            for (Node node : nodes) {
+           for (Node node : nodes) {
 
-                if (node instanceof Label) {
-                    label = (Label) node;
-                }
+               if (node instanceof Label) {
+                   label = (Label) node;
+               }
 
-                if (node instanceof TextField) {
-                    TextField field = (TextField) node;
+               if (node instanceof TextField) {
+                   TextField field = (TextField) node;
 
-                    checkField(label, field);
-                    if (allFieldsCorrect == false)
-                        return;
-                }
-            }
-
-
-            if (allFieldsCorrect) {
-                for (Node node : nodes) {
-
-                    if (node instanceof Label) {
-                        label = (Label) node;
-                    }
-
-                    if (node instanceof TextField) {
-                        TextField field = (TextField) node;
+                   checkField(label,field);
+                   if (allFieldsCorrect == false)
+                       return;
+               }
+           }
 
 
-                        if (allFieldsCorrect)
-                            performUpdate(label, field, order);
+             if (allFieldsCorrect) {
+                 for (Node node : nodes) {
+
+                     if (node instanceof Label) {
+                         label = (Label) node;
+                     }
+
+                     if (node instanceof TextField) {
+                         TextField field = (TextField) node;
 
 
-                    }
-                }
+                            if (allFieldsCorrect)
+                             performUpdate(label, field, order);
 
 
-                order.setChanges(order.getChanges() + 1);
-                order.setLastChange(LocalDateTime.now());
 
 
-                if (allFieldsCorrect) {
-                    DataInterface.flightsTable.refresh();
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setHeaderText("Success");
-                    alert.setContentText("Changes successfully changed!");
-                    alert.showAndWait();
-                }
-            }
+
+
+
+
+
+
+
+                     }
+                 }
+
+
+                     order.setChanges(order.getChanges()+1);
+                     order.setLastChange(LocalDateTime.now());
+
+
+
+
+
+if (allFieldsCorrect) {
+    DataInterface.flightsTable.refresh();
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Success");
+    alert.setHeaderText("Success");
+    alert.setContentText("Changes successfully changed!");
+    alert.showAndWait();
+}
+             }
+
 
 
         });
@@ -759,6 +794,7 @@ public class OrderForm {
             field.setText(order.getCSVRows().get(i).getValue());
 
 
+
             // Add label and field to the orderPane
             orderPane.add(label, col, row);
             orderPane.add(field, col + 1, row);
@@ -774,10 +810,16 @@ public class OrderForm {
         }
 
         Separator separator = new Separator(Orientation.HORIZONTAL);
-        mainBox.getChildren().addAll(buttonBox, informationPane, separator, orderPane);
+        mainBox.getChildren().addAll(buttonBox, informationPane,separator,orderPane);
 
 
         ObservableList<Node> nodes = (ObservableList<Node>) orderPane.getChildren();
+
+
+
+
+
+
 
 
         return mainBox;
@@ -785,11 +827,11 @@ public class OrderForm {
 
     private static void checkField(Label label, TextField field) {
         String labelId = label.getId();
-        String methodName = "check" + labelId;
+        String methodName = "check"+labelId;
 
         try {
             Method method = Validation.class.getDeclaredMethod(methodName, String.class);
-            Object result = method.invoke(null, field.getText().trim());
+            Object result = method.invoke(null,field.getText().trim());
 
             if (result instanceof Boolean) {
                 boolean res = (Boolean) result;
@@ -806,24 +848,23 @@ public class OrderForm {
 
             }
         } catch (Exception e) {
-            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
+            e.printStackTrace();
         }
     }
-
     private static void performUpdate(Label label, TextField field, Order orderItem) {
         String labelId = label.getId();
-        String methodName = "set" + labelId;
+        String methodName = "set"+labelId;
 
         try {
 
             Method method = Order.class.getDeclaredMethod(methodName, String.class);
-            Object result = method.invoke(orderItem, field.getText().trim());
+            Object result = method.invoke(orderItem,field.getText().trim());
 
             orderItem.setRows(Order.generateListOfCSVRows(orderItem));
 
 
         } catch (Exception e) {
-            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
+            e.printStackTrace();
         }
     }
 

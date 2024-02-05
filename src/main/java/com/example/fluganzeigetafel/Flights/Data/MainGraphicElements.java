@@ -21,7 +21,7 @@ public class MainGraphicElements {
 
 
     /**
-     * This method creates the GUI elements that are at the top of the Flights table, like Search Button, Filter TextField ...
+     * This constructor creates the GUI elements that are at the top of the Flights table, like Search Button, Filter TextField ...
      * @param pane The BorderPane that is above the table, where these elements are.
      * @throws FileNotFoundException
      */

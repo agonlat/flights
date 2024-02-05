@@ -19,10 +19,6 @@ import javafx.stage.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * This class handles the GUI and the operations for editing a Flight.
- */
-
 public class FlightChangeManager {
     private Label flightNoLabel;
     private TextField flightNoTextField;
@@ -45,7 +41,7 @@ public class FlightChangeManager {
     private Flight flight;
     private boolean checkStageClose;
 
-    private GridPane gridPane;
+private GridPane gridPane;
 
     private void updateApproveButtonState() {
         approveButton.setDisable(
@@ -57,10 +53,6 @@ public class FlightChangeManager {
         );
     }
 
-
-    /**
-     * This constructor shows the window for editing a Flight. It also includes the neccecary operations for Flight manipulation.
-     */
     public FlightChangeManager(Stage mainStage) {
         Stage stage = new Stage();
         Image img = new Image(getClass().getResourceAsStream("/Icons/pencil-square.png"));
@@ -73,21 +65,21 @@ public class FlightChangeManager {
 
         // Create labels and text fields
         flightNoLabel = new Label("Flight No:");
-        flightNoTextField = new TextField();
+         flightNoTextField = new TextField();
 
         Label newIttLabel = new Label("New Itt:");
         newIttTextField = new TextField();
 
-        newPosLabel = new Label("New Pos:");
-        newPosTextField = new TextField();
+         newPosLabel = new Label("New Pos:");
+         newPosTextField = new TextField();
 
-        newTerminalLabel = new Label("New Terminal:");
-        newTerminalCombo = new ComboBox();
+         newTerminalLabel = new Label("New Terminal:");
+         newTerminalCombo = new ComboBox();
 
-        newSaaLabel = new Label("New Saa:");
-        newSAACombo = new ComboBox();
+         newSaaLabel = new Label("New Saa:");
+         newSAACombo = new ComboBox();
 
-        flightInfo = new Label("");
+         flightInfo = new Label("");
 
         newTerminalCombo.getItems().addAll(new ArrayList(Arrays.asList(1,2, "")));
 
@@ -96,7 +88,7 @@ public class FlightChangeManager {
                 ,63,64,65,66,67,72,80,86,88,94,96,97,98,99)));
 
 
-        tooltipFlightNo = new Tooltip(
+         tooltipFlightNo = new Tooltip(
                 "Airline:\n" +
                         "- 3-character code\n" +
                         "- Optionally, space at the 3rd position\n" +
@@ -112,13 +104,13 @@ public class FlightChangeManager {
                         "6-digit, unique ID of a flight. Must always be present"
         );
 
-        tooltipITT = new Tooltip(
+         tooltipITT = new Tooltip(
                 "Internal time for on-block or off-block\n" +
                         "Format DD.MM.YYYY HH:mm:ss\n" +
                         "Can be empty!"
         );
 
-        tooltipPOS = new Tooltip(
+         tooltipPOS = new Tooltip(
                 "4-digit parking position on the apron\n" +
                         "Space on the right\n" +
                         "Uppercase letters and numbers\n" +
@@ -126,8 +118,8 @@ public class FlightChangeManager {
                         "Examples: 145, 545E"
         );
 
-        tooltipSAA = new Tooltip("Select the new flight status from the list with predefined values");
-        tooltipTER = new Tooltip("Select the new terminal from the list with predefined values");
+         tooltipSAA = new Tooltip("Select the new flight status from the list with predefined values");
+         tooltipTER = new Tooltip("Select the new terminal from the list with predefined values");
 
 
         newIttTextField.setTooltip(tooltipITT);
@@ -141,7 +133,7 @@ public class FlightChangeManager {
         flightNoTextField.textProperty().addListener((observable, newValue, oldValue)-> {
             if (!flightNoTextField.getText().trim().isEmpty() && ValidationUtil.checkFlightNumberFormat(flightNoTextField.getText().trim())
             ) {
-                flight = ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim());
+                 flight = ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim());
 
                 if (flight != null) {
 
@@ -175,7 +167,7 @@ public class FlightChangeManager {
 
 
 
-        cancelButton = new Button("Cancel");
+         cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e->  {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
@@ -194,7 +186,7 @@ public class FlightChangeManager {
             if (res == ButtonType.YES)
                 stage.close();
 
-        });
+           });
 
         approveButton = new Button("Approve");
         approveButton.setDisable(true);
@@ -231,7 +223,7 @@ public class FlightChangeManager {
             if (ValidationUtil.checkFlightNumberFormat(flightNoTextField.getText().trim())) {
                 if (ValidationUtil.checkFlightNumberExistence(flightNoTextField.getText().trim()) != null) {
                     if (newIttTextField.getText().isBlank() && newPosTextField.getText().isBlank() &&
-                            newSAACombo.getValue().toString().equals(flight.getSaa()) && newTerminalCombo.getValue().toString().equals(flight.getTer()) ) {
+                    newSAACombo.getValue().toString().equals(flight.getSaa()) && newTerminalCombo.getValue().toString().equals(flight.getTer()) ) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Warning");
                         alert.setContentText("Nothing to change. Flight remains the same");
@@ -325,7 +317,7 @@ public class FlightChangeManager {
 
         });
 
-        gridPane = new GridPane();
+         gridPane = new GridPane();
         gridPane.setPadding(new Insets(10));
         gridPane.setHgap(10);
         gridPane.setVgap(10);

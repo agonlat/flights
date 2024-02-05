@@ -9,16 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * This class is responsible for handling methods for CSV-Files.
- */
+
 public class FileHandler {
 
-    /**
-     * This method reads a CSV-File and converts it to an ArrayList of Flights.
-     * @param path The path as a String
-     * @return ArrayList<Flight> returns the Flights as an ArrayList
-     */
+
     public ArrayList<Flight> readCSV_File(final String path) {
         boolean isHeadersLine = true;
 
@@ -34,7 +28,7 @@ public class FileHandler {
                     continue;
                 }
 
-                String[] values = line.split(",");
+                    String[] values = line.split(",");
                 Flight flight = new Flight(
                         values[0].replace("\"", "").trim(),  // fnr
                         values[1].replace("\"", "").trim(),  // knr
@@ -62,7 +56,7 @@ public class FileHandler {
 
 
 
-            }
+        }
 
 
 
@@ -85,12 +79,7 @@ public class FileHandler {
         return null;
     }
 
-    /**
-     * This method writes Data, specifically Flights, to a CSV-File and returns a boolean.
-     * @param flights The flights as ArrayList to be exported to CSV
-     * @return true If the flights were exported successfully
-     * @return false If an error occured while exporting
-     */
+
     public boolean writeToCSV_File(final ArrayList<Flight> flights) {
         String filename = "output.csv"; // Specify the desired file name
         String path = System.getProperty("user.dir") + File.separator + filename; // Combine directory and filename

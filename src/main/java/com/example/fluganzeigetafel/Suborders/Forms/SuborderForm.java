@@ -2,7 +2,6 @@ package com.example.fluganzeigetafel.Suborders.Forms;
 
 import com.example.fluganzeigetafel.CustomDialogs.CloseDialog;
 import com.example.fluganzeigetafel.CustomDialogs.EmptyFieldsDialog;
-import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.example.fluganzeigetafel.Flights.Data.FlightsTable;
@@ -30,9 +29,6 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- * Manages the form for Suborders, handling field correctness, gui elements ...
- */
 public class SuborderForm {
     static boolean allFieldsCorrect = true;
     private Map<Label, TextField> changeDetection;
@@ -43,15 +39,18 @@ public class SuborderForm {
     private GridPane informationPane = new GridPane();
 
     private GridPane orderPane = new GridPane();
-
-    /**
-     * Creates a VBox containing the form for a Suborder, based on the provided Suborder and Order.
-     *
-     * @param suborder The Suborder for which the form is created.
-     * @param order    The associated Order.
-     * @return A VBox containing the Suborder form.
-     */
     public VBox createSubOrderForm(Suborder suborder, Order order) {
+
+
+
+
+
+
+
+
+
+
+
 
 
         HashMap<String, String> uaKeyMap = new HashMap<>();
@@ -175,44 +174,44 @@ public class SuborderForm {
 
         deleteSubOrderButton.setOnAction(e-> {
 
-            if (Utility.fieldsAreEmpty(orderPane.getChildren())) {
-                Scene scene =  DataInterface.flightsTable.getScene();
-                VBox b = (VBox) scene.getRoot();
-                b.getChildren().remove(FlightsTable.getOdsuComponent());
-            } else {
+          if (Utility.fieldsAreEmpty(orderPane.getChildren())) {
+              Scene scene =  DataInterface.flightsTable.getScene();
+              VBox b = (VBox) scene.getRoot();
+              b.getChildren().remove(FlightsTable.getOdsuComponent());
+          } else {
 
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setContentText("Do you really want to delete the suborder?");
-                alert.setHeaderText("Warning");
-                Optional<ButtonType> result =  alert.showAndWait();
+              Alert alert = new Alert(Alert.AlertType.WARNING);
+              alert.setTitle("Warning");
+              alert.setContentText("Do you really want to delete the suborder?");
+              alert.setHeaderText("Warning");
+              Optional<ButtonType> result =  alert.showAndWait();
 
-                result.ifPresent(c->{
-                    if (c == ButtonType.OK) {
+              result.ifPresent(c->{
+                  if (c == ButtonType.OK) {
 
-                        DataInterface.getInstance().getSubordersList().remove(suborder);
-
-
-                        //  DataInterface.getInstance().getContracts().remove(order);
-                        Scene flightsTableScene = DataInterface.flightsTable.getScene();
-                        VBox flightsTableBox = (VBox) flightsTableScene.getRoot();
-                        flightsTableBox.getChildren().remove(FlightsTable.getOdsuComponent());
-
-                        TreeItem<Flight> treeItem = DataInterface.getInstance().getCurrentItem();
-
-                        TreeItem<Flight> parent = treeItem.getParent();
-                        parent.getChildren().remove(treeItem);
+                      DataInterface.getInstance().getSubordersList().remove(suborder);
 
 
-                        DataInterface.flightsTable.refresh();
+                      //  DataInterface.getInstance().getContracts().remove(order);
+                      Scene flightsTableScene = DataInterface.flightsTable.getScene();
+                      VBox flightsTableBox = (VBox) flightsTableScene.getRoot();
+                      flightsTableBox.getChildren().remove(FlightsTable.getOdsuComponent());
+
+                      TreeItem<Flight> treeItem = DataInterface.getInstance().getCurrentItem();
+
+                      TreeItem<Flight> parent = treeItem.getParent();
+                      parent.getChildren().remove(treeItem);
 
 
-                    } else {
-                        return;
-                    }
-                });
+                      DataInterface.flightsTable.refresh();
 
-            }
+
+                  } else {
+                      return;
+                  }
+          });
+
+                }
 
 
 
@@ -289,7 +288,7 @@ public class SuborderForm {
             field.textProperty().addListener((observable, oldValue, newValue) -> {
 
                 if (!oldValue.trim().equals(newValue.trim())) {
-
+                    System.out.println(oldValue + "/" + newValue);
                     isChanged = true;
                 }
 
@@ -406,12 +405,7 @@ public class SuborderForm {
 
 
     }
-    /**
-     * Creates a VBox containing the form for a Suborder based on the provided Order, representing a new Suborder.
-     *
-     * @param order The Order for which the Suborder form is created.
-     * @return A VBox containing the Suborder form.
-     */
+
     public VBox createSubOrderForm(Order order) {
         orderS = order;
         isChanged = false;
@@ -986,7 +980,7 @@ public class SuborderForm {
 
 
         } catch (Exception e) {
-            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
+            e.printStackTrace();
         }
     }
 

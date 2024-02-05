@@ -1,6 +1,5 @@
 package com.example.fluganzeigetafel.Suborders.Handler;
 
-import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.Orders.Order;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Suborders.Suborder;
@@ -12,17 +11,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Handles reading Suborders from a CSV file and adding them to the system.
- */
+
 public class SubOrdersFileHandler {
-    /**
-     * Reads a CSV file containing Suborders and converts it into an ArrayList of Suborders.
-     *
-     * @param path The path to the CSV file.
-     * @return An ArrayList of Suborders read from the CSV file.
-     * @throws RuntimeException If there is an issue reading or parsing the CSV file.
-     */
+
     public ArrayList<Suborder> readCSVtoListOfSubOrders(String path) {
         boolean check = true;
 
@@ -126,20 +117,15 @@ public class SubOrdersFileHandler {
             return suborderArrayList;
 
         } catch (FileNotFoundException e) {
-            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
+            throw new RuntimeException(e);
         } catch (IOException e) {
-            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
+            throw new RuntimeException(e);
         }
 
-        return suborderArrayList;
     }
 
 
-    /**
-     * Adds a list of Suborders to corresponding Orders in the system.
-     *
-     * @param list The list of Suborders to be added.
-     */
+
 
     public void addSubOrdersToOrders(ArrayList<Suborder> list) {
 
@@ -160,9 +146,17 @@ public class SubOrdersFileHandler {
                     suborder.setCreationDate(LocalDateTime.now());
                     suborder.setChanges(0);
                     suborder.setLastChange(null);
+                    }
                 }
             }
+
         }
+
+
+
+
+
+
 
     }
 
@@ -170,8 +164,5 @@ public class SubOrdersFileHandler {
 
 
 
-
-
-}
 
 

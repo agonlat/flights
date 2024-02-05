@@ -10,19 +10,8 @@ import javafx.scene.control.TextField;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * This class provides a function for filtering the flights table.
- */
-
 public class FilterAndSearchMethods {
     static int counter = 0;
-
-
-    /**
-     * This method filters the table after specific search key
-     * @param filterTextField The filter to be applied
-     */
     public static void filterFlights(TextField filterTextField) {
 
 
@@ -38,33 +27,33 @@ public class FilterAndSearchMethods {
                 return;
             }
 
-            DataInterface dataInterface = DataInterface.getInstance();
-            ArrayList<Flight> flights = (ArrayList<Flight>) dataInterface.getFlights();
+        DataInterface dataInterface = DataInterface.getInstance();
+        ArrayList<Flight> flights = (ArrayList<Flight>) dataInterface.getFlights();
 
-            // Create a filtered list
-            FilteredList<Flight> filteredFlights = new FilteredList<>(FXCollections.observableArrayList(flights));
+        // Create a filtered list
+        FilteredList<Flight> filteredFlights = new FilteredList<>(FXCollections.observableArrayList(flights));
 
 
-            String filter = newValue.trim();
+        String filter = newValue.trim();
 
-            // Set the filter predicate
-            filteredFlights.setPredicate(flight ->
-                    flight.getFnr().startsWith(filter) || flight.getKnr().startsWith(filter));
+        // Set the filter predicate
+        filteredFlights.setPredicate(flight ->
+                flight.getFnr().startsWith(filter) || flight.getKnr().startsWith(filter));
 
             List<Flight> arrayList = new ArrayList<>(filteredFlights);
             DataInterface.getInstance().addTemporaryFlights(arrayList);
-            // Update the TableView with the filtered list
-            //   DataInterface.flightsTable.populateTable(filteredFlights);
+        // Update the TableView with the filtered list
+     //   DataInterface.flightsTable.populateTable(filteredFlights);
 
-            // Refresh the TableView
+        // Refresh the TableView
+        DataInterface.flightsTable.refresh();
+
+        // If the filter is empty, show all flights
+        if (newValue.isBlank()) {
+            DataInterface.getInstance().addFlights(flights);
+            DataInterface.flightsTable.populateTable(flights);
             DataInterface.flightsTable.refresh();
-
-            // If the filter is empty, show all flights
-            if (newValue.isBlank()) {
-                DataInterface.getInstance().addFlights(flights);
-                DataInterface.flightsTable.populateTable(flights);
-                DataInterface.flightsTable.refresh();
-            }
+        }
         });
 
     }

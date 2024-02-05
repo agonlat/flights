@@ -125,7 +125,7 @@ public class FlightsTable extends TreeTableView   {
                         Suborder suborder = null;
 
                         if ("Order".equals(selectedItem.getValue().getKnr())) {
-
+                            System.out.println("ORDER SELECTED: " + selectedItem.getValue().getFnr());
                             order = DataInterface.getInstance().getOrderByAUKEY(selectedItemValue);
 
                             VBox orderLayout = orderForm.createOrderForm(order);
@@ -140,7 +140,7 @@ public class FlightsTable extends TreeTableView   {
                             DataInterface.getInstance().setCurrentItem(selectedItem);
 
                         } else if ("Suborder".equals(selectedItem.getValue().getKnr())) {
-
+                            System.out.println("SUBORDER SELECTED");
                             SuborderForm suborderForm = new SuborderForm();
                             TreeItem<Flight> ff = selectedItem.getParent();
                             Order orderC = DataInterface.getInstance().getOrderByAUKEY(ff.getValue().getFnr());
@@ -180,12 +180,6 @@ public class FlightsTable extends TreeTableView   {
         setContextMenu(new OrderContextMenu());
     }
 
-    /**
-     * This method populates the FlightsTable with flights.
-     * Note that the flights are converted to TreeItems.
-     * @param flights The Flights to be added as ArrayList
-     */
-
     public FlightsTable populateTable(ArrayList<Flight> flights) {
         TreeItem<Flight> rootItem = new TreeItem<>(new Flight("Flights","","","","","","","","","","",""));
         rootItem.setExpanded(true);
@@ -204,26 +198,21 @@ public class FlightsTable extends TreeTableView   {
         return this;
     }
 
-    /**
-     * This method adds the Orders to the specific Flights
-     * @param tableView The TableView where to add the Orders
-     */
-
     public static void addOrderItems(TreeTableView<Flight> tableView) {
         TreeItem<Flight> root =  tableView.getRoot();
 
 
         for (TreeItem<Flight> item : root.getChildren()) {
-            Flight f = (Flight) item.getValue();
-            ArrayList<Order> orderList = f.getOrders();
+           Flight f = (Flight) item.getValue();
+           ArrayList<Order> orderList = f.getOrders();
 
-            for (Order order : orderList) {
-                TreeItem<Flight> orderTreeItem = new TreeItem<>(
-                        new Flight(order.getAUKEY(), "Order","","","","","","","","","",""));
-                item.getChildren().add(orderTreeItem);
+           for (Order order : orderList) {
+               TreeItem<Flight> orderTreeItem = new TreeItem<>(
+                       new Flight(order.getAUKEY(), "Order","","","","","","","","","",""));
+               item.getChildren().add(orderTreeItem);
 
 
-            }
+           }
 
         }
 
@@ -231,11 +220,6 @@ public class FlightsTable extends TreeTableView   {
         tableView.refresh();
 
     }
-
-    /**
-     * This method adds the Suborders to the specific Orders
-     * @param tableView The TableView where to add the Suborders
-     */
 
 
     public static void addSubOrderItems(TreeTableView<Flight> tableView) {
@@ -245,23 +229,20 @@ public class FlightsTable extends TreeTableView   {
             Flight f = (Flight) item.getValue();
             ArrayList<Order> orderList = f.getOrders();
 
-            for (TreeItem<Flight> orderItem : item.getChildren()) {
-                Order order = f.getOrderByAUKEY(orderItem.getValue().getFnr());
+          for (TreeItem<Flight> orderItem : item.getChildren()) {
+             Order order = f.getOrderByAUKEY(orderItem.getValue().getFnr());
 
-                for (Suborder suborder : order.getSubOrdersList()) {
-                    TreeItem<Flight> subOrderItem = new TreeItem<>(new Flight(suborder.getUAKEY(),"Suborder","","","","","","","","","",""));
-                    orderItem.getChildren().add(subOrderItem);
-                }
+             for (Suborder suborder : order.getSubOrdersList()) {
+                 TreeItem<Flight> subOrderItem = new TreeItem<>(new Flight(suborder.getUAKEY(),"Suborder","","","","","","","","","",""));
+                 orderItem.getChildren().add(subOrderItem);
+             }
 
-            }
+                       }
 
         }
     }
 
-    /**
-     * This method is for populating the flights table.
-     * @param flights The flights as an Observable List of TreeItems of Flights
-     */
+
 
 
     public void populateTable(ObservableList<TreeItem<Flight>> flights) {

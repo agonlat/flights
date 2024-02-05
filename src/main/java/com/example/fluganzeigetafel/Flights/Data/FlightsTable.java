@@ -180,6 +180,12 @@ public class FlightsTable extends TreeTableView   {
         setContextMenu(new OrderContextMenu());
     }
 
+    /**
+* This method populates the FlightsTable with flights.
+* Note that the flights are converted to TreeItems.
+* @param flights The Flights to be added as ArrayList
+*/
+
     public FlightsTable populateTable(ArrayList<Flight> flights) {
         TreeItem<Flight> rootItem = new TreeItem<>(new Flight("Flights","","","","","","","","","","",""));
         rootItem.setExpanded(true);
@@ -197,6 +203,11 @@ public class FlightsTable extends TreeTableView   {
         this.refresh();
         return this;
     }
+
+    /**
+* This method adds the Orders to the specific Flights
+* @param tableView The TableView where to add the Orders
+*/
 
     public static void addOrderItems(TreeTableView<Flight> tableView) {
         TreeItem<Flight> root =  tableView.getRoot();
@@ -221,7 +232,12 @@ public class FlightsTable extends TreeTableView   {
 
     }
 
+/**
+* This method adds the Suborders to the specific Orders
+* @param tableView The TableView where to add the Suborders
+*/
 
+    
     public static void addSubOrderItems(TreeTableView<Flight> tableView) {
         TreeItem<Flight> root = tableView.getRoot();
 
@@ -242,7 +258,10 @@ public class FlightsTable extends TreeTableView   {
         }
     }
 
-
+/**
+* This method is for populating the flights table.
+* @param flights The flights as an Observable List of TreeItems of Flights
+*/
 
 
     public void populateTable(ObservableList<TreeItem<Flight>> flights) {

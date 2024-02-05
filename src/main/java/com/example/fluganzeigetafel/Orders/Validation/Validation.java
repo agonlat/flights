@@ -9,8 +9,14 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
+/**
+ * The ValidationUtil class provides methods for validating attributes of orders and suborders.
+ * It includes validation for attributes like terminal, status, flight number format, internal time format,
+ * internal time values, positions, and more.
+ */
 public class Validation {
+
+    
     public static boolean checkAUKEY(String input) {
         try {
             int value = Integer.parseInt(input);

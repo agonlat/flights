@@ -46,7 +46,10 @@ public class OrderForm {
 
 
 
-
+/**
+ * Displays a new Order with empty fields
+ * @return A VBox containing the OrderForm.
+ */
     
     public VBox createOrderForm()  {
         
@@ -515,6 +518,13 @@ public class OrderForm {
 
         return mainBox;
     }
+
+/**
+ * Displays the order in the OrderForm.
+ *
+ * @param order The Order to be displayed.
+ * @return A VBox containing the OrderForm.
+ */
     public VBox createOrderForm(Order order) {
         orderS = order;
         isChanged = false;

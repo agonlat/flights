@@ -318,6 +318,11 @@ public class PrintManager {
         }
     }
 
+ 
+ /**
+  * This method creates a PDF file for one flight that was searched for.
+  * @param f The flight to be exported to PDF
+  */
 
     public void createPDF(Flight f) {
         try {

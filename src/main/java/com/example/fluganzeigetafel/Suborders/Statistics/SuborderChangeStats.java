@@ -5,8 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
-
+/**
+ * Generates statistics for changes made to a Suborder.
+ */
 public class SuborderChangeStats {
+    /**
+     * Creates a BorderPane containing statistics for the given Suborder.
+     *
+     * @param suborder The Suborder for which statistics are generated.
+     * @return A BorderPane containing statistics such as Changes, Last Change, and Creation Date.
+     */
     public static BorderPane createStats(Suborder suborder) {
         BorderPane root = new BorderPane();
 

@@ -12,8 +12,19 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The ValidationUtil class provides utility methods for validating various inputs related to flight information.
+ */
 public class ValidationUtil {
 
+
+
+    /**
+     * Checks if the provided terminal value is within the allowed range (1 or 2).
+     *
+     * @param terminal The input terminal value to be checked.
+     * @return True if the terminal value is valid, false otherwise.
+     */
     public static boolean checkTER(final String terminal) {
         try {
             int ter = Integer.parseInt(terminal);
@@ -27,6 +38,14 @@ public class ValidationUtil {
 
         return false;
     }
+
+
+    /**
+     * Checks if the provided status value is one of the allowed values.
+     *
+     * @param status The input status value to be checked.
+     * @return True if the status value is valid, false otherwise.
+     */
     public static boolean checkSAA(final String status) {
         ArrayList values = new ArrayList(Arrays.asList(01,03,05,15,20,22,23,25,27,30,35,38,43,46,48,51,53,56,57,60,61
                 ,63,64,65,66,67,72,80,86,88,94,96,97,98,99));
@@ -49,7 +68,12 @@ public class ValidationUtil {
 
         return true;
     }
-
+    /**
+     * Checks if the provided flight number follows a specific format.
+     *
+     * @param flightNo The input flight number to be checked.
+     * @return True if the flight number format is valid, false otherwise.
+     */
 
     public static boolean checkFlightNumberFormat(final String flightNo) {
 
@@ -68,7 +92,12 @@ public class ValidationUtil {
 
         return true;
     }
-
+    /**
+     * Checks if a flight with the provided flight number exists in the data.
+     *
+     * @param flightNo The input flight number to be checked.
+     * @return The Flight object if the flight number exists, otherwise returns null.
+     */
     public static Flight checkFlightNumberExistence(final String flightNo) {
 
         if (checkFlightNumberFormat(flightNo)) {
@@ -83,6 +112,12 @@ public class ValidationUtil {
         }
         return null;
     }
+    /**
+     * Checks if the provided internal time format is valid.
+     *
+     * @param itt The input internal time format to be checked.
+     * @return True if the internal time format is valid, false otherwise.
+     */
 
     public static boolean checkNewInternalTimeFormat(final String itt) {
         if (itt.isBlank())
@@ -103,6 +138,13 @@ public class ValidationUtil {
         return true;
     }
 
+    /**
+     * Checks if the provided new internal time value is valid compared to a given standard time.
+     *
+     * @param itt1 The input new internal time value to be checked.
+     * @param itt2 The standard time value for comparison.
+     * @return True if the new internal time value is valid, false otherwise.
+     */
     public static boolean checkNewInternalTimeValue(final String itt1, final String itt2) {
         if (itt1.isBlank() || itt2.isBlank())
             return true;
@@ -127,6 +169,14 @@ public class ValidationUtil {
         }
 
     }
+
+    /**
+     * Checks if the provided position is valid
+     *
+     * @param pos The postition to be checked
+     * @return true If pos is valid
+     * @return false If pos is invalid
+     */
     public static boolean checkNewPosition(final String pos) {
 
         if (pos.isBlank())

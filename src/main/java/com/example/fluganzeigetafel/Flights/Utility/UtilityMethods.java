@@ -101,7 +101,7 @@ public class UtilityMethods {
 
 
                     alert.setContentText(pattern);
-                   alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     Optional<ButtonType> opt = alert.showAndWait();
 
                     if (opt.isPresent() && opt.get().getButtonData() == ButtonBar.ButtonData.APPLY) {

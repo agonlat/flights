@@ -9,8 +9,14 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
+/**
+ * The ValidationUtil class provides methods for validating attributes of orders and suborders.
+ * It includes validation for attributes like terminal, status, flight number format, internal time format,
+ * internal time values, positions, and more.
+ */
 public class Validation {
+
+
     public static boolean checkAUKEY(String input) {
         try {
             int value = Integer.parseInt(input);
@@ -104,11 +110,11 @@ public class Validation {
 
 
     public static boolean checkFGKEY(String input) {
-       if (input.length() > 32)
-           return false;
+        if (input.length() > 32)
+            return false;
         if (input.isBlank())
             return false;
-       return true;
+        return true;
     }
 
     public static boolean checkPLKEY(String input) {
@@ -128,11 +134,11 @@ public class Validation {
 
 
     public static boolean checkORTFR(String input) {
-       if (input.length() > 16)
-           return false;
+        if (input.length() > 16)
+            return false;
         if (input.isBlank())
             return false;
-       return true;
+        return true;
     }
 
 
@@ -242,8 +248,8 @@ public class Validation {
 
 
     public static boolean checkUAZPL(String input) {
-       if (input.length()> 3)
-           return false;
+        if (input.length()> 3)
+            return false;
         if (input.isBlank())
             return false;
         try {
@@ -295,8 +301,8 @@ public class Validation {
 
 
     public static boolean checkSTTBE(String input) {
-      Validation validation = new Validation();
-      return validation.checkDate(input);
+        Validation validation = new Validation();
+        return validation.checkDate(input);
     }
 
 
@@ -434,16 +440,16 @@ public class Validation {
 
     public static boolean checkAUDAT(String input) {
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
 
-            try {
-                // Attempt to parse the input value as a date with the specified format
-                formatter.parse(input);
-                return true;
-            } catch (DateTimeParseException ex) {
-                // Parsing failed, indicating an incorrect format
-                return false;
-            }
+        try {
+            // Attempt to parse the input value as a date with the specified format
+            formatter.parse(input);
+            return true;
+        } catch (DateTimeParseException ex) {
+            // Parsing failed, indicating an incorrect format
+            return false;
+        }
     }
 
 
@@ -711,7 +717,7 @@ public class Validation {
 
 
 
-public static boolean checkDISPOExistence(String input) {
+    public static boolean checkDISPOExistence(String input) {
         List<String> list = new ArrayList<>(List.of("BAGTR","CLEAN", "COBRA2", "ENTEISUNG", "FUCHS2", "KFZ", "LUCHS",
                 "MAUSGEP", "MAUSLAST", "OPTIBUS", "PND_ABF", "PND_ANK", "PUMA2"));
 
@@ -719,7 +725,7 @@ public static boolean checkDISPOExistence(String input) {
             return false;
 
         return true;
-}
+    }
 
 
     public static boolean checkCINFO(String input) {

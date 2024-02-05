@@ -11,9 +11,18 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * The OrderStats class represents a graphical display of order statistics, including disposition system, jobtype,
+ * and mandant distribution.
+ */
 public class OrderStats extends Stage {
-//JTP DISPO MAD
+
+    /**
+     * Creates an OrderStats stage with graphical displays of disposition system, jobtype, and mandant distribution.
+     *
+     * @param orderList The list of orders for which statistics are generated.
+     */
+
     public OrderStats(ArrayList<Order> orderList) {
 
         ArrayList<Order> orders = orderList;

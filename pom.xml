@@ -75,14 +75,7 @@
 
     <build>
 
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.csv</include>
-                </includes>
-            </resource>
-        </resources>
+
 
         <plugins>
             <plugin>
@@ -100,6 +93,7 @@
                                 <transformer implementation=
                                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>com.example.fluganzeigetafel.Starter</mainClass>
+
                                 </transformer>
                             </transformers>
                         </configuration>

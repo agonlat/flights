@@ -1,5 +1,6 @@
 package com.example.fluganzeigetafel.Flights.Manager;
 
+import com.example.fluganzeigetafel.CustomDialogs.ErrorDialog;
 import com.example.fluganzeigetafel.DataInterface;
 import com.example.fluganzeigetafel.Flights.Data.Flight;
 import com.google.zxing.BarcodeFormat;
@@ -26,7 +27,16 @@ import java.util.*;
 import static com.example.fluganzeigetafel.Flights.Utility.UtilityMethods.leaveOneWhiteSpace;
 
 
+/**
+ * In this class all operations for printing Orders are present.
+ */
 public class PrintManager {
+
+
+    /**
+     * This method creates a PDF File with the given flights as ArrayList
+     * @param flights The Flights to be converted to PDF
+     */
     public void createPDF(ArrayList<Flight> flights) {
 
 
@@ -77,7 +87,7 @@ public class PrintManager {
             int fl = 0;
 
             if (!DataInterface.getInstance().getTemporaryFlights().isEmpty()) {
-            fl = DataInterface.getInstance().getTemporaryFlights().size();
+                fl = DataInterface.getInstance().getTemporaryFlights().size();
             } else
                 fl = DataInterface.getInstance().getFlights().size();
 
@@ -179,15 +189,15 @@ public class PrintManager {
 
             for (int i = 0; i < flights.size(); i++) {
 
-                 Flight f = flights.get(i);
+                Flight f = flights.get(i);
                 if (i == 20 || cd == 37) {
                     cd = 0;
-                        stream.close();
-                        PDPage pg = new PDPage(PDRectangle.A4);
+                    stream.close();
+                    PDPage pg = new PDPage(PDRectangle.A4);
                     document.addPage(pg);
                     stream = new PDPageContentStream(document, pg, PDPageContentStream.AppendMode.APPEND, true);
 
-                        stream.setFont(PDType1Font.HELVETICA, 12);
+                    stream.setFont(PDType1Font.HELVETICA, 12);
                     countFor60 = true;
                     y = pg.getMediaBox().getHeight()-50;
 
@@ -285,8 +295,8 @@ public class PrintManager {
 
 
 
-            if (countFor60)
-                cd++;
+                if (countFor60)
+                    cd++;
 
             }
 
@@ -305,10 +315,15 @@ public class PrintManager {
 
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
         }
     }
 
+
+    /**
+     * This method creates a PDF file for one flight that was searched for.
+     * @param f The flight to be exported to PDF
+     */
 
     public void createPDF(Flight f) {
         try {
@@ -453,103 +468,103 @@ public class PrintManager {
 
 
 
-                stream.beginText();
-                stream.newLineAtOffset(30,y=y-15);
+            stream.beginText();
+            stream.newLineAtOffset(30,y=y-15);
 
-                String fnr = leaveOneWhiteSpace(f.getFnr().trim());
-                String knr = leaveOneWhiteSpace(f.getKnr().trim());
-                String reg = leaveOneWhiteSpace(f.getReg().trim());
-                String typ = leaveOneWhiteSpace(f.getTyp().trim());
-                String ha0 = leaveOneWhiteSpace(f.getHa0().trim());
-                String lsk = leaveOneWhiteSpace(f.getLsk().trim());
-                String stt = leaveOneWhiteSpace(f.getStt().trim());
-                String itt = leaveOneWhiteSpace(f.getItt().trim());
-                String pos = leaveOneWhiteSpace(f.getPos().trim());
-                String ter = leaveOneWhiteSpace(f.getTer().trim());
-                String mad = leaveOneWhiteSpace(f.getMad().trim());
-                String saa = leaveOneWhiteSpace(f.getSaa().trim());
+            String fnr = leaveOneWhiteSpace(f.getFnr().trim());
+            String knr = leaveOneWhiteSpace(f.getKnr().trim());
+            String reg = leaveOneWhiteSpace(f.getReg().trim());
+            String typ = leaveOneWhiteSpace(f.getTyp().trim());
+            String ha0 = leaveOneWhiteSpace(f.getHa0().trim());
+            String lsk = leaveOneWhiteSpace(f.getLsk().trim());
+            String stt = leaveOneWhiteSpace(f.getStt().trim());
+            String itt = leaveOneWhiteSpace(f.getItt().trim());
+            String pos = leaveOneWhiteSpace(f.getPos().trim());
+            String ter = leaveOneWhiteSpace(f.getTer().trim());
+            String mad = leaveOneWhiteSpace(f.getMad().trim());
+            String saa = leaveOneWhiteSpace(f.getSaa().trim());
 
-                stream.showText("|"+fnr);
-                stream.endText();
-
-
-                stream.beginText();
-                stream.newLineAtOffset(80,y);
-                stream.showText("|"+knr);
-                stream.endText();
-
-                stream.beginText();
-                stream.newLineAtOffset(123.75f,y);
-                stream.showText("|"+reg);
-                stream.endText();
-
-                stream.beginText();
-                stream.newLineAtOffset(167.5f,y);
-                stream.showText("|"+typ);
-                stream.endText();
+            stream.showText("|"+fnr);
+            stream.endText();
 
 
+            stream.beginText();
+            stream.newLineAtOffset(80,y);
+            stream.showText("|"+knr);
+            stream.endText();
 
+            stream.beginText();
+            stream.newLineAtOffset(123.75f,y);
+            stream.showText("|"+reg);
+            stream.endText();
 
-
-                stream.beginText();
-                stream.newLineAtOffset(205,y);
-                stream.showText("|"+ha0);
-                stream.endText();
-
-                stream.beginText();
-                stream.newLineAtOffset(236.25f,y);
-                stream.showText("|"+lsk);
-                stream.endText();
-
-                stream.beginText();
-                stream.newLineAtOffset(248.75f,y);
-                stream.showText("|"+stt);
-                stream.endText();
-
-                stream.beginText();
-                stream.newLineAtOffset(366.25f,y);
-                stream.showText("|"+itt);
-                stream.endText();
-
-
-                stream.beginText();
-                stream.newLineAtOffset(480.75f,y);
-                stream.showText("|"+pos);
-                stream.endText();
-
-
-                stream.beginText();
-                stream.newLineAtOffset(514.25f,y);
-                stream.showText("|"+ter);
-                stream.endText();
-
-                stream.beginText();
-                stream.newLineAtOffset(526.75f,y);
-                stream.showText("|"+mad);
-                stream.endText();
-
-
-                stream.beginText();
-                stream.newLineAtOffset(551.75f,y);
-                stream.showText("|"+saa);
-                stream.endText();
-
-
-
-
-                stream.beginText();
-                stream.newLineAtOffset(30,y=y-5);
-                stream.showText("_________________________________________________________________________________");
-                stream.endText();
+            stream.beginText();
+            stream.newLineAtOffset(167.5f,y);
+            stream.showText("|"+typ);
+            stream.endText();
 
 
 
 
 
+            stream.beginText();
+            stream.newLineAtOffset(205,y);
+            stream.showText("|"+ha0);
+            stream.endText();
+
+            stream.beginText();
+            stream.newLineAtOffset(236.25f,y);
+            stream.showText("|"+lsk);
+            stream.endText();
+
+            stream.beginText();
+            stream.newLineAtOffset(248.75f,y);
+            stream.showText("|"+stt);
+            stream.endText();
+
+            stream.beginText();
+            stream.newLineAtOffset(366.25f,y);
+            stream.showText("|"+itt);
+            stream.endText();
 
 
-        stream.close();
+            stream.beginText();
+            stream.newLineAtOffset(480.75f,y);
+            stream.showText("|"+pos);
+            stream.endText();
+
+
+            stream.beginText();
+            stream.newLineAtOffset(514.25f,y);
+            stream.showText("|"+ter);
+            stream.endText();
+
+            stream.beginText();
+            stream.newLineAtOffset(526.75f,y);
+            stream.showText("|"+mad);
+            stream.endText();
+
+
+            stream.beginText();
+            stream.newLineAtOffset(551.75f,y);
+            stream.showText("|"+saa);
+            stream.endText();
+
+
+
+
+            stream.beginText();
+            stream.newLineAtOffset(30,y=y-5);
+            stream.showText("_________________________________________________________________________________");
+            stream.endText();
+
+
+
+
+
+
+
+            stream.close();
             String currentDir = System.getProperty("user.dir");
             String filePath = currentDir + File.separator + "Flights.pdf";
             document.save(filePath);
@@ -565,10 +580,10 @@ public class PrintManager {
 
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
         }
     }
-    public static BufferedImage createBarCode(String text, int width, int height) {
+    private static BufferedImage createBarCode(String text, int width, int height) {
 
         try {
             Map<EncodeHintType, Object> hints = new HashMap<>();
@@ -595,7 +610,7 @@ public class PrintManager {
 
             return qrCodeImage;
         } catch (Exception e) {
-            e.printStackTrace();
+            ErrorDialog dialog = new ErrorDialog("Internal error. Restart the programm.");
             return null;
         }
     }

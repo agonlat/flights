@@ -2,7 +2,6 @@ module com.example.fluganzeigetafel {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
-
     requires com.google.zxing;
 
     requires junit; // Replace org.junit.jupiter.api and org.junit.platform.commons with junit

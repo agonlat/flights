@@ -13,8 +13,16 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Displays statistics for Suborders related to a specific Order.
+ */
 public class SuborderStats extends Stage {
+
+    /**
+     * Creates a SuborderStats stage based on the provided Order.
+     *
+     * @param order The Order for which Suborder statistics are displayed.
+     */
     public SuborderStats(Order order) {
 
 
@@ -63,14 +71,14 @@ public class SuborderStats extends Stage {
         // Create the layout
         HBox boxs = new HBox();
         if (suborders.isEmpty()) {
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("No suborders");
-         alert.setContentText("There are no suborders!");
-         alert.showAndWait();
-         return;
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No suborders");
+            alert.setContentText("There are no suborders!");
+            alert.showAndWait();
+            return;
         }
         else
-        boxs.getChildren().addAll(uasaaDistribution, uaartChart);
+            boxs.getChildren().addAll(uasaaDistribution, uaartChart);
 
         // Set up the scene and stage
         this.setScene(new Scene(boxs));

@@ -42,6 +42,14 @@ public class SuborderForm {
     private GridPane informationPane = new GridPane();
 
     private GridPane orderPane = new GridPane();
+
+/**
+ * Creates a VBox containing the form for a Suborder, based on the provided Suborder and Order.
+ *
+ * @param suborder The Suborder for which the form is created.
+ * @param order    The associated Order.
+ * @return A VBox containing the Suborder form.
+ */
     public VBox createSubOrderForm(Suborder suborder, Order order) {
 
 
@@ -397,7 +405,12 @@ public class SuborderForm {
 
 
     }
-
+/**
+ * Creates a VBox containing the form for a Suborder based on the provided Order, representing a new Suborder.
+ *
+ * @param order The Order for which the Suborder form is created.
+ * @return A VBox containing the Suborder form.
+ */
     public VBox createSubOrderForm(Order order) {
         orderS = order;
         isChanged = false;

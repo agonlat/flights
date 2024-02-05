@@ -13,8 +13,16 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Displays statistics for Suborders related to a specific Order.
+ */
 public class SuborderStats extends Stage {
+
+    /**
+     * Creates a SuborderStats stage based on the provided Order.
+     *
+     * @param order The Order for which Suborder statistics are displayed.
+     */
     public SuborderStats(Order order) {
 
 

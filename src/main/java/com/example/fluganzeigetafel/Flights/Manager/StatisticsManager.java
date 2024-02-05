@@ -15,11 +15,20 @@ import javafx.stage.Stage;
 
 import java.util.Map;
 
+ /**
+  * This class is responsible for the statistical data of the flights.
+  */
+
 public class StatisticsManager {
 private Stage stage;
 private Image img;
 private GridPane pane;
 private Scene scene;
+
+    
+ /**
+  * This constructor creates the window and includes all neccecary operations for showing the stats of all Flights.
+  */
     public StatisticsManager() {
          stage = new Stage();
          img = new Image(getClass().getResourceAsStream("/Icons/info-circle-fill.png"));

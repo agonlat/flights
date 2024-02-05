@@ -12,7 +12,9 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * The ValidationUtil class provides utility methods for validating various inputs related to flight information.
+ */
 public class ValidationUtil {
 
 

@@ -13,12 +13,24 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
 import java.util.*;
-
+/**
+ * The DataInterface class manages the data for the flight information display system.
+ * It provides methods for handling flights, orders, and suborders, as well as various utilities.
+ * This class follows the Singleton design pattern to ensure a single instance throughout the application.
+ * This class serves as a Database for all classes.
+ *
+ * @author latifiagon
+ * @version 1.0
+ */
 public class DataInterface {
     private ObservableList<TreeItem<Flight>> flightItems;
 
     private ArrayList<CSVRow> contractDataRow;
-
+/**
+     * Retrieves the current item in the FlightsTable
+     *
+     * @return The current TreeItem representing a Flight.
+     */
     public TreeItem<Flight> getCurrentItem() {
         return currentItem;
     }

@@ -7,33 +7,62 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
-
+/**
+ * Represents a Suborder with attributes related to changes, last change date, and creation date.
+ */
 public class Suborder {
 
-
+/**
+     * Gets the number of changes made to the Suborder.
+     *
+     * @return The number of changes.
+     */
     public int getChanges() {
         return changes;
     }
-
+/**
+     * Sets the number of changes made to the Suborder.
+     *
+     * @param changes The number of changes to set.
+     */
     public void setChanges(int changes) {
         this.changes = changes;
     }
-
+/**
+     * Gets the last change date and time of the Suborder.
+     *
+     * @return The last change date and time.
+     */
     public LocalDateTime getLastChange() {
         if (lastChange != null)
             lastChange = LocalDateTime.parse(lastChange.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
         return lastChange;
     }
+    /**
+     * Sets the last change date and time of the Suborder.
+     *
+     * @param lastChange The last change date and time to set.
+     */
 
     public void setLastChange(LocalDateTime lastChange) {
         this.lastChange = lastChange;
     }
-
+ /**
+     * Gets the creation date and time of the Suborder.
+     *
+     * @return The creation date and time.
+     */
     public LocalDateTime getCreationDate() {
         creationDate = LocalDateTime.parse(creationDate.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 
         return creationDate;
     }
+
+    /**
+     * Gets the formatted string representation of the last change date and time.
+     *
+     * @return The formatted last change date and time string.
+     */
     public String getLastChangeFormatted() {
         if (lastChange != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
@@ -42,7 +71,11 @@ public class Suborder {
         return ""; // or throw an exception or handle the null case as needed
     }
 
-    // New method to get formatted date string for creationDate
+    /**
+     * Gets the formatted string representation of the creation date and time.
+     *
+     * @return The formatted creation date and time string.
+     */
     public String getCreationDateFormatted() {
         if (creationDate != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
@@ -51,7 +84,11 @@ public class Suborder {
         return ""; // or throw an exception or handle the null case as needed
     }
 
-
+ /**
+     * Sets the creation date and time of the Suborder.
+     *
+     * @param creationDate The creation date and time to set.
+     */
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
@@ -688,7 +725,11 @@ public class Suborder {
 
 
 
-
+/**
+ * Retrieves a list of CSV rows representing the attributes of the current object.
+ *
+ * @return ArrayList of CSV rows containing attribute names and corresponding values.
+ */
    public ArrayList<CSVRow> getCSVRows() {
         Class<?> clazz = this.getClass();
         Field[] fields = clazz.getDeclaredFields();

@@ -29,6 +29,9 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * Manages the form for Suborders, handling field correctness, gui elements ...
+ */
 public class SuborderForm {
     static boolean allFieldsCorrect = true;
     private Map<Label, TextField> changeDetection;
@@ -40,17 +43,6 @@ public class SuborderForm {
 
     private GridPane orderPane = new GridPane();
     public VBox createSubOrderForm(Suborder suborder, Order order) {
-
-
-
-
-
-
-
-
-
-
-
 
 
         HashMap<String, String> uaKeyMap = new HashMap<>();

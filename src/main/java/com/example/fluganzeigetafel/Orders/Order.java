@@ -8,32 +8,62 @@ import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
+/**
+ * The Order class represents an order with various attributes and methods to manage and manipulate order information.
+ * It includes methods for retrieving and setting attributes like the number of changes, the last change timestamp, etc.
+ */
 public class Order {
-
+/**
+ * Retrieves the number of changes made to the order.
+ *
+ * @return The number of changes made to the order.
+ */
+    
     public int getChanges() {
         return changes;
     }
-
+/**
+ * Sets the number of changes made to the order.
+ *
+ * @param changes The number of changes to set.
+ */
     public void setChanges(int changes) {
         this.changes = changes;
     }
-
+/**
+ * Retrieves the timestamp of the last change made to the order.
+ *
+ * @return The timestamp of the last change made to the order.
+ */
     public LocalDateTime getLastChange() {
         if (lastChange != null)
             lastChange = LocalDateTime.parse(lastChange.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
         return lastChange;
     }
-
+/**
+ * Sets the timestamp of the last change made to the order.
+ *
+ * @param lastChange The timestamp of the last change to set.
+ */
     public void setLastChange(LocalDateTime lastChange) {
         this.lastChange = lastChange;
     }
-
+/**
+ * Retrieves the timestamp of the creation date of the order.
+ *
+ * @return The timestamp of the creation date of the order.
+ */
     public LocalDateTime getCreationDate() {
         creationDate = LocalDateTime.parse(creationDate.toString(), DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 
         return creationDate;
     }
+
+    /**
+ * Retrieves the formatted string representation of the last change timestamp.
+ *
+ * @return The formatted string representation of the last change timestamp.
+ */
     public String getLastChangeFormatted() {
         if (lastChange != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
@@ -41,7 +71,11 @@ public class Order {
         }
         return ""; // or throw an exception or handle the null case as needed
     }
-
+/**
+ * Retrieves the formatted string representation of the creation date timestamp.
+ *
+ * @return The formatted string representation of the creation date timestamp.
+ */
     // New method to get formatted date string for creationDate
     public String getCreationDateFormatted() {
         if (creationDate != null) {
@@ -51,7 +85,11 @@ public class Order {
         return ""; // or throw an exception or handle the null case as needed
     }
 
-
+**
+ * Sets the timestamp of the creation date of the order.
+ *
+ * @param creationDate The timestamp of the creation date to set.
+ */
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
@@ -557,7 +595,11 @@ public class Order {
     }
 
 
-
+/**
+ * Creates an Order with AUKEY
+ *
+ * @param AUKEY The unique key of Order
+ */
     public Order(String AUKEY) {
         this.ATTBE = "";
         this.ATTEN = "";
@@ -621,7 +663,57 @@ public class Order {
         this.rows = new ArrayList<>();
     }
 
-
+/**
+ * Creates an Order object with the specified attributes.
+ *
+ * @param ATTBE Actual Time of Begin
+ * @param ATTEN Actual Time of End
+ * @param AUAGE Auftraggeber
+ * @param AUKEY Autragsschlüssel
+ * @param AUKNL Kontrollnummer Landung
+ * @param AUKNS Kontrollnummer Start
+ * @param AUPIR Problemindikator
+ * @param AUSAA Auftragsstatus
+ * @param AUSAU Unterstatus
+ * @param DISPO Dispositionssystem
+ * @param EINHE Einheit f. MENGE
+ * @param ETTBE Estm. Time of Begin
+ * @param ETTEN Estim. Time of End
+ * @param FGKEY Referenz auf Fremddaten
+ * @param JTP Job Type
+ * @param KEYLK ID-des LK-Informationbroker
+ * @param KEYLE ID-des LE-Informationbroker
+ * @param KEYLF ID-des LF-Informationbroker
+ * @param LUPDN letzter Update
+ * @param LUPDT Zeitpunkt des letzten Updates
+ * @param LUPDV Veranlasser d. letzten Änderung
+ * @param MENGE Menge
+ * @param ORTFR 1. Ort (from)
+ * @param ORTTO 2. Ort (to)
+ * @param STTBE Schedule Time of begin
+ * @param STTEN Schedule Time of End
+ * @param UAZAK Teilauftragszähler
+ * @param UAZPL planm. benötigte TA's
+ * @param XAU Änderungszeitstempel
+ * @param ZINFO Zusatzinformationen
+ * @param DIB Dispositionsbereich
+ * @param PLKEY Planungsschlüssel
+ * @param AUDAT Tagesdatum des Auftrags
+ * @param AUABF Auftragsabfertiger
+ * @param ATT20 1. Vorlage zur Disposition
+ * @param RELFK wird in KFZ noch verwendet
+ * @param CINFO Creator-Info
+ * @param FDAEN FD-Änderung
+ * @param FLAGS Flags
+ * @param MITAR Mitarbeiterkürzel
+ * @param MAD Mandant
+ * @param STLIK StücklistenKey
+ * @param PKART Prozessart
+ * @param PKL Prozessklasse
+ * @param PKLAS Lastsituation
+ * @param PKLEA Leistungsart
+ * @param PKNAM Prozessklassename
+ */
     public Order(String ATTBE, String ATTEN, String AUAGE, String AUKEY, String AUKNL, String AUKNS, String AUPIR,
                  String AUSAA, String AUSAU, String DISPO, String EINHE, String ETTBE, String ETTEN, String FGKEY,
                  String JTP, String KEYLK, String KEYLE, String KEYLF, String LUPDN, String LUPDT, String LUPDV,
@@ -688,13 +780,22 @@ public class Order {
         rows = new ArrayList<>();
     }
 
-
+/**
+ * Sets the list of CSVRows for this Order.
+ *
+ * @param rows The list of CSVRows to set.
+ */
     public void setRows(ArrayList<CSVRow> rows) {
         this.rows = rows;
     }
 
     private ArrayList<CSVRow> rows;
-
+/**
+ * Generates a list of CSVRows based on the attributes of the provided Order.
+ *
+ * @param order The Order object to generate CSVRows from.
+ * @return ArrayList of CSVRows generated from the Order's attributes.
+ */
     public static ArrayList<CSVRow> generateListOfCSVRows(Order order) {
         Class<?> clazz = order.getClass();
         Field[] fields = clazz.getDeclaredFields();
@@ -735,7 +836,12 @@ public class Order {
     }
 
     private  String title;
-
+/**
+ * Creates an Order with the specified title and argument.
+ *
+ * @param title The title for the Order.
+ * @param arg   The argument for the Order.
+ */
     public Order(String title, String arg) {
         this.title = title;
     }

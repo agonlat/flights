@@ -26,7 +26,16 @@ import java.util.*;
 import static com.example.fluganzeigetafel.Flights.Utility.UtilityMethods.leaveOneWhiteSpace;
 
 
+ /**
+  * In this class all operations for printing Orders are present.
+  */
 public class PrintManager {
+
+    
+ /**
+  * This method creates a PDF File with the given flights as ArrayList
+  * @param flights The Flights to be converted to PDF
+  */
     public void createPDF(ArrayList<Flight> flights) {
 
 
@@ -568,7 +577,7 @@ public class PrintManager {
             throw new RuntimeException(e);
         }
     }
-    public static BufferedImage createBarCode(String text, int width, int height) {
+    private static BufferedImage createBarCode(String text, int width, int height) {
 
         try {
             Map<EncodeHintType, Object> hints = new HashMap<>();

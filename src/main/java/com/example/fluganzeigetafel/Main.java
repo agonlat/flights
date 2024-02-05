@@ -15,7 +15,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**
+ * The main class responsible for starting the flight information display system application.
+ * Initializes the graphical user interface, sets up the main components, and launches the application.
+ *
+ * @author [Your Name]
+ * @version 1.0
+ * @since [Date]
+ */
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {

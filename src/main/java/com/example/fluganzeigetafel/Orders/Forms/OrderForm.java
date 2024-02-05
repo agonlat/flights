@@ -31,6 +31,11 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * The OrderForm class represents a graphical user interface for managing orders,
+ * providing operations such as editing, generating suborders, and printing.
+ */
+
 public class OrderForm {
     static boolean allFieldsCorrect = true;
     private Map<Label, TextField> changeDetection;

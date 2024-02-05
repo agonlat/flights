@@ -43,13 +43,13 @@ public class OrderForm {
     static Order orderS;
     private Font customFont;
     Map<String, List<String>> expectedColumnsMap = new HashMap<>();
-    public VBox createOrderForm()  {
-        try {
-            customFont =   Font.loadFont(new FileInputStream("src/main/resources/Fonts/LiberationSerif-Regular.ttf"), 12);
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
+
+
+    
+    public VBox createOrderForm()  {
+        
 
         VBox mainBox = new VBox();
         HBox buttonBox = new HBox();

@@ -15,9 +15,15 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ * The Printer class provides methods for creating PDF documents for orders and suborders.
+ */
 public class Printer {
-
+/**
+     * Creates a PDF document for the given order.
+     *
+     * @param order The order to create the PDF for.
+     */
     public void createPDF(Order order) {
         try {
             PDDocument document = new PDDocument();
@@ -105,7 +111,11 @@ public class Printer {
         }
 
     }
-
+ /**
+     * Creates a PDF document for the given suborder.
+     *
+     * @param suborder The suborder to create the PDF for.
+     */
     public void createPDF(Suborder suborder) {
         try {
             PDDocument document = new PDDocument();

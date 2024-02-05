@@ -12,6 +12,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The FileHandler class provides methods for reading CSV files and handling orders.
+ */
+
+
+    /**
+     * Reads a CSV file and converts its content into a list of orders.
+     *
+     * @param filepath The path to the CSV file.
+     * @return An ArrayList containing Order objects.
+     */
 public class FileHandler {
     public ArrayList<Order> readCSV_toList(String filepath) {
         DataInterface.getInstance().setFilePath(filepath);
@@ -118,7 +129,11 @@ public class FileHandler {
         return list;
     }
 
-
+ /**
+     * Adds orders to corresponding flights.
+     *
+     * @param list The list of orders to be added to flights.
+     */
 
     public void addOrdersToFlights(ArrayList<Order> list) {
 

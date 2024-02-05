@@ -19,6 +19,10 @@ import javafx.stage.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+ /**
+  * This class handles the GUI and the operations for editing a Flight.
+  */
+
 public class FlightChangeManager {
     private Label flightNoLabel;
     private TextField flightNoTextField;
@@ -53,6 +57,10 @@ private GridPane gridPane;
         );
     }
 
+    
+ /**
+  * This constructor shows the window for editing a Flight. It also includes the neccecary operations for Flight manipulation.
+  */
     public FlightChangeManager(Stage mainStage) {
         Stage stage = new Stage();
         Image img = new Image(getClass().getResourceAsStream("/Icons/pencil-square.png"));

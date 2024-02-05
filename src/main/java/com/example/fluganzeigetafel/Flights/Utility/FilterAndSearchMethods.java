@@ -10,8 +10,19 @@ import javafx.scene.control.TextField;
 import java.util.ArrayList;
 import java.util.List;
 
+
+ /**
+  * This class provides a function for filtering the flights table.
+  */
+
 public class FilterAndSearchMethods {
     static int counter = 0;
+
+    
+ /**
+  * This method filters the table after specific search key
+  * @param filterTextField The filter to be applied
+  */
     public static void filterFlights(TextField filterTextField) {
 
 

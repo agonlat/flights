@@ -19,11 +19,16 @@ import java.io.IOException;
  * The main class responsible for starting the flight information display system application.
  * Initializes the graphical user interface, sets up the main components, and launches the application.
  *
- * @author [Your Name]
- * @version 1.0
- * @since [Date]
  */
 public class Main extends Application {
+
+    /**
+     * The entry point for the flight information display system application.
+     * Initializes the GUI components, sets up the main stage, and displays the application window.
+     *
+     * @param stage The primary stage for the application.
+     * @throws IOException If an error occurs during FXML loading.
+     */
     @Override
     public void start(Stage stage) throws IOException {
 
